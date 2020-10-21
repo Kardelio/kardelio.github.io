@@ -1,0 +1,49 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+    font-family: roboto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: linear-gradient(326deg, rgba(2, 0, 36, 1) 0%, rgb(22 61 92) 58%, rgba(0, 212, 255, 1) 100%);
+    color: white;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+}
+
+.text-container {
+    text-align: center;
+}
+
+.links-container {
+    text-align: center;
+    background: white;
+    border-radius: 0.5em;
+    padding: 1em;
+    border: 3px solid #2a5d85;
+}
+
+.icon {
+    width: 100px;
+    margin: 1em;
+}
+
+p {
+    margin: 0px !important;
+}
+
+.myface {
+    width: 10em;
+}
+
+@font-face {
+    font-family: roboto;
+    src: url("media/font/Roboto-Regular.ttf");
+}
