@@ -3,14 +3,29 @@ body {
     margin: 0;
     height: 100%;
     font-family: roboto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .container {
     background: linear-gradient(326deg, rgba(2, 0, 36, 1) 0%, rgb(22 61 92) 58%, rgba(0, 212, 255, 1) 100%);
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-wide{
+    width: 100%;
+    background: linear-gradient(326deg, rgba(2, 0, 36, 1) 0%, rgb(22 61 92) 58%, rgba(0, 212, 255, 1) 100%);
+    color: white;
+}
+
+.inner-container-wide{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
 }
 
 .header-container {
@@ -20,6 +35,26 @@ body {
 
 .text-container {
     text-align: center;
+    font-family: roboto;
+}
+
+#talks-button{
+    border-radius: 0.5em;
+    padding: 0.5em;
+    border: 3px solid #2a5d85;
+    font-size: 150%;
+    margin-bottom: 0.5em;
+    font-family: roboto;
+}
+
+.links-container-wide{
+    text-align: center;
+    background: white;
+    border-radius: 0.5em;
+    padding: 1em;
+    border: 3px solid #2a5d85;
+    width: 90%;
+    margin-top: 1em;
 }
 
 .links-container {
