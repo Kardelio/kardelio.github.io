@@ -1,3 +1,10 @@
+:root{
+    --main-blue: #163d5b;
+    --main-blue-light: #2a5d85;
+    --main-orange: #e87244;
+    --main-orange-dark: #c35330;
+}
+
 html,
 body {
     margin: 0;
@@ -5,8 +12,21 @@ body {
     font-family: roboto;
 }
 
+.name-title{
+    text-shadow: 2px 2px 2px black;
+    display: inline-block;
+}
+
+.flags-title{
+    display: inline-block;
+    font-size: 200%;
+    margin-left: 0.4em;
+}
+
 .container {
-    background: linear-gradient(326deg, rgba(2, 0, 36, 1) 0%, rgb(22 61 92) 58%, rgba(0, 212, 255, 1) 100%);
+    /* background: linear-gradient(326deg, rgba(2, 0, 36, 1) 0%, rgb(22 61 92) 58%, rgba(0, 212, 255, 1) 100%); */
+    background: var(--main-orange);
+    background: radial-gradient(circle, var(--main-orange) 0%, var(--main-orange-dark) 59%);
     color: white;
     display: flex;
     justify-content: center;
@@ -15,7 +35,8 @@ body {
 
 .container-wide{
     width: 100%;
-    background: linear-gradient(326deg, rgba(2, 0, 36, 1) 0%, rgb(22 61 92) 58%, rgba(0, 212, 255, 1) 100%);
+    background: var(--main-orange);
+    background: radial-gradient(circle, var(--main-orange) 0%, var(--main-orange-dark) 59%);
     color: white;
 }
 
@@ -41,28 +62,77 @@ body {
 #talks-button{
     border-radius: 0.5em;
     padding: 0.5em;
-    border: 3px solid #2a5d85;
+    background: var(--main-blue);
     font-size: 150%;
     margin-bottom: 0.5em;
+    color: white;
+    border: 2px solid white;
     font-family: roboto;
 }
-
+/* 
 .links-container-wide{
     text-align: center;
     background: white;
     border-radius: 0.5em;
-    padding: 1em;
-    border: 3px solid #2a5d85;
+    padding: 0.5em;
+    border: 3px solid var(--main-blue);
     width: 90%;
-    margin-top: 1em;
-}
+    margin-top: 0.5em;
+    color: black;
+    margin: 0.3em auto;
+} */
 
 .links-container {
     text-align: center;
     background: white;
     border-radius: 0.5em;
     padding: 1em;
-    border: 3px solid #2a5d85;
+    border: 3px solid var(--main-blue);
+}
+
+#talks-container{
+    /* width: 100%; */
+}
+
+.links-container-wide{
+    display: flex;
+    margin: 1em;
+}
+
+.talk-date{
+    margin-right: 1em;
+}
+
+.talk-talk-block{
+    background: white;
+    width: 80%;
+    padding: 0.3em;
+    border-radius: 6px;
+}
+
+.talk-title{
+    font-size: 120%;
+    color: var(--main-blue);
+    font-weight: 900;
+}
+
+.talk-location{
+    margin-top: 2px;
+    color: var(--main-blue-light);
+    font-style: italic;
+}
+
+.online{
+    background: var(--main-orange);
+    color: white;
+    padding: 0px 4px;
+    border-radius: 3px;
+}
+
+.year{
+    /* text-align: center; */
+    font-size: 200%;
+    margin: 1em;
 }
 
 .icon {
@@ -78,7 +148,15 @@ p {
     width: 10em;
 }
 
+.myface-talks {
+    width: 5em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0.5em;
+}
+
 @font-face {
     font-family: roboto;
-    src: url("media/font/Roboto-Regular.ttf");
+    src: url("../media/font/Roboto-Regular.ttf");
 }
