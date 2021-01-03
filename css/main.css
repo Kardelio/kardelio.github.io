@@ -46,7 +46,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 1em;
+    /* margin-top: 1em; */
 }
 
 .header-container {
@@ -100,7 +100,7 @@ body {
 }
 
 .talk-date{
-    margin-right: 1em;
+    margin-right: 0.5em;
     font-size: 120%;
 }
 
