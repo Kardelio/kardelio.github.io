@@ -102,6 +102,7 @@ body {
 .talk-date{
     margin-right: 0.5em;
     font-size: 120%;
+    white-space: nowrap;
 }
 
 .talk-talk-block{
