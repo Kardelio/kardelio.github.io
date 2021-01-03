@@ -2,10 +2,19 @@
     "extra": {
         "innovateher": true,
         "techforumsomething": "hmmm",
-        "filmingforbbc": "08.10.2019 : link: https://www.bbc.co.uk/bitesize/articles/zv68cqt"
+        "filmingforbbc": "08.10.2019 : link: https://www.bbc.co.uk/bitesize/articles/zv68cqt",
+        "healthwellbeing": "Ran the HW guild up until 3/4 2018",
+        "dontforget": " helped witha  bunch of interview at the March 2018",
+        "hackathon":"feb 2017 when i first arribed"
     },
     "work_in_prog": {
         "dot-git-talk": true
+    },
+    "confs": {
+        "codemobile": "02.04.18-05.04.18",
+        "agilemanchester": "09.05.18-11.05.18",
+        "retailtechweek(london)":"02.10.19-03.10.19",
+        "droidcon":"24.10.19-25.10.19"
     },
     "talksInYears": [
         {
@@ -23,8 +32,10 @@
                     "file": "AGiftForGitMas-Dec2020.pptx",
                     "date": "22.12.20",
                     "extra": "",
-                    "link": null,
-                    "display": true
+                    "link": "https://youtu.be/cYeCiLi9MVo",
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Introduction to Tech, The Very Group and life as a dev",
@@ -39,7 +50,9 @@
                     "date": "09.12.20",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Diversity in tech",
@@ -54,7 +67,9 @@
                     "date": "19.11.20",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Advanced Git Tutorial Session",
@@ -69,7 +84,9 @@
                     "date": "11.11.20",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "How to create your own brand",
@@ -84,7 +101,9 @@
                     "date": "10.11.20",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Who we are and my journey",
@@ -99,7 +118,9 @@
                     "date": "03.11.20",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Who we are, my journey & getting into The Very Group",
@@ -114,7 +135,9 @@
                     "date": "07.10.20",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Introduction to the Very Android App",
@@ -129,7 +152,9 @@
                     "date": "23.09.20",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Mobile App Team Hackathon",
@@ -144,7 +169,9 @@
                     "date": "20.08.2020",
                     "extra": "",
                     "link": null,
-                    "display": false
+                    "display": false,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Beginner Git Tutorial Session",
@@ -159,7 +186,9 @@
                     "date": "22.07.2020",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Code & Create with Orbis: Introduction to Kotlin for Java developers",
@@ -174,7 +203,9 @@
                     "date": "27.05.2020",
                     "extra": "",
                     "link": "https://youtu.be/8J61x-mZeEY",
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Beginner Terminal Workshop - How to use the Bash Terminal",
@@ -189,7 +220,9 @@
                     "date": "14.05.2020",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Beginner Terminal Workshop - How to use the Bash Terminal",
@@ -204,7 +237,9 @@
                     "date": "23.03.2020",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "How to contribute to Open Source Software",
@@ -219,7 +254,9 @@
                     "date": "27.02.2020",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "BBC Bitesize QA Panel",
@@ -234,7 +271,9 @@
                     "date": "07.02.2020",
                     "extra": "Instagram image of panel and presenter",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "BBC Bitesize QA Panel",
@@ -249,7 +288,9 @@
                     "date": "29.01.2020",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "BBC Bitesize QA Panel",
@@ -264,7 +305,9 @@
                     "date": "23.01.2020",
                     "extra": "Instagram image of panel and presenter",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 }
             ]
         },
@@ -284,7 +327,9 @@
                     "date": "05.12.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Innovate Her Mentoring",
@@ -299,7 +344,9 @@
                     "date": "25.09.2019",
                     "extra": "I think photos and tweets on twitter (Every Wednesday after work from 25.09.2019 - 20.11.2019 [9 total])",
                     "link": "https://innovateher.co.uk/",
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "BBC Bitesize QA Panel",
@@ -314,7 +361,9 @@
                     "date": "12.11.2019",
                     "extra": "",
                     "link": "https://www.bbc.co.uk/bitesize/articles/zv68cqt",
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Intro to The Very Group, my journey and advice on how to get ahead now",
@@ -329,7 +378,9 @@
                     "date": "11.11.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Q & A Panel - Employers in the North West",
@@ -344,7 +395,9 @@
                     "date": "22.10.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Hosting Tech Showcase",
@@ -359,7 +412,9 @@
                     "date": "19.09.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Doris IT - Podcast Episode: We don't ask for permission, we ask for forgiveness",
@@ -374,7 +429,9 @@
                     "date": "18.09.2019",
                     "extra": "https://soundcloud.com/dorisit/bridging-the-gap-vol-10-we-dont-ask-for-permission-we-ask-for-forgiveness-ben-kadel",
                     "link": "https://soundcloud.com/dorisit/bridging-the-gap-vol-10-we-dont-ask-for-permission-we-ask-for-forgiveness-ben-kadel",
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Agent Academy - Introduction to Tech at the Very Group",
@@ -389,7 +446,9 @@
                     "date": "29.08.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Beginner Git Session (Git for dummies)",
@@ -404,7 +463,9 @@
                     "date": "20.08.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Introduce the new Interns",
@@ -419,7 +480,9 @@
                     "date": "22.07.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "The App Team Operations Monitor - ATOM (Tech Forum)",
@@ -434,7 +497,9 @@
                     "date": "18.07.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Intro to The Very Group, my journey and advice on how to get ahead now",
@@ -449,7 +514,9 @@
                     "date": "02.07.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Beginner Git Session (Git for dummies) [First Time]",
@@ -464,7 +531,26 @@
                     "date": "28.02.2019",
                     "extra": "Worksheets: Git Worksheet Feb 2019.docx",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "My Life in the Terminal",
+                    "description": "A talk (actually in the Terminal) about my tools and workflow inside the Terminal and some of the awesome tools I use to enhance my dev experience",
+                    "company": "The Very Group",
+                    "more_than_once": true,
+                    "with": null,
+                    "where": "The Very Group",
+                    "audience": "Colleagues",
+                    "folder": null,
+                    "file": null,
+                    "date": "21.02.2019",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Networking with students at Sensor City",
@@ -479,7 +565,9 @@
                     "date": "15.02.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "12 Session Java course to High School Students (Y7 - Y11)",
@@ -494,7 +582,9 @@
                     "date": "13.02.2019",
                     "extra": "Every Wednesday after work from 13.02.2019 planned for 12 sessions [10 actually]",
                     "link": null,
-                    "display": false
+                    "display": false,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Chester Devs: Git Power Commands",
@@ -509,13 +599,15 @@
                     "date": "06.02.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 },
                 {
                     "title": "Wild west of Object Oriented Programming (Java)",
                     "description": "A presentation and interactive tutorial to learn about the basics of object oriented programming in the Java programming language",
                     "company": "The Very Group",
-                    "more_than_once": false,
+                    "more_than_once": true,
                     "with": null,
                     "where": "The Very Group",
                     "audience": "Colleagues (Degree Apprentices)",
@@ -524,7 +616,9 @@
                     "date": "21.01.2019",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 }
             ]
         },
@@ -544,7 +638,303 @@
                     "date": "12.12.2018",
                     "extra": "",
                     "link": null,
-                    "display": true
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Build My Future - The State of the Industry",
+                    "description": "Talked about the state of the tech industry, what the students can expect from it, some of the trends at the time and some of the useful programming languages to know",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": "Leigh Rathbone",
+                    "where": "University of Liverpool",
+                    "audience": "High School Students",
+                    "folder": null,
+                    "file": "BMFBKSlides.pptx",
+                    "date": "29.11.18",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "BIMA - How the Internet works",
+                    "description": "Talked about how the internet actually works using props and audience volunteers to help demonstrate it to the high school students. Explaining everything from IP addresses to DNS servers, before judging the students BIMA competition",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "High School in Liverpool",
+                    "audience": "High School Students",
+                    "folder": null,
+                    "file": "HowTheInternetWorks.pptx",
+                    "date": "13.11.18",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "BIMA - How the Internet works",
+                    "description": "Talked about how the internet actually works using props and audience volunteers to help demonstrate it to the high school students. Explaining everything from IP addresses to DNS servers, before judging the students BIMA competition",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "University of Liverpool",
+                    "audience": "First Year University students",
+                    "folder": null,
+                    "file": "0909-LU-FirstYears.pptx",
+                    "date": "09.11.18",
+                    "extra": "Also have these slides for some reason: SMALL_0909-LU-FirstYears.pptx",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Tech Showcase (2) - Quick Git Commands",
+                    "description": "Took the audience through a tailored collection of lesser known git commands and explained what each did",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "The Very Group",
+                    "audience": "Colleagues",
+                    "folder": null,
+                    "file": "GitCommandsQuick.pptx",
+                    "date": "08.11.18",
+                    "extra": "Also have these slides for some reason: GitCommandsQuickNEW.pptx",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "STEM Fair at Liverpool Uni (The Crypt)",
+                    "description": "Held and ran a stand at the job fair to meet and engage with students about The Very Group (SD at the time) and also gave them a coding challenge to try and solve [Recruitment]",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "University of Liverpool",
+                    "audience": "University students",
+                    "folder": null,
+                    "file": null,
+                    "date": "18.10.18",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Career Coach Induction",
+                    "description": "Talked to colleagues that were becoming career coaches about what the role entails and my experiences with it",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "The Very Group",
+                    "audience": "Colleagues",
+                    "folder": null,
+                    "file": "careerCoachPres.pptx",
+                    "date": "30.08.18",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Understanding the technical role for apprenticeships",
+                    "description": "Talked to colleagues that were becoming tech coaches about what the role entails and my experiences with it",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "The Very Group (Aintree)",
+                    "audience": "Colleagues",
+                    "folder": null,
+                    "file": "techcoachpres.pptx",
+                    "date": "22.08.18",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Visited the Studio",
+                    "description": "Was not to present, instead it was an event to visit the school, see some of the students work and code and engage with them about TVG",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": "James Williams",
+                    "where": "The Studio (Liverpool)",
+                    "audience": "High School Students",
+                    "folder": null,
+                    "file": null,
+                    "date": "28.06.18",
+                    "extra": "",
+                    "link": null,
+                    "display": false,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Git and Github Interactive Tutorial",
+                    "description": "Taught a interactive tutorial lecture to an array of Comp Sci students at LU about what Git is, how it is different to Github and how to use them both correctly",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "University of Liverpool",
+                    "audience": "University students",
+                    "folder": null,
+                    "file": "Liverpool Uni Git and Github.pptx",
+                    "date": "02.05.18",
+                    "extra": "Files also contained in /videosForGitTalk and help sheet is: gitHelpSheet",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Apprentice Assessment Day - What is Software Engineering",
+                    "description": "Described coding, my job and the industry to the potential candidates. I also told them a little bit about the company and what we do before being part of the team that observed and judged the candidates to decide who would proceed to the next steps",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "The Very Group (Cube)",
+                    "audience": "Potential apprentices (Students finishing school)",
+                    "folder": null,
+                    "file": "ApprenticeDaySoftwareEngineering.pptx",
+                    "date": "26.04.18",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Firebase findings playback",
+                    "description": "After a short amount of research time I fed back to my immediate team the things I discovered about firebase and the capabilities it could give us",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": "Joe Crane",
+                    "where": "The Very Group",
+                    "audience": "Mobile App Team",
+                    "folder": null,
+                    "file": "FirebaseFindings.pptx",
+                    "date": "19.04.18",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Java Tuesdays with Ben Kadel",
+                    "description": "Every week on a Tuesday I would spend just over an hour teaching the degree apprentices the Java programming language with 1-2-1 help on their uni lectures and labs",
+                    "company": "The Very Group",
+                    "more_than_once": true,
+                    "with": null,
+                    "where": "The Very Group",
+                    "audience": "Degree Apprentices at work",
+                    "folder": null,
+                    "file": null,
+                    "date": "From 17.10.17 to 20.03.18",
+                    "extra": "Every Tuesday in the morning",
+                    "link": null,
+                    "display": false,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Be your own boss Q&A panel",
+                    "description": "Was part of a Q&A panel (with 2 other externals from other companies) at LU where we described our roles at our companies and answers student asked questions",
+                    "company": "The Very Group",
+                    "more_than_once": true,
+                    "with": null,
+                    "where": "University of Liverpool",
+                    "audience": "University students",
+                    "folder": null,
+                    "file": null,
+                    "date": "06.03.18",
+                    "extra": "",
+                    "link": null,
+                    "display": false,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Intern Assessment Day",
+                    "description": "Not to present but to be part of the intern assessment day to observe and judge potential interns and helping to decide which should progress to the next step",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "The Very Group (Cube)",
+                    "audience": "Potential interns (Students finishing school)",
+                    "folder": null,
+                    "file": null,
+                    "date": "27.02.18",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                }
+            ]
+        },
+        {
+            "year": "2017",
+            "talks": [
+                {
+                    "title": "How to get a job in the Tech Industry",
+                    "description": "Myself and Andy split the session, he took the first half talking about how to market yourself to employers and I took the second half talking about tips the students can use now to enhance their chances later",
+                    "company": "The Very Group",
+                    "more_than_once": false,
+                    "with": "Andrew Gibson",
+                    "where": "University of Liverpool",
+                    "audience": "University students",
+                    "folder": null,
+                    "file": "NewUniSlidesBU.pptx",
+                    "date": "01.12.17",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Wild west of Object Oriented Programming (Java)",
+                    "description": "A presentation and interactive tutorial to learn about the basics of object oriented programming in the Java programming language",
+                    "company": "The Very Group",
+                    "more_than_once": true,
+                    "with": null,
+                    "where": "The Very Group",
+                    "audience": "Colleagues (Degree Apprentices)",
+                    "folder": null,
+                    "file": "WWOOOP.pptx",
+                    "date": "22.11.2017",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
+                },
+                {
+                    "title": "Introduction to Git and Github (GIT COP)",
+                    "description": "The first time the Git tutorial presentation was given to selection of colleagues at SD that signed up for the workshop, was a full introduction to git in the terminal and github [lots fo tech problems remember]",
+                    "company": "The Very Group",
+                    "more_than_once": true,
+                    "with": null,
+                    "where": "The Very Group",
+                    "audience": "Colleagues",
+                    "folder": null,
+                    "file": "Git And Github COP at ShopDirect.pptx",
+                    "date": "05.09.2017",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration":"",
+                    "reuse":false
                 }
             ]
         }

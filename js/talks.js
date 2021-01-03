@@ -16,7 +16,7 @@ $.getJSON('data/talks.json', function (data) {
                 }
                 let linkBlock = "";
                 if (talk.link != null) {
-                    linkBlock = `<div class="talk-link"><a href="${talk.link}">LINK</a></div>`;
+                    linkBlock = `<div class="talk-link"><a href="${talk.link}">More Information...</a></div>`;
                 }
                 document.getElementById("talks-container").appendChild(createElementsFromHTML(`
                     <div class="links-container-wide">
@@ -24,7 +24,7 @@ $.getJSON('data/talks.json', function (data) {
                             ${getShortDate(talk.date)}
                         </div>
                         <div class="talk-talk-block">
-                            <div class="talk-title">${titleCase(talk.title)}</div>
+                            <div class="talk-title">${talk.title}</div>
                             ${locationBlock}
                             ${linkBlock}
                         </div>
@@ -34,6 +34,8 @@ $.getJSON('data/talks.json', function (data) {
         });
     });
 });
+//<div class="talk-title">${titleCase(talk.title)}</div>
+//
 
 function highlightOnline(str){
     return str.replace("online","<b class='online'>online</b>");
@@ -41,7 +43,7 @@ function highlightOnline(str){
 
 function getShortDate(dateIn) {
     let splitDate = dateIn.split(".")
-    return `${splitDate[0]}-${splitDate[1]}`;
+    return `${splitDate[0]} - ${splitDate[1]}`;
 }
 
 function titleCase(str) {
