@@ -5,7 +5,7 @@
         "filmingforbbc": "08.10.2019 : link: https://www.bbc.co.uk/bitesize/articles/zv68cqt",
         "healthwellbeing": "Ran the HW guild up until 3/4 2018",
         "dontforget": " helped witha  bunch of interview at the March 2018",
-        "hackathon":"feb 2017 when i first arribed"
+        "hackathon": "feb 2017 when i first arribed"
     },
     "work_in_prog": {
         "dot-git-talk": true
@@ -13,10 +13,32 @@
     "confs": {
         "codemobile": "02.04.18-05.04.18",
         "agilemanchester": "09.05.18-11.05.18",
-        "retailtechweek(london)":"02.10.19-03.10.19",
-        "droidcon":"24.10.19-25.10.19"
+        "retailtechweek(london)": "02.10.19-03.10.19",
+        "droidcon": "24.10.19-25.10.19"
     },
     "talksInYears": [
+        {
+            "year": "2021",
+            "talks": [
+                {
+                    "title": "Personal Brand (Webinar) Podcast - Why it matters",
+                    "description": "Myself and Andy talked with Parul (Manhattan Partners) for a podcast episode, we discussed personal branding, our stories within that context and tips for folks looking to start their personal branding journey",
+                    "company": "Myself",
+                    "more_than_once": false,
+                    "with": "Andy Beacock",
+                    "where": "online - Manhattan Partners",
+                    "audience": "World Wide - Anyone",
+                    "folder": null,
+                    "file": null,
+                    "date": "19.01.21",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration": "",
+                    "reuse": false
+                }
+            ]
+        },
         {
             "year": "2020",
             "talks": [
@@ -34,8 +56,8 @@
                     "extra": "",
                     "link": "https://youtu.be/cYeCiLi9MVo",
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Introduction to Tech, The Very Group and life as a dev",
@@ -51,8 +73,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Diversity in tech",
@@ -68,8 +90,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Advanced Git Tutorial Session",
@@ -85,8 +107,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "How to create your own brand",
@@ -102,8 +124,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Who we are and my journey",
@@ -119,8 +141,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Who we are, my journey & getting into The Very Group",
@@ -136,8 +158,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Introduction to the Very Android App",
@@ -153,8 +175,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Mobile App Team Hackathon",
@@ -170,8 +192,8 @@
                     "extra": "",
                     "link": null,
                     "display": false,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Beginner Git Tutorial Session",
@@ -187,8 +209,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Code & Create with Orbis: Introduction to Kotlin for Java developers",
@@ -204,8 +226,8 @@
                     "extra": "",
                     "link": "https://youtu.be/8J61x-mZeEY",
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Beginner Terminal Workshop - How to use the Bash Terminal",
@@ -221,8 +243,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Beginner Terminal Workshop - How to use the Bash Terminal",
@@ -238,8 +260,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "How to contribute to Open Source Software",
@@ -255,8 +277,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "BBC Bitesize QA Panel",
@@ -272,8 +294,8 @@
                     "extra": "Instagram image of panel and presenter",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "BBC Bitesize QA Panel",
@@ -289,8 +311,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "BBC Bitesize QA Panel",
@@ -306,8 +328,8 @@
                     "extra": "Instagram image of panel and presenter",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 }
             ]
         },
@@ -328,8 +350,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Innovate Her Mentoring",
@@ -345,8 +367,8 @@
                     "extra": "I think photos and tweets on twitter (Every Wednesday after work from 25.09.2019 - 20.11.2019 [9 total])",
                     "link": "https://innovateher.co.uk/",
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "BBC Bitesize QA Panel",
@@ -362,8 +384,8 @@
                     "extra": "",
                     "link": "https://www.bbc.co.uk/bitesize/articles/zv68cqt",
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Intro to The Very Group, my journey and advice on how to get ahead now",
@@ -379,8 +401,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Q & A Panel - Employers in the North West",
@@ -396,8 +418,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Hosting Tech Showcase",
@@ -413,8 +435,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Doris IT - Podcast Episode: We don't ask for permission, we ask for forgiveness",
@@ -430,8 +452,8 @@
                     "extra": "https://soundcloud.com/dorisit/bridging-the-gap-vol-10-we-dont-ask-for-permission-we-ask-for-forgiveness-ben-kadel",
                     "link": "https://soundcloud.com/dorisit/bridging-the-gap-vol-10-we-dont-ask-for-permission-we-ask-for-forgiveness-ben-kadel",
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Agent Academy - Introduction to Tech at the Very Group",
@@ -447,8 +469,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Beginner Git Session (Git for dummies)",
@@ -464,8 +486,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Introduce the new Interns",
@@ -481,8 +503,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "The App Team Operations Monitor - ATOM (Tech Forum)",
@@ -498,8 +520,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Intro to The Very Group, my journey and advice on how to get ahead now",
@@ -515,8 +537,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Beginner Git Session (Git for dummies) [First Time]",
@@ -532,8 +554,8 @@
                     "extra": "Worksheets: Git Worksheet Feb 2019.docx",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "My Life in the Terminal",
@@ -549,8 +571,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Networking with students at Sensor City",
@@ -566,8 +588,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "12 Session Java course to High School Students (Y7 - Y11)",
@@ -583,8 +605,8 @@
                     "extra": "Every Wednesday after work from 13.02.2019 planned for 12 sessions [10 actually]",
                     "link": null,
                     "display": false,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Chester Devs: Git Power Commands",
@@ -600,8 +622,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Wild west of Object Oriented Programming (Java)",
@@ -617,8 +639,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 }
             ]
         },
@@ -639,8 +661,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Build My Future - The State of the Industry",
@@ -656,8 +678,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "BIMA - How the Internet works",
@@ -673,8 +695,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "BIMA - How the Internet works",
@@ -690,8 +712,8 @@
                     "extra": "Also have these slides for some reason: SMALL_0909-LU-FirstYears.pptx",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Tech Showcase (2) - Quick Git Commands",
@@ -707,8 +729,8 @@
                     "extra": "Also have these slides for some reason: GitCommandsQuickNEW.pptx",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "STEM Fair at Liverpool Uni (The Crypt)",
@@ -724,8 +746,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Career Coach Induction",
@@ -741,8 +763,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Understanding the technical role for apprenticeships",
@@ -758,8 +780,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Visited the Studio",
@@ -775,8 +797,8 @@
                     "extra": "",
                     "link": null,
                     "display": false,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Git and Github Interactive Tutorial",
@@ -792,8 +814,8 @@
                     "extra": "Files also contained in /videosForGitTalk and help sheet is: gitHelpSheet",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Apprentice Assessment Day - What is Software Engineering",
@@ -809,8 +831,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Firebase findings playback",
@@ -826,8 +848,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Java Tuesdays with Ben Kadel",
@@ -843,8 +865,8 @@
                     "extra": "Every Tuesday in the morning",
                     "link": null,
                     "display": false,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Be your own boss Q&A panel",
@@ -860,8 +882,8 @@
                     "extra": "",
                     "link": null,
                     "display": false,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Intern Assessment Day",
@@ -877,8 +899,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 }
             ]
         },
@@ -899,8 +921,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Wild west of Object Oriented Programming (Java)",
@@ -916,8 +938,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 },
                 {
                     "title": "Introduction to Git and Github (GIT COP)",
@@ -933,8 +955,8 @@
                     "extra": "",
                     "link": null,
                     "display": true,
-                    "duration":"",
-                    "reuse":false
+                    "duration": "",
+                    "reuse": false
                 }
             ]
         }
