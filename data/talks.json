@@ -21,6 +21,23 @@
             "year": "2021",
             "talks": [
                 {
+                    "title": "InnovateHer - My Experiences as a Lead Mentor",
+                    "description": "Telling an audience of potential ambassadors for a new InnovateHer program about my experiences on a previous prorgam. I shared my feels on the amazing programme and shared some stoies from the incredible girls and what they created during the course",
+                    "company": "Myself",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "online - innovateHer",
+                    "audience": "World Wide - Anyone",
+                    "folder": null,
+                    "file": null,
+                    "date": "25.03.21",
+                    "extra": "",
+                    "link": "https://innovateher.co.uk",
+                    "display": true,
+                    "duration": "",
+                    "reuse": false
+                },
+                {
                     "title": "Personal Brand (Webinar) Podcast - Why it matters",
                     "description": "Myself and Andy talked with Parul (Manhattan Partners) for a podcast episode, we discussed personal branding, our stories within that context and tips for folks looking to start their personal branding journey",
                     "company": "Myself",
