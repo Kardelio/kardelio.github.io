@@ -21,6 +21,23 @@
             "year": "2021",
             "talks": [
                 {
+                    "title": "Scouts - Learn to code with Scratch",
+                    "description": "Telling an audience of potential ambassadors for a new InnovateHer program about my experiences on a previous prorgam. I shared my feels on the amazing programme and shared some stoies from the incredible girls and what they created during the course",
+                    "company": "Myself",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "online - Scouts group in UK",
+                    "audience": "Scouts group",
+                    "folder": null,
+                    "file": "GDrive: Scratch-Scouts",
+                    "date": "06.05.21",
+                    "extra": "",
+                    "link": "",
+                    "display": true,
+                    "duration": "",
+                    "reuse": false
+                },
+                {
                     "title": "InnovateHer - My Experiences as a Lead Mentor",
                     "description": "Telling an audience of potential ambassadors for a new InnovateHer program about my experiences on a previous prorgam. I shared my feels on the amazing programme and shared some stoies from the incredible girls and what they created during the course",
                     "company": "Myself",
