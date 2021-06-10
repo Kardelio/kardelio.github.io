@@ -21,8 +21,25 @@
             "year": "2021",
             "talks": [
                 {
+                    "title": "Scouts - Learn to code with Scratch - CONTINUED",
+                    "description": "This was the continuation of the previous scouts session and was basically a session for the scouts to present their creations back to me and get feedback on them",
+                    "company": "Myself",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "online - Scouts group in UK",
+                    "audience": "Scouts group",
+                    "folder": null,
+                    "file": null,
+                    "date": "09.06.21",
+                    "extra": "",
+                    "link": "",
+                    "display": true,
+                    "duration": "",
+                    "reuse": false
+                },
+                {
                     "title": "Scouts - Learn to code with Scratch",
-                    "description": "Telling an audience of potential ambassadors for a new InnovateHer program about my experiences on a previous prorgam. I shared my feels on the amazing programme and shared some stoies from the incredible girls and what they created during the course",
+                    "description": "Presenting to a group of about 20 scout children about how to code. From the basics of a computer and binary to using the program called scratch to create things. This was a fun fast paced interacive tutorial",
                     "company": "Myself",
                     "more_than_once": false,
                     "with": null,
