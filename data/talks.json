@@ -21,6 +21,23 @@
             "year": "2021",
             "talks": [
                 {
+                    "title": "The journey of adopting Jetpack Compose in Babbel’s App",
+                    "description": "In this session, we will be sharing Our journey of adopting Compose into the Babbel App, the lessons learned, the ups and downs, the decisions we made and why we made them, and how to replicate that in your app. Basically, all and every takeaway from our journey starting from adopting the compose mindset all the way to how we integrated it with the already existing app architecture, design system and see what differences Compose has made to the Babbel app.",
+                    "company": "Babbel",
+                    "more_than_once": false,
+                    "with": "Ahmed Mabrook",
+                    "where": "DroidCon Berlin - CityCube Berlin",
+                    "audience": "Worldwide - Droidcon attendees",
+                    "folder": null,
+                    "file": "DroidCon 2021 - Slides",
+                    "date": "20.10.21",
+                    "extra": "",
+                    "link": "https://www.berlin.droidcon.com/",
+                    "display": true,
+                    "duration": "45 minutes",
+                    "reuse": false
+                },
+                {
                     "title": "Scouts - Learn to code with Scratch - CONTINUED",
                     "description": "This was the continuation of the previous scouts session and was basically a session for the scouts to present their creations back to me and get feedback on them",
                     "company": "Myself",
