@@ -18,8 +18,46 @@
     },
     "talksInYears": [
         {
+            "year": "2022",
+            "talks": []
+        },
+        {
             "year": "2021",
             "talks": [
+                {
+                    "title": "Git workshop with Ben Kadel - TechNomads (Part 1)",
+                    "description": "In this interactive tutorial session I teach a group called 'The Tech Nomads' about git. Starting from 0 and going all the way through to enable them to create their first PR and contribution to a codebase, whilst explaining everything in a thorugh but easy to digest way",
+                    "company": "Myself",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "online - MeetUp",
+                    "audience": "Worldwide - Tech Nomads",
+                    "folder": null,
+                    "file":null,
+                    "date": "04.12.21",
+                    "extra": "",
+                    "link": "https://youtu.be/18pfAryjlJ4",
+                    "display": true,
+                    "duration": "1 hour & 40 minutes",
+                    "reuse": false
+                },
+                {
+                    "title": "Android interview with, Benjamin Kadel",
+                    "description": "A wonderful YouTuber called Mohsen (Channel: Android Developer Tips) asked if he could interview me about my job as a Senior Android developer and all the things that come along with the work and lifestyle to help new potential developers understand the industry and what we do in it",
+                    "company": "Myself",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "online - YouTube",
+                    "audience": "Worldwide - Developers",
+                    "folder": null,
+                    "file": null,
+                    "date": "25.11.21",
+                    "extra": "",
+                    "link": "https://youtu.be/7fcb5HiaFYE",
+                    "display": true,
+                    "duration": "1 hour & 30 minutes",
+                    "reuse": false
+                },
                 {
                     "title": "The journey of adopting Jetpack Compose in Babbel’s App",
                     "description": "In this session, we will be sharing Our journey of adopting Compose into the Babbel App, the lessons learned, the ups and downs, the decisions we made and why we made them, and how to replicate that in your app. Basically, all and every takeaway from our journey starting from adopting the compose mindset all the way to how we integrated it with the already existing app architecture, design system and see what differences Compose has made to the Babbel app.",

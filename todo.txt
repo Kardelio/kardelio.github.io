@@ -5,12 +5,11 @@
 
 0. podcastwith mohsend
 youtube link
-
+https://youtu.be/7fcb5HiaFYE
 
 1. tech nomads git introduciton workshop
 Mon Nov 29 16:59:17 2021 
+https://youtu.be/18pfAryjlJ4
 
 2. Hosting event for QA panel 360 microservice
 1st Dec 2021
-
-3. podcast with coding in flow
