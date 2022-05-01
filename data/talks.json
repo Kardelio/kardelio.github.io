@@ -68,6 +68,23 @@
                     "display": true,
                     "duration": "40 minutes",
                     "reuse": true
+                },
+                {
+                    "title": "Git workshop with Ben Kadel - TechNomads (Part 2)",
+                    "description": "In this interactive tutorial session I teach a group called 'The Tech Nomads' about git. Starting from 0 and going all the way through to enable them to create their first PR and contribution to a codebase, whilst explaining everything in a thorugh but easy to digest way",
+                    "company": "Myself",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "online - MeetUp",
+                    "audience": "Worldwide - Tech Nomads",
+                    "folder": null,
+                    "file":null,
+                    "date": "21.03.22",
+                    "extra": "",
+                    "link": "https://youtu.be/IBnJjJWxJtQ",
+                    "display": true,
+                    "duration": "1 hour & 40 minutes",
+                    "reuse": false
                 }
             ]
         },
