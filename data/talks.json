@@ -19,7 +19,57 @@
     "talksInYears": [
         {
             "year": "2022",
-            "talks": []
+            "talks": [
+                {
+                    "title": "Beginner Stand Up Comedy Course - 5 Minute Standup Set",
+                    "description": "",
+                    "company": "Myself",
+                    "more_than_once": false,
+                    "with": null,
+                    "where": "The Wall Comedy Club - Berlin",
+                    "audience": "Public",
+                    "folder": null,
+                    "file":null,
+                    "date": "30.04.22",
+                    "extra": "",
+                    "link": "TODO",
+                    "display": true,
+                    "duration": "5 minutes",
+                    "reuse": false
+                },
+                {
+                    "title": "Inside the .git folder - Explore the mysterious depths...",
+                    "description": "Conference talk - Fun & Entertaining presentation that takes the audience on a cave diving expedition into the cave system of the .git folder and explains each file and folder in there which in turn highlights how git works internally with a mysterious & fun twist!",
+                    "company": "Myself",
+                    "more_than_once": true,
+                    "where": "Android Makers - Paris",
+                    "audience": "Worldwide - Android Makers attendees",
+                    "folder": "dot git folder",
+                    "file": "Inside the .git folder",
+                    "date": "25.04.22",
+                    "extra": "https://androidmakers.fr/schedule/2022-04-25?sessionId=NZD-1739",
+                    "link": "TODO",
+                    "display": true,
+                    "duration": "40 minutes",
+                    "reuse": true
+                },
+                {
+                    "title": "Inside the .git folder - Explore the mysterious depths...",
+                    "description": "Conference talk - Fun & Entertaining presentation that takes the audience on a cave diving expedition into the cave system of the .git folder and explains each file and folder in there which in turn highlights how git works internally with a mysterious & fun twist!",
+                    "company": "Myself",
+                    "more_than_once": true,
+                    "where": "DroidCon Lisbon - Lisbon",
+                    "audience": "DroidCon Lisbon attendees",
+                    "folder": "dot git folder",
+                    "file": "Inside the .git folder",
+                    "date": "22.04.22",
+                    "extra": "",
+                    "link": "https://www.lisbon.droidcon.com/schedule",
+                    "display": true,
+                    "duration": "40 minutes",
+                    "reuse": true
+                }
+            ]
         },
         {
             "year": "2021",
