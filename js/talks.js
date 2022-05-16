@@ -16,7 +16,7 @@ $.getJSON('data/talks.json', function (data) {
                 }
                 let linkBlock = "";
                 if (talk.link != null) {
-                    linkBlock = `<div class="talk-link"><a href="${talk.link}">More Information...</a></div>`;
+                    linkBlock = `<div class="talk-link"><a href="${talk.link}">${talk.link}</a></div>`;
                 }
                 document.getElementById("talks-container").appendChild(createElementsFromHTML(`
                     <div class="links-container-wide">
