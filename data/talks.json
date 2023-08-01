@@ -32,7 +32,7 @@
                     "file": "Practical ADB usage to enhance your life",
                     "date": "06.07.23",
                     "extra": "",
-                    "link": "",
+                    "link": "https://www.droidcon.com/2023/08/01/practical-adb-usage-to-enhance-your-life-2/",
                     "display": true,
                     "duration": "45 minutes",
                     "reuse": true
@@ -74,6 +74,23 @@
                     "link": "https://www.droidcon.com/2022/11/16/comedy-talk-better-android-development-bad-2/",
                     "display": true,
                     "duration": "40 minutes",
+                    "reuse": true
+                },
+                {
+                    "title": "Interview with Ben Kadel",
+                    "description": "I get interviewed at Droidcon about my career and Android Development in general",
+                    "company": "Myself",
+                    "with": null,
+                    "more_than_once": false,
+                    "where": "DroidCon Berlin - CityCube Berlin",
+                    "audience": "Worldwide - Droidcon attendees",
+                    "folder": "",
+                    "file": "",
+                    "date": "21.09.2022",
+                    "extra": "",
+                    "link": "https://www.droidcon.com/2022/08/01/comedy-talk-better-android-development-bad/",
+                    "display": true,
+                    "duration": "12 minutes",
                     "reuse": true
                 },
                 {
