@@ -18,6 +18,27 @@
     },
     "talksInYears": [
         {
+            "year": "2024",
+            "talks": [
+                {
+                    "title": "Crime Scene InvestiGITor",
+                    "description": "Together, we will learn how to become a professional and revered investiGITor, who will be able to sniff out and solve any version control offence with the ease and panache of a seasoned detective!",
+                    "company": "Myself",
+                    "with":null,
+                    "more_than_once": true,
+                    "where": "Android Makers by Droidcon Paris - The Belfry of Montrouge",
+                    "audience": "Worldwide - Android Makers by Droidcon",
+                    "folder": "",
+                    "file": "Crime Scene investiGITor",
+                    "date": "25.04.24",
+                    "extra": "",
+                    "link": "https://www.youtube.com/watch?v=xVaIM0yD0SM",
+                    "display": true,
+                    "duration": "45 minutes",
+                    "reuse": true
+                }
+        },
+        {
             "year": "2023",
             "talks": [
                 {
