@@ -26,6 +26,23 @@
                     "company": "Myself",
                     "with":null,
                     "more_than_once": true,
+                    "where": "Droidcon Lisbon - Forum Cultural de Alcochete",
+                    "audience": "Worldwide - Droidcon Lisbon",
+                    "folder": "",
+                    "file": "Crime Scene investiGITor",
+                    "date": "05.09.24",
+                    "extra": "",
+                    "link": "https://www.youtube.com/live/uVIj5RSp27A?si=o0OKqdHv-6G6G8RV&t=581",
+                    "display": true,
+                    "duration": "40 minutes",
+                    "reuse": true
+                },
+                {
+                    "title": "Crime Scene InvestiGITor",
+                    "description": "Together, we will learn how to become a professional and revered investiGITor, who will be able to sniff out and solve any version control offence with the ease and panache of a seasoned detective!",
+                    "company": "Myself",
+                    "with":null,
+                    "more_than_once": true,
                     "where": "Droidcon Berlin - CityCube Berlin",
                     "audience": "Worldwide - Droidcon Berlin",
                     "folder": "",
@@ -34,7 +51,7 @@
                     "extra": "",
                     "link": "https://www.droidcon.com/2024/08/30/crime-scene-investigitor-2/",
                     "display": true,
-                    "duration": "45 minutes",
+                    "duration": "40 minutes",
                     "reuse": true
                 },
                 {
@@ -51,7 +68,7 @@
                     "extra": "",
                     "link": "https://www.devtalks.ro/speakers/375-ben-kadel",
                     "display": true,
-                    "duration": "45 minutes",
+                    "duration": "40 minutes",
                     "reuse": true
                 },
                 {
@@ -68,7 +85,7 @@
                     "extra": "",
                     "link": "https://www.youtube.com/watch?v=xVaIM0yD0SM",
                     "display": true,
-                    "duration": "45 minutes",
+                    "duration": "40 minutes",
                     "reuse": true
                 }
             ]
@@ -116,7 +133,7 @@
                     "company": "Myself",
                     "with":null,
                     "more_than_once": false,
-                    "where": "Droidcon Lisbon - ",
+                    "where": "Droidcon Lisbon - Forum Cultural de Alcochete",
                     "audience": "Attendees only - Droidcon Lisbon",
                     "folder": "",
                     "file": "Practical ADB usage to enhance your life",
