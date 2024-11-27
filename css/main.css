@@ -198,3 +198,22 @@ p {
     display: flex;
     justify-content: space-between;
 }
+
+#games-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.game-box{
+    background: white;
+    padding: 1em;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.game-title{
+    
+}

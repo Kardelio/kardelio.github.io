@@ -1,0 +1,713 @@
+{
+    "games": [
+        {
+            "id": 173346,
+            "name": "7 Wonders Duel",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/zdagMskTF7wJBPjX74XsRw__original/img/Ju836WNSaW7Mab9Vjq2TJ_FqhWQ=/0x0/filters:format(jpeg)/pic2576399.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/zdagMskTF7wJBPjX74XsRw__thumb/img/gV1-ckZSIC-dCxxpq1Y7GmPITzQ=/fit-in/200x150/filters:strip_icc()/pic2576399.jpg",
+            "yearpublished": 2015,
+            "playtime": 30,
+            "minplaytime": 30,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 202976,
+            "name": "7 Wonders Duel: Pantheon",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/iQRqtxgRuh-4J5vYLdhsMg__original/img/rwOQ9RK6_C9gIy-g_dgkdF6Mb7Y=/0x0/filters:format(png)/pic3143885.png",
+            "thumbnail": "https://cf.geekdo-images.com/iQRqtxgRuh-4J5vYLdhsMg__thumb/img/7KX-iJ5e3ZW0LnbEd9OQHRSpHG8=/fit-in/200x150/filters:strip_icc()/pic3143885.png",
+            "yearpublished": 2016,
+            "playtime": 30,
+            "minplaytime": 30,
+            "maxplaytime": 30,
+            "type": "boardgameexpansion",
+            "basegames": [
+                {
+                    "id": "173346",
+                    "name": "7 Wonders Duel"
+                }
+            ]
+        },
+        {
+            "id": 172818,
+            "name": "Above and Below",
+            "minplayers": 2,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/U0wpvRmBe65e4vwGf0Jbpg__original/img/gIlpowYQ7XzumYO0jZyVldxosBA=/0x0/filters:format(jpeg)/pic2398773.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/U0wpvRmBe65e4vwGf0Jbpg__thumb/img/jHLwKKWiJ-lHoaNIj0TrKAGm7QM=/fit-in/200x150/filters:strip_icc()/pic2398773.jpg",
+            "yearpublished": 2015,
+            "playtime": 90,
+            "minplaytime": 90,
+            "maxplaytime": 90,
+            "type": "boardgame"
+        },
+        {
+            "id": 144728,
+            "name": "Adventure Time Card Wars: Finn vs. Jake",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/86gFVhKPx5R1ASB90yTkqw__original/img/i2h27eEXuzdNM59EIDFd0LsPq80=/0x0/filters:format(jpeg)/pic1919277.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/86gFVhKPx5R1ASB90yTkqw__thumb/img/8_SbH-Tw2VbrSAHMHNUc7VCJo7U=/fit-in/200x150/filters:strip_icc()/pic1919277.jpg",
+            "yearpublished": 2014,
+            "playtime": 30,
+            "minplaytime": 30,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 236457,
+            "name": "Architects of the West Kingdom",
+            "minplayers": 1,
+            "maxplayers": 5,
+            "image": "https://cf.geekdo-images.com/OAX7HfOz-9N60StgADzd0g__original/img/x2Y_DYWrzzleMETfnu7Jm3R8jPo=/0x0/filters:format(png)/pic3781944.png",
+            "thumbnail": "https://cf.geekdo-images.com/OAX7HfOz-9N60StgADzd0g__thumb/img/sBMaoJ-Kz74lJ6djcl-NNMTr0Wo=/fit-in/200x150/filters:strip_icc()/pic3781944.png",
+            "yearpublished": 2018,
+            "playtime": 80,
+            "minplaytime": 60,
+            "maxplaytime": 80,
+            "type": "boardgame"
+        },
+        {
+            "id": 299592,
+            "name": "Beez",
+            "minplayers": 2,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/EiVjc2erZbNIGAad5IJJDQ__original/img/G66B2ystjcGb4bSRUFolhyDc1Hc=/0x0/filters:format(png)/pic5186783.png",
+            "thumbnail": "https://cf.geekdo-images.com/EiVjc2erZbNIGAad5IJJDQ__thumb/img/gKswZWcdhZ-xt_oSbjeo_dMjIs4=/fit-in/200x150/filters:strip_icc()/pic5186783.png",
+            "yearpublished": 2020,
+            "playtime": 45,
+            "minplaytime": 30,
+            "maxplaytime": 45,
+            "type": "boardgame"
+        },
+        {
+            "id": 10547,
+            "name": "Betrayal at House on the Hill",
+            "minplayers": 3,
+            "maxplayers": 6,
+            "image": "https://cf.geekdo-images.com/lqmt2Oti_qJS65XqHcB8AA__original/img/7R6yYk8A2eUMmSDaxGjae5SceGI=/0x0/filters:format(png)/pic5146864.png",
+            "thumbnail": "https://cf.geekdo-images.com/lqmt2Oti_qJS65XqHcB8AA__thumb/img/EDOmDbRhLy4za2PHkJ5IbhNxZmk=/fit-in/200x150/filters:strip_icc()/pic5146864.png",
+            "yearpublished": 2004,
+            "playtime": 60,
+            "minplaytime": 60,
+            "maxplaytime": 60,
+            "type": "boardgame"
+        },
+        {
+            "id": 11,
+            "name": "Bohnanza",
+            "minplayers": 2,
+            "maxplayers": 7,
+            "image": "https://cf.geekdo-images.com/8SADtu_4zBH_UJrCo935Iw__original/img/RNuAr2CDbxE3XzeJVkxj4Df3eVM=/0x0/filters:format(jpeg)/pic6348964.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/8SADtu_4zBH_UJrCo935Iw__thumb/img/vwTEQOWA3Mw__ztkTMulOgJ82Pw=/fit-in/200x150/filters:strip_icc()/pic6348964.jpg",
+            "yearpublished": 1997,
+            "playtime": 45,
+            "minplaytime": 45,
+            "maxplaytime": 45,
+            "type": "boardgame"
+        },
+        {
+            "id": 275916,
+            "name": "Cairn",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/dT0ephy8PTzXyaM2XWa9KQ__original/img/Ex8YcHmMgaUPIfJmytK26QZiOlo=/0x0/filters:format(jpeg)/pic7730638.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/dT0ephy8PTzXyaM2XWa9KQ__thumb/img/c-veLuBLe1gWD5-bxqo6QutVQQc=/fit-in/200x150/filters:strip_icc()/pic7730638.jpg",
+            "yearpublished": 2019,
+            "playtime": 25,
+            "minplaytime": 25,
+            "maxplaytime": 25,
+            "type": "boardgame"
+        },
+        {
+            "id": 50381,
+            "name": "Cards Against Humanity",
+            "minplayers": 4,
+            "maxplayers": 30,
+            "image": "https://cf.geekdo-images.com/nYLrPiI9gnvlrwOrKQ4_CA__original/img/EgMpdhoG38LUTApk0kyFFsmoQPk=/0x0/filters:format(jpeg)/pic2909692.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/nYLrPiI9gnvlrwOrKQ4_CA__thumb/img/fIhQLjWueNPYZhCZ_LzjAIhPm5U=/fit-in/200x150/filters:strip_icc()/pic2909692.jpg",
+            "yearpublished": 2009,
+            "playtime": 30,
+            "minplaytime": 30,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 278,
+            "name": "Catan Card Game",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/CRCOv0p4FgZaze_3fGuhIA__original/img/OiugGzMENFVOzMTKBFZnEVOPzto=/0x0/filters:format(jpeg)/pic706443.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/CRCOv0p4FgZaze_3fGuhIA__thumb/img/m3u-LAThaaVm0fBYatEMsbrl_bk=/fit-in/200x150/filters:strip_icc()/pic706443.jpg",
+            "yearpublished": 1996,
+            "playtime": 120,
+            "minplaytime": 60,
+            "maxplaytime": 120,
+            "type": "boardgame"
+        },
+        {
+            "id": 2915,
+            "name": "Catan Card Game: Expansion Set",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/M1ogM5NSkKds14SapeqnwA__original/img/zwSP59aLcnLpY284Qh8HGqzcKlI=/0x0/filters:format(jpeg)/pic255527.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/M1ogM5NSkKds14SapeqnwA__thumb/img/A_Rh9sBpilWX1R2l-G2rNhNYLhc=/fit-in/200x150/filters:strip_icc()/pic255527.jpg",
+            "yearpublished": 2002,
+            "playtime": 90,
+            "minplaytime": 90,
+            "maxplaytime": 90,
+            "type": "boardgameexpansion",
+            "basegames": [
+                {
+                    "id": "278",
+                    "name": "Catan Card Game"
+                }
+            ]
+        },
+        {
+            "id": 926,
+            "name": "CATAN: Cities & Knights",
+            "minplayers": 3,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/XVjc87_UzjIhagFeO4r8ew__original/img/EjqC0K9hK6XJOEkF6Hmaz3MKndI=/0x0/filters:format(jpeg)/pic2420315.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/XVjc87_UzjIhagFeO4r8ew__thumb/img/MVJhRxVHfoSpVOSSYwvzyn8hTCw=/fit-in/200x150/filters:strip_icc()/pic2420315.jpg",
+            "yearpublished": 1998,
+            "playtime": 150,
+            "minplaytime": 90,
+            "maxplaytime": 150,
+            "type": "boardgameexpansion",
+            "basegames": [
+                {
+                    "id": "13",
+                    "name": "CATAN"
+                }
+            ]
+        },
+        {
+            "id": 102794,
+            "name": "Caverna: The Cave Farmers",
+            "minplayers": 1,
+            "maxplayers": 7,
+            "image": "https://cf.geekdo-images.com/EAqbd46lFxo-7GumlO8U4w__original/img/oNM6bkDbjww-7nKZX-WYYmPxRws=/0x0/filters:format(jpeg)/pic5598833.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/EAqbd46lFxo-7GumlO8U4w__thumb/img/g-qxFyjgqn7kwH3erf3jhmgYaIU=/fit-in/200x150/filters:strip_icc()/pic5598833.jpg",
+            "yearpublished": 2013,
+            "playtime": 210,
+            "minplaytime": 30,
+            "maxplaytime": 210,
+            "type": "boardgame"
+        },
+        {
+            "id": 171,
+            "name": "Chess",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/0-DjGBOko6RV8zg5ejhYIg__original/img/0pn_QgMuWaIJb2Q7aZNfORse0_o=/0x0/filters:format(jpeg)/pic260745.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/0-DjGBOko6RV8zg5ejhYIg__thumb/img/kjtoinSrkYV0HZleXMxkJzZwS8k=/fit-in/200x150/filters:strip_icc()/pic260745.jpg",
+            "yearpublished": 1475,
+            "playtime": 0,
+            "minplaytime": 0,
+            "maxplaytime": 0,
+            "type": "boardgame"
+        },
+        {
+            "id": 178900,
+            "name": "Codenames",
+            "minplayers": 2,
+            "maxplayers": 8,
+            "image": "https://cf.geekdo-images.com/F_KDEu0GjdClml8N7c8Imw__original/img/gcX_EfjsRpB5fI4Ug4XV73G4jGI=/0x0/filters:format(jpeg)/pic2582929.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/F_KDEu0GjdClml8N7c8Imw__thumb/img/yl8iXxSNwguMeg3KkmfFO9SMVVc=/fit-in/200x150/filters:strip_icc()/pic2582929.jpg",
+            "yearpublished": 2015,
+            "playtime": 15,
+            "minplaytime": 15,
+            "maxplaytime": 15,
+            "type": "boardgame"
+        },
+        {
+            "id": 198773,
+            "name": "Codenames: Pictures",
+            "minplayers": 2,
+            "maxplayers": 8,
+            "image": "https://cf.geekdo-images.com/Q2u-Nk68Wb1iLjxh_dfsIg__original/img/i4FVjrk9TtmvVlVK7NtwRqgOxdQ=/0x0/filters:format(jpeg)/pic3476592.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/Q2u-Nk68Wb1iLjxh_dfsIg__thumb/img/6-1EOESE196KVKw4xOJ5rge56j0=/fit-in/200x150/filters:strip_icc()/pic3476592.jpg",
+            "yearpublished": 2016,
+            "playtime": 15,
+            "minplaytime": 15,
+            "maxplaytime": 15,
+            "type": "boardgame"
+        },
+        {
+            "id": 131568,
+            "name": "Codinca",
+            "minplayers": 2,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/m11wZ62qcE_dr1ArroRAvA__original/img/0yMZdgnJEUGyCTkQHVF-KMTGbxs=/0x0/filters:format(jpeg)/pic2995800.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/m11wZ62qcE_dr1ArroRAvA__thumb/img/vxwLTHfTfZyvj-AKuxs64Uga8FY=/fit-in/200x150/filters:strip_icc()/pic2995800.jpg",
+            "yearpublished": 2012,
+            "playtime": 30,
+            "minplaytime": 30,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 131357,
+            "name": "Coup",
+            "minplayers": 2,
+            "maxplayers": 6,
+            "image": "https://cf.geekdo-images.com/MWhSY_GOe2-bmlQ2rntSVg__original/img/ayAAWBK1rAEumARNmROsOtvqW-4=/0x0/filters:format(jpeg)/pic2016054.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/MWhSY_GOe2-bmlQ2rntSVg__thumb/img/vuR_0PCX1w2EkjO_LbchOHZPOwU=/fit-in/200x150/filters:strip_icc()/pic2016054.jpg",
+            "yearpublished": 2012,
+            "playtime": 15,
+            "minplaytime": 15,
+            "maxplaytime": 15,
+            "type": "boardgame"
+        },
+        {
+            "id": 204466,
+            "name": "Dark Is the Night",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/vMemXSFmaRCkiacdaoJLYA__original/img/UgOXKjSAh71InO1o41mhIyhLAPA=/0x0/filters:format(png)/pic3107145.png",
+            "thumbnail": "https://cf.geekdo-images.com/vMemXSFmaRCkiacdaoJLYA__thumb/img/BwPGDQ-idafqvJNldMyWq1XeksI=/fit-in/200x150/filters:strip_icc()/pic3107145.png",
+            "yearpublished": 2017,
+            "playtime": 15,
+            "minplaytime": 1,
+            "maxplaytime": 15,
+            "type": "boardgame"
+        },
+        {
+            "id": 149155,
+            "name": "Dead Man's Draw",
+            "minplayers": 2,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/m6tC_KsilZUQsKFIzDXIpA__original/img/yhZIPwPWPnesvMA1ChdANxEcBzM=/0x0/filters:format(jpeg)/pic6489882.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/m6tC_KsilZUQsKFIzDXIpA__thumb/img/CmL-JIZZO3ku0NKVHq3lHpMrLEM=/fit-in/200x150/filters:strip_icc()/pic6489882.jpg",
+            "yearpublished": 2015,
+            "playtime": 15,
+            "minplaytime": 15,
+            "maxplaytime": 15,
+            "type": "boardgame"
+        },
+        {
+            "id": 169654,
+            "name": "Deep Sea Adventure",
+            "minplayers": 2,
+            "maxplayers": 6,
+            "image": "https://cf.geekdo-images.com/owyKXaa5SPB2HG9F_MueNQ__original/img/gOmpUB3hM7Ap9o-kDsV8ZVBVYXA=/0x0/filters:format(png)/pic3169827.png",
+            "thumbnail": "https://cf.geekdo-images.com/owyKXaa5SPB2HG9F_MueNQ__thumb/img/poEY0PMTpz4X_SOUaPjs6G7qr7o=/fit-in/200x150/filters:strip_icc()/pic3169827.png",
+            "yearpublished": 2014,
+            "playtime": 30,
+            "minplaytime": 30,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 262547,
+            "name": "Don't Get Got!",
+            "minplayers": 2,
+            "maxplayers": 10,
+            "image": "https://cf.geekdo-images.com/YIxmAusaJJq4SpiSpSAKWQ__original/img/eF9QBEETiQcbshrwrstTk6X5Pf0=/0x0/filters:format(png)/pic6935641.png",
+            "thumbnail": "https://cf.geekdo-images.com/YIxmAusaJJq4SpiSpSAKWQ__thumb/img/9i6K95aGNZegnktzp4Cv4t805I4=/fit-in/200x150/filters:strip_icc()/pic6935641.png",
+            "yearpublished": 2018,
+            "playtime": 1440,
+            "minplaytime": 30,
+            "maxplaytime": 1440,
+            "type": "boardgame"
+        },
+        {
+            "id": 251399,
+            "name": "Doxie Dash",
+            "minplayers": 2,
+            "maxplayers": 6,
+            "image": "https://cf.geekdo-images.com/Orfn1RzeSv5GDT6hPkEkng__original/img/tUKjhkRtu3yYkJ9W6AdpyZGA6Dk=/0x0/filters:format(png)/pic4102239.png",
+            "thumbnail": "https://cf.geekdo-images.com/Orfn1RzeSv5GDT6hPkEkng__thumb/img/JY96BFqlDb-BkQ9kQ1yMRq52Zlg=/fit-in/200x150/filters:strip_icc()/pic4102239.png",
+            "yearpublished": 2018,
+            "playtime": 30,
+            "minplaytime": 15,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 6366,
+            "name": "Dungeons & Dragons: The Fantasy Adventure Board Game",
+            "minplayers": 2,
+            "maxplayers": 5,
+            "image": "https://cf.geekdo-images.com/sgYgyMVxD_ecYXUw0U36YQ__original/img/xwwDikctt5Eta4iXlJtXThk0MJw=/0x0/filters:format(jpeg)/pic681985.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/sgYgyMVxD_ecYXUw0U36YQ__thumb/img/d2n12CN3d8rkeqEIZHqJI6jS_mI=/fit-in/200x150/filters:strip_icc()/pic681985.jpg",
+            "yearpublished": 2003,
+            "playtime": 60,
+            "minplaytime": 60,
+            "maxplaytime": 60,
+            "type": "boardgame"
+        },
+        {
+            "id": 8874,
+            "name": "Dungeons & Dragons: The Fantasy Adventure Board Game – Eternal Winter Expansion Pack",
+            "minplayers": 2,
+            "maxplayers": 6,
+            "image": "https://cf.geekdo-images.com/x-n8ag9AtjXiaZuYTXv6dA__original/img/xTwc5eiwIzFwrONNnAgzqdDQh_c=/0x0/filters:format(jpeg)/pic786382.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/x-n8ag9AtjXiaZuYTXv6dA__thumb/img/dHdjEJJnT_Tv6msRnJR5oSGQm78=/fit-in/200x150/filters:strip_icc()/pic786382.jpg",
+            "yearpublished": 2003,
+            "playtime": 240,
+            "minplaytime": 240,
+            "maxplaytime": 240,
+            "type": "boardgameexpansion",
+            "basegames": [
+                {
+                    "id": "6366",
+                    "name": "Dungeons & Dragons: The Fantasy Adventure Board Game"
+                }
+            ]
+        },
+        {
+            "id": 16138,
+            "name": "Dungeons & Dragons: The Fantasy Adventure Board Game – Forbidden Forest Expansion Pack",
+            "minplayers": 2,
+            "maxplayers": 5,
+            "image": "https://cf.geekdo-images.com/ANCK66YI9c50LHf3-Cft3A__original/img/zcieDUxn6f2p2BDCKkBgZTs4sE8=/0x0/filters:format(jpeg)/pic786377.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/ANCK66YI9c50LHf3-Cft3A__thumb/img/KxXPFppB6ZqTml1-fXnH4amHKs0=/fit-in/200x150/filters:strip_icc()/pic786377.jpg",
+            "yearpublished": 2004,
+            "playtime": 0,
+            "minplaytime": 0,
+            "maxplaytime": 0,
+            "type": "boardgameexpansion",
+            "basegames": [
+                {
+                    "id": "6366",
+                    "name": "Dungeons & Dragons: The Fantasy Adventure Board Game"
+                }
+            ]
+        },
+        {
+            "id": 72125,
+            "name": "Eclipse: New Dawn for the Galaxy",
+            "minplayers": 2,
+            "maxplayers": 6,
+            "image": "https://cf.geekdo-images.com/cnFppsVNOSTJ-W3APQFuTg__original/img/AbcjscBi-x3tVrsJsBhXq2RxLbc=/0x0/filters:format(jpeg)/pic1974056.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/cnFppsVNOSTJ-W3APQFuTg__thumb/img/X8XQO2_mRl7HRSzzOEgoKrWulj4=/fit-in/200x150/filters:strip_icc()/pic1974056.jpg",
+            "yearpublished": 2011,
+            "playtime": 180,
+            "minplaytime": 60,
+            "maxplaytime": 180,
+            "type": "boardgame"
+        },
+        {
+            "id": 125898,
+            "name": "Eclipse: Rise of the Ancients",
+            "minplayers": 2,
+            "maxplayers": 9,
+            "image": "https://cf.geekdo-images.com/ddT2F5CvTVlOs3WwhavuNA__original/img/mIwW5dlS1B5FlCkCWesNG6KREzE=/0x0/filters:format(jpeg)/pic1340277.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/ddT2F5CvTVlOs3WwhavuNA__thumb/img/RvASIBxJN0cfxqGLr8qfIjGw0BQ=/fit-in/200x150/filters:strip_icc()/pic1340277.jpg",
+            "yearpublished": 2012,
+            "playtime": 120,
+            "minplaytime": 120,
+            "maxplaytime": 120,
+            "type": "boardgameexpansion",
+            "basegames": [
+                {
+                    "id": "72125",
+                    "name": "Eclipse: New Dawn for the Galaxy"
+                }
+            ]
+        },
+        {
+            "id": 138161,
+            "name": "Firefly: The Game",
+            "minplayers": 1,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/iRkRCqB6-J428N8JPjL5fg__original/img/hZEedxgN2GQ8UENAGkWAX_E2bZA=/0x0/filters:format(png)/pic1727008.png",
+            "thumbnail": "https://cf.geekdo-images.com/iRkRCqB6-J428N8JPjL5fg__thumb/img/kR9xjgvm2GkSGpSuyngRuUuHwTg=/fit-in/200x150/filters:strip_icc()/pic1727008.png",
+            "yearpublished": 2013,
+            "playtime": 240,
+            "minplaytime": 120,
+            "maxplaytime": 240,
+            "type": "boardgame"
+        },
+        {
+            "id": 212140,
+            "name": "Firefly: The Game – Crime & Punishment",
+            "minplayers": 1,
+            "maxplayers": 0,
+            "image": "https://cf.geekdo-images.com/Piu_m-D6CiGcK-WgGZfMig__original/img/5USbmykoi-gwSyOxwAx2OgNp-lE=/0x0/filters:format(jpeg)/pic3421222.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/Piu_m-D6CiGcK-WgGZfMig__thumb/img/bQ_tCBaXl329UG-P3nNIUeBdCus=/fit-in/200x150/filters:strip_icc()/pic3421222.jpg",
+            "yearpublished": 2017,
+            "playtime": 0,
+            "minplaytime": 120,
+            "maxplaytime": 0,
+            "type": "boardgameexpansion",
+            "basegames": [
+                {
+                    "id": "138161",
+                    "name": "Firefly: The Game"
+                }
+            ]
+        },
+        {
+            "id": 177497,
+            "name": "Firefly: The Game – Jetwash",
+            "minplayers": 0,
+            "maxplayers": 0,
+            "image": "https://cf.geekdo-images.com/dEMQztK8APmRaoUn4TFY8w__original/img/StYTEOoz9HXbmMCGJpRg0da2amk=/0x0/filters:format(jpeg)/pic2514194.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/dEMQztK8APmRaoUn4TFY8w__thumb/img/0yW29eaI-S0Xt0WCMCk2Y-u2kAo=/fit-in/200x150/filters:strip_icc()/pic2514194.jpg",
+            "yearpublished": 2015,
+            "playtime": 0,
+            "minplaytime": 0,
+            "maxplaytime": 0,
+            "type": "boardgameexpansion",
+            "basegames": [
+                {
+                    "id": "138161",
+                    "name": "Firefly: The Game"
+                }
+            ]
+        },
+        {
+            "id": 207016,
+            "name": "Flick 'em Up!: Dead of Winter",
+            "minplayers": 1,
+            "maxplayers": 10,
+            "image": "https://cf.geekdo-images.com/P7W3dCZliN22VxH7JPUG3A__original/img/FJ0Y-DDM5A_rmkXvNXEm-brHaHk=/0x0/filters:format(jpeg)/pic3365608.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/P7W3dCZliN22VxH7JPUG3A__thumb/img/m-ZmSf0iL8fgEb2BmVhqhqmWzLQ=/fit-in/200x150/filters:strip_icc()/pic3365608.jpg",
+            "yearpublished": 2017,
+            "playtime": 45,
+            "minplaytime": 30,
+            "maxplaytime": 45,
+            "type": "boardgame"
+        },
+        {
+            "id": 43570,
+            "name": "Friday",
+            "minplayers": 1,
+            "maxplayers": 1,
+            "image": "https://cf.geekdo-images.com/7bBUuYUIyKIBDh_UnNa_Fw__original/img/_tiZYJMEc26kgt7uNF6IM8A-8As=/0x0/filters:format(jpeg)/pic1513328.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/7bBUuYUIyKIBDh_UnNa_Fw__thumb/img/Bjg_3ovfjRqjGtYEaEj6107UGWY=/fit-in/200x150/filters:strip_icc()/pic1513328.jpg",
+            "yearpublished": 2011,
+            "playtime": 25,
+            "minplaytime": 25,
+            "maxplaytime": 25,
+            "type": "boardgame"
+        },
+        {
+            "id": 197443,
+            "name": "Fugitive",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/Jeukp3NUs-u6i3SuF-yE4A__original/img/X8-dbZ1EzlwOUAe3CuwKBRztTMY=/0x0/filters:format(png)/pic3481216.png",
+            "thumbnail": "https://cf.geekdo-images.com/Jeukp3NUs-u6i3SuF-yE4A__thumb/img/1cw7pZbdLk2bBFh-tjkwzZXwgmw=/fit-in/200x150/filters:strip_icc()/pic3481216.png",
+            "yearpublished": 2017,
+            "playtime": 20,
+            "minplaytime": 5,
+            "maxplaytime": 20,
+            "type": "boardgame"
+        },
+        {
+            "id": 336794,
+            "name": "Galaxy Trucker (Second Edition)",
+            "minplayers": 2,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/1gQABuftAVgk1qshkMyDEw__original/img/7GY1ZXeZkWkWki5QLAbfdX-EGp0=/0x0/filters:format(jpeg)/pic6125184.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/1gQABuftAVgk1qshkMyDEw__thumb/img/Ovni6sWuvyfj9LWn-hnHzpCELF8=/fit-in/200x150/filters:strip_icc()/pic6125184.jpg",
+            "yearpublished": 2021,
+            "playtime": 30,
+            "minplaytime": 20,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 194626,
+            "name": "Happy Salmon",
+            "minplayers": 3,
+            "maxplayers": 8,
+            "image": "https://cf.geekdo-images.com/qiPO300rG73UqxJvpUe3og__original/img/r-ZepVlPDZRwmxcWJgLA4GpaXfY=/0x0/filters:format(jpeg)/pic7354069.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/qiPO300rG73UqxJvpUe3og__thumb/img/jo26IkaY-DSx4MhfRQ7lDHCPtbo=/fit-in/200x150/filters:strip_icc()/pic7354069.jpg",
+            "yearpublished": 2016,
+            "playtime": 2,
+            "minplaytime": 2,
+            "maxplaytime": 2,
+            "type": "boardgame"
+        },
+        {
+            "id": 155969,
+            "name": "Harbour",
+            "minplayers": 1,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/ECislQBZPHzEiCHOb1H3Bg__original/img/AzWc6JVdCn9CgDtMn35PEZgc0s0=/0x0/filters:format(jpeg)/pic2726915.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/ECislQBZPHzEiCHOb1H3Bg__thumb/img/f_JxFu1OVK5g_bmzw4PXb8imjJY=/fit-in/200x150/filters:strip_icc()/pic2726915.jpg",
+            "yearpublished": 2015,
+            "playtime": 60,
+            "minplaytime": 30,
+            "maxplaytime": 60,
+            "type": "boardgame"
+        },
+        {
+            "id": 355326,
+            "name": "Heroes of Might & Magic III: The Board Game",
+            "minplayers": 1,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/oI8jrUmwBtlWyCiIuYH6YQ__original/img/IIa8Wvb-yLAoaU8J9oPGRwNXi7w=/0x0/filters:format(jpeg)/pic8107311.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/oI8jrUmwBtlWyCiIuYH6YQ__thumb/img/9y2YUB27rgUmeYby_M39zGOjZAw=/fit-in/200x150/filters:strip_icc()/pic8107311.jpg",
+            "yearpublished": 2024,
+            "playtime": 120,
+            "minplaytime": 90,
+            "maxplaytime": 120,
+            "type": "boardgame"
+        },
+        {
+            "id": 346553,
+            "name": "Heuschrecken Poker",
+            "minplayers": 2,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/zpGCLrSDb0TIsBFLccA5WA__original/img/ZgXggea4EAs2JgPnyt84QQ1hPdk=/0x0/filters:format(png)/pic6377348.png",
+            "thumbnail": "https://cf.geekdo-images.com/zpGCLrSDb0TIsBFLccA5WA__thumb/img/kP7UnJFkg_fmqJbFia2iXMfgKhU=/fit-in/200x150/filters:strip_icc()/pic6377348.png",
+            "yearpublished": 2021,
+            "playtime": 20,
+            "minplaytime": 20,
+            "maxplaytime": 20,
+            "type": "boardgame"
+        },
+        {
+            "id": 232079,
+            "name": "How to Rob a Bank",
+            "minplayers": 2,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/fcn9UjnV-uG41chEmw-KYA__original/img/CIuGcfY3_ak-KQ1LW8NH4qbwl_0=/0x0/filters:format(jpeg)/pic4274327.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/fcn9UjnV-uG41chEmw-KYA__thumb/img/-3ZQ7C85SGbHEQ6s1Qwn8CzgdiU=/fit-in/200x150/filters:strip_icc()/pic4274327.jpg",
+            "yearpublished": 2017,
+            "playtime": 30,
+            "minplaytime": 30,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 230342,
+            "name": "InBetween",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/OobyrTWZBCvtytRZT6xqug__original/img/QF_Iy_Q9jzYq9UBgODQUqvwzL-k=/0x0/filters:format(jpeg)/pic5335582.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/OobyrTWZBCvtytRZT6xqug__thumb/img/K1BEWEF5pxwk8Nwb1tgHUTnh3HY=/fit-in/200x150/filters:strip_icc()/pic5335582.jpg",
+            "yearpublished": 2017,
+            "playtime": 40,
+            "minplaytime": 20,
+            "maxplaytime": 40,
+            "type": "boardgame"
+        },
+        {
+            "id": 15512,
+            "name": "Incan Gold",
+            "minplayers": 3,
+            "maxplayers": 8,
+            "image": "https://cf.geekdo-images.com/xPuQ_NYaoKWEUhugIDA3yA__original/img/kPOT6llwnZBDjeRq8LopasPm1Go=/0x0/filters:format(jpeg)/pic8279658.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/xPuQ_NYaoKWEUhugIDA3yA__thumb/img/osrBmn2JqDeBylg8bvqaVOCVGTI=/fit-in/200x150/filters:strip_icc()/pic8279658.jpg",
+            "yearpublished": 2005,
+            "playtime": 30,
+            "minplaytime": 30,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 155821,
+            "name": "Inis",
+            "minplayers": 2,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/6QE8mnPFmauoj2THsyUYPA__original/img/6bZdn1SNbpIqU7n5pwtncvdNE_U=/0x0/filters:format(jpeg)/pic4739757.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/6QE8mnPFmauoj2THsyUYPA__thumb/img/m63hnvHi6jqlva52FGaWbEqzjys=/fit-in/200x150/filters:strip_icc()/pic4739757.jpg",
+            "yearpublished": 2016,
+            "playtime": 90,
+            "minplaytime": 60,
+            "maxplaytime": 90,
+            "type": "boardgame"
+        },
+        {
+            "id": 54043,
+            "name": "Jaipur",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/_LTujSe_o16nvjDC-J0seA__original/img/zUnAdsgt4dCxvtoRDc_9DHbic0M=/0x0/filters:format(jpeg)/pic5100947.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/_LTujSe_o16nvjDC-J0seA__thumb/img/82vhODfpxIT03BzW4NkisJ5Unzs=/fit-in/200x150/filters:strip_icc()/pic5100947.jpg",
+            "yearpublished": 2009,
+            "playtime": 30,
+            "minplaytime": 30,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        },
+        {
+            "id": 405987,
+            "name": "Kelp: Brilliant Behaviours Mini Expansion Set",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/DhXrVOTsXV0-Xl3qII_PaQ__original/img/FNZtfaieWgT5b-axkhOjNXN1Afg=/0x0/filters:format(jpeg)/pic8445278.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/DhXrVOTsXV0-Xl3qII_PaQ__thumb/img/tbaoxIhF1b5iPC4hT9dEb3ni_FI=/fit-in/200x150/filters:strip_icc()/pic8445278.jpg",
+            "yearpublished": 2024,
+            "playtime": 60,
+            "minplaytime": 45,
+            "maxplaytime": 60,
+            "type": "boardgameexpansion",
+            "basegames": [
+                {
+                    "id": "374595",
+                    "name": "Kelp: Shark vs Octopus"
+                }
+            ]
+        },
+        {
+            "id": 374595,
+            "name": "Kelp: Shark vs Octopus",
+            "minplayers": 2,
+            "maxplayers": 2,
+            "image": "https://cf.geekdo-images.com/iMtHHxutEtga5DiZDIbgJg__original/img/nzgtIPmNuWX65AHNC0sAbo4V2vU=/0x0/filters:format(jpeg)/pic7493386.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/iMtHHxutEtga5DiZDIbgJg__thumb/img/4QKru9Jmr46bphmA9uzwnOZve44=/fit-in/200x150/filters:strip_icc()/pic7493386.jpg",
+            "yearpublished": 2024,
+            "playtime": 60,
+            "minplaytime": 40,
+            "maxplaytime": 60,
+            "type": "boardgame"
+        },
+        {
+            "id": 204583,
+            "name": "Kingdomino",
+            "minplayers": 2,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/c0m3gwZTcfKoLI63ASio8g__original/img/HT6NQPT0cSFcZXjSewtjTO_NBAE=/0x0/filters:format(png)/pic8443569.png",
+            "thumbnail": "https://cf.geekdo-images.com/c0m3gwZTcfKoLI63ASio8g__thumb/img/4p4Xydg0tze9UFcd6oUbCnVyxCw=/fit-in/200x150/filters:strip_icc()/pic8443569.png",
+            "yearpublished": 2016,
+            "playtime": 25,
+            "minplaytime": 15,
+            "maxplaytime": 25,
+            "type": "boardgame"
+        },
+        {
+            "id": 277458,
+            "name": "Kluster",
+            "minplayers": 1,
+            "maxplayers": 4,
+            "image": "https://cf.geekdo-images.com/0uu0QJ2OFRIEGVMUgzfYJQ__original/img/kLE0YlCEq_tSQGQXF9CMrTUtK8o=/0x0/filters:format(jpeg)/pic5251671.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/0uu0QJ2OFRIEGVMUgzfYJQ__thumb/img/aNd2-AJpD-f5yZfnYc2zfZ6Um48=/fit-in/200x150/filters:strip_icc()/pic5251671.jpg",
+            "yearpublished": 2018,
+            "playtime": 20,
+            "minplaytime": 10,
+            "maxplaytime": 20,
+            "type": "boardgame"
+        },
+        {
+            "id": 238700,
+            "name": "Lanzeloth",
+            "minplayers": 2,
+            "maxplayers": 6,
+            "image": "https://cf.geekdo-images.com/-LEBNFHSzIgptOQNeLX-Hw__original/img/YB0JbQ1vFOEtahApbvqp_CZEPbw=/0x0/filters:format(jpeg)/pic4285735.jpg",
+            "thumbnail": "https://cf.geekdo-images.com/-LEBNFHSzIgptOQNeLX-Hw__thumb/img/Ic3JqB8p0AB0Kx9u64PbjU7nqf4=/fit-in/200x150/filters:strip_icc()/pic4285735.jpg",
+            "yearpublished": 2017,
+            "playtime": 30,
+            "minplaytime": 20,
+            "maxplaytime": 30,
+            "type": "boardgame"
+        }
+    ],
+    "stats": {
+        "count": 50,
+        "games": 41,
+        "expansions": 9
+    }
+}
