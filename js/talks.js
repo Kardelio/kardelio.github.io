@@ -20,7 +20,7 @@ $.getJSON('data/talks.json', function (data) {
                 }
                 let selfieImageBlock = "";
                 if (talk.selfieImage != undefined && talk.selfieImage != null) {
-                    selfieImageBlock = `<img class="selfie-image" onmouseover="showLargeImage('${talk.selfieImage}')" onmouseout="hideLargeImage()" src="media/photos/${talk.selfieImage}"/>`;
+                    selfieImageBlock = `<img class="selfie-image" onmouseover="showLargeImage('${talk.selfieImage}')" onmouseout="hideLargeImage()" src="media/photos/selfies/${talk.selfieImage}"/>`;
                 }
                 document.getElementById("talks-container").appendChild(createElementsFromHTML(`
                     <div class="links-container-wide">
@@ -50,7 +50,7 @@ function showLargeImage(imageName) {
     console.log(imageName);
     var dialogBox = document.createElement('div')
     dialogBox.id = 'generic-dialog'
-    dialogBox.innerHTML = `<img class="larger-image" src="media/photos/${imageName}" />`
+    dialogBox.innerHTML = `<img class="larger-image" src="media/photos/selfies/${imageName}" />`
     // dialogBox.style.top = `${posY}px`
     // dialogBox.style.left = `${posX}px`
     document.body.appendChild(dialogBox)
