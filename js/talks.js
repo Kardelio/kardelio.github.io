@@ -5,7 +5,7 @@ $.getJSON('data/talks.json', function (data) {
     data.talksInYears.forEach(element => {
         document.getElementById("talks-container").innerHTML += `
             <div class="year">    
-                ${element.year}
+                ${element.year} <span class="year-amount">(${element.talks.length})</span>
             </div>
         `;
         element.talks.forEach(talk => {

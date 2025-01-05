@@ -138,6 +138,12 @@ margin: 0.3em auto;
     margin: 1em;
 }
 
+.year-amount{
+    font-size: 80%;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+}
+
 .icon {
     width: 100px;
     margin: 1em;
