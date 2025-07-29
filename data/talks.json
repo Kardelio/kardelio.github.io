@@ -26,6 +26,24 @@
                     "company": "Myself",
                     "with": null,
                     "more_than_once": true,
+                    "selfieImage": "2025-ny.jpg",
+                    "where": "Droidcon New York - The Brooklyn Storehouse",
+                    "audience": "Conference attendees",
+                    "folder": "",
+                    "file": "Escape From Planet Regex",
+                    "date": "25.06.25",
+                    "extra": "",
+                    "link": "https://youtu.be/ja2nQ5ryO-o",
+                    "display": true,
+                    "duration": "40 minutes",
+                    "reuse": true
+                },
+                {
+                    "title": "Escape from Planet Regex - Kotlin to the Rescue",
+                    "description": "An exciting adventure into the mysterious world of Regex and Kotlin together! Come aboard the SS Singleton & journey with me to Planet Regex, where you will learn all about the Basics (and some advanced bit) of Regex & then more importantly how to use that knowledge in your favourite programming language; Kotlin!",
+                    "company": "Myself",
+                    "with": null,
+                    "more_than_once": true,
                     "selfieImage": "2025-paris.jpg",
                     "where": "Android Makers by Droidcon Paris - The Belfry of Montrouge",
                     "audience": "Conference attendees",
@@ -36,7 +54,7 @@
                     "link": "https://www.youtube.com/watch?v=F7navDuZFdo",
                     "display": true,
                     "duration": "40 minutes",
-                    "reuse": false
+                    "reuse": true
                 }
             ]
         },
