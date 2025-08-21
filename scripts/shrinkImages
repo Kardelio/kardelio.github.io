@@ -10,6 +10,8 @@ ACTION_KEYWORD_DEFAULT="no"
 
 compressFile(){
     local i="${1}"
+    echo "DU: $(du $i)"
+    presize=$(du -h "$i" | awk '{print $1}')
     relative_path=$(dirname "$i") 
     filename=$(basename "$i")
     extension="${filename#*.}"
@@ -23,8 +25,9 @@ compressFile(){
     if [[ $override_mode = true ]]; then
         rm "$i"
     fi
+    postsize=$(du -h "$finalName" | awk '{print $1}')
     if [[ $? -eq 0 ]]; then
-        echo "✅ Successful compression of: ${i}"
+        echo "✅ Successful compression of: ${i} (pre: ${presize}, post: ${postsize})"
     else
         echo "❌ Failed to compress: ${i}"
     fi
