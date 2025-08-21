@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 
-#get files
-#ffmpeg replase
-
-#brew install findutils
-#gfind . -type f -me=$(basename "$full_path")regextype posix-extended -regex ".*\.(png|jpg)"
 suffix="-shrunk"
 files=($(gfind . -type f -regextype posix-extended -regex ".*\.(png|jpg)" -printf "%P\n"))
 
 interactive_mode=false
+override_mode=false
 ACTION_KEYWORD="yes"
 ACTION_KEYWORD_DEFAULT="no"
 
@@ -18,8 +14,12 @@ compressFile(){
     filename=$(basename "$i")
     extension="${filename#*.}"
     base_name="${filename%.*}"
+    finalName="${relative_path}/${base_name}${suffix}.webp"
+    if [[ $override_mode = true ]]; then
+        finalName="${relative_path}/${base_name}.webp"
+    fi
     echo " Outputting: ${relative_path}/${base_name}${suffix}.webp"
-    ffmpeg -i "${i}" -y -hide_banner -loglevel error -vf "scale=iw*0.5:ih*0.5:flags=lanczos"  -q:v 75 -compression_level 8 "${relative_path}/${base_name}${suffix}.webp"
+    ffmpeg -i "${i}" -y -hide_banner -loglevel error -vf "scale=iw*0.5:ih*0.5:flags=lanczos"  -q:v 75 -compression_level 8 "${finalName}"
     if [[ $? -eq 0 ]]; then
         echo "✅ Successful compression of: ${i}"
     else
@@ -27,8 +27,13 @@ compressFile(){
     fi
 }
 
-while getopts "is:" opt; do
+while getopts "ois:" opt; do
     case $opt in
+        o)
+            echo "Override mode..."
+            #TODO check if user sure
+            override_mode=true
+            ;;
         i)
             echo "Interactive mode..."
             interactive_mode=true
