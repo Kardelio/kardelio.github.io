@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+#get files
+#ffmpeg replase
+
+#brew install findutils
+#gfind . -type f -me=$(basename "$full_path")regextype posix-extended -regex ".*\.(png|jpg)"
+suffix="-shrunk"
+files=($(gfind . -type f -regextype posix-extended -regex ".*\.(png|jpg)" -printf "%P\n"))
+
+interactive_mode=false
+ACTION_KEYWORD="yes"
+
+compressFile(){
+    local i="${1}"
+    echo "--$i"
+    #relative_path="${i%/*}" 
+    relative_path=$(dirname "$i") 
+    failename=$(basename "$i")
+    extension="${filename#*.}"
+    base_name="${filename%.*}"
+    # ffmpeg -i bk-L.png -vf "scale=iw*0.5:ih*0.5:flags=lanczos"  -q:v 75 -compression_level 8 out3.webp
+    echo "==$extension"
+    echo "000 ${filename} - ${base_name}"
+    echo "++${relative_path}"
+    ffmpeg -i "${i}" -y -hide_banner -loglevel error -vf "scale=iw*0.5:ih*0.5:flags=lanczos"  -q:v 75 -compression_level 8 "${relative_path}/${base_name}${suffix}.webp"
+}
+
+while getopts "is:" opt; do
+    case $opt in
+        i)
+            echo "Interactive mode..."
+            interactive_mode=true
+            ;;
+        s)
+            echo "suffix is:"
+            echo "s - $OPTARG"
+            ;;
+        *)
+            echo "invalid option or argument $OPTARG"
+            exit 1
+            ;;
+    esac
+done
+
+if [[ $interactive_mode = true ]]; then
+    echo "---------------"
+    tmp_file=$(mktemp)
+    echo "--->$tmp_file"
+    #Works
+    trap 'rm -f "$tmp_file"' EXIT
+    # Populate the temporary file with a list of items, each prefixed with the action keyword.
+    echo "# Edit this file to select which items to process." > "$tmp_file"
+    echo "# To skip an item, change 'yes' to any other word (e.g., 'no' or 'skip')." >> "$tmp_file"
+    echo "# Lines starting with '#' are ignored." >> "$tmp_file"
+    echo "" >> "$tmp_file"
+    for item in "${files[@]}"; do
+        echo "$ACTION_KEYWORD $item" >> "$tmp_file"
+    done
+
+    # Open the temporary file in the editor for user interaction.
+    # A return code of 0 means the user saved and exited normally.
+    editor="${EDITOR:-nano}"
+    "$editor" "$tmp_file"
+
+    if [[ $? -ne 0 ]]; then
+        echo "Editor exited with an error or was aborted. Aborting script."
+        exit 1
+    fi
+    while read -r action item; do
+        # Skip empty lines and comments.
+        [[ -z "$action" ]] || [[ "$action" =~ ^# ]] && continue
+
+        # Check if the user kept the action keyword.
+        if [[ "$action" == "$ACTION_KEYWORD" ]]; then
+            echo "✅ Performing action on: $item"
+            compressFile "$item"
+        else
+            echo "⏭️ Skipping item: $item"
+        fi
+    done < "$tmp_file"
+    #sleep 5
+fi
+
+exit 0
+for i in "${files[@]}"; do
+    echo "--$i"
+    #relative_path="${i%/*}" 
+    relative_path=$(dirname "$i") 
+    failename=$(basename "$i")
+    extension="${filename#*.}"
+    base_name="${filename%.*}"
+    # ffmpeg -i bk-L.png -vf "scale=iw*0.5:ih*0.5:flags=lanczos"  -q:v 75 -compression_level 8 out3.webp
+    echo "==$extension"
+    echo "000 ${filename} - ${base_name}"
+    echo "++${relative_path}"
+    ffmpeg -i "${i}" -vf "scale=iw*0.5:ih*0.5:flags=lanczos"  -q:v 75 -compression_level 8 "${relative_path}/${base_name}${suffix}.webp"
+    exit 0
+done
+#ffmpeg -i bk-L.png -vf "scale=iw*0.5:ih*0.5:flags=lanczos"  -q:v 75 -compression_level 8 out3.webp
