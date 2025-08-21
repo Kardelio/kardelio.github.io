@@ -18,8 +18,9 @@ compressFile(){
     if [[ $override_mode = true ]]; then
         finalName="${relative_path}/${base_name}.webp"
     fi
-    echo " Outputting: ${relative_path}/${base_name}${suffix}.webp"
+    echo " Outputting: ${finalName}"
     ffmpeg -i "${i}" -y -hide_banner -loglevel error -vf "scale=iw*0.5:ih*0.5:flags=lanczos"  -q:v 75 -compression_level 8 "${finalName}"
+    rm "$i"
     if [[ $? -eq 0 ]]; then
         echo "✅ Successful compression of: ${i}"
     else
