@@ -1,0 +1,326 @@
+:root {
+    --main-blue-darker: #0e2a3f;
+    --main-blue: #163d5b;
+    --main-blue-light: #2a5d85;
+    --main-orange: #e87244;
+    --main-orange-dark: #c35330;
+    --main-white: #ffffff;
+    --main-black: #000000;
+    --main-grey: #2e2e2e;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    font-family: roboto;
+}
+
+.name-title {
+    text-shadow: 2px 2px 2px black;
+    display: inline-block;
+}
+
+.contianer-brief-heading {
+    font-size: 120%;
+    margin: 1em;
+}
+
+.flags-title {
+    display: inline-block;
+    font-size: 200%;
+    margin-left: 0.4em;
+}
+
+.container {
+    /* background: linear-gradient(326deg, rgba(2, 0, 36, 1) 0%, rgb(22 61 92) 58%, rgba(0, 212, 255, 1) 100%); */
+    /* background: var(--main-orange); */
+    background: var(--main-blue);
+    /* background: radial-gradient(circle, var(--main-orange) 0%, var(--main-orange-dark) 59%); */
+    background: radial-gradient(circle, var(--main-blue) 0%, var(--main-blue-darker) 59%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* height: 100%; */
+    /* overflow: scroll; */
+    padding: 1em;
+}
+
+.container-wide {
+    width: 100%;
+    /* background: var(--main-orange); */
+    background: var(--main-blue);
+    /* background: radial-gradient(circle, var(--main-orange) 0%, var(--main-orange-dark) 59%); */
+    background: radial-gradient(circle, var(--main-blue) 0%, var(--main-blue-darker) 59%);
+    color: white;
+}
+
+.inner-container {
+
+}
+
+.inner-container-wide {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 1em; */
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+}
+
+.text-container {
+    text-align: center;
+    font-family: roboto;
+}
+
+#talks-button {
+    border-radius: 0.5em;
+    padding: 0.5em;
+    background: var(--main-white);
+    font-size: 200%;
+    margin-bottom: 0.5em;
+    /* color: white; */
+    color: var(--main-blue-light);
+    /* border: 2px solid white; */
+    border: 4px solid var(--main-blue-light);
+    font-family: roboto;
+    animation: wobble;
+    animation-iteration-count: infinite;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#talks-button:hover {
+    scale: 1.2;
+    background: var(--main-blue-light);
+    color: var(--main-white);
+}
+
+#talks-button:active {
+    background: var(--main-blue-darker);
+    color: var(--main-white);
+}
+
+@keyframes wobble {
+    0% {
+        transform: rotateZ(-2deg);
+    }
+
+    50% {
+        transform: rotateZ(2deg);
+    }
+
+    100% {
+        transform: rotateZ(-2deg);
+    }
+}
+
+
+
+/* 
+.links-container-wide{
+text-align: center;
+background: white;
+border-radius: 0.5em;
+padding: 0.5em;
+border: 3px solid var(--main-blue);
+width: 90%;
+margin-top: 0.5em;
+color: black;
+margin: 0.3em auto;
+} */
+
+.spaced-box {
+    margin: 1em;
+}
+
+.links-container {
+    text-align: center;
+    background: white;
+    border-radius: 0.5em;
+    padding: 0.2em;
+    border: 4px solid var(--main-blue-light);
+}
+
+#talks-container {
+    /* width: 100%; */
+}
+
+#focused-talks-box {
+    width: 100%;
+}
+
+.single-focused-talk-container {
+    margin: 0.5em;
+    background-color: var(--main-white);
+    border-radius: 5px;
+    color: var(--main-blue);
+    text-align: left;
+    padding: 0.5em;
+    position: relative;
+}
+
+.single-focused-talk-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 0.5em;
+    margin-top: 0.4em;
+    background: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 5px;
+}
+
+.single-focused-talk-title {
+    font-weight: bold;
+    /* color: black; */
+    font-size: 110%;
+}
+
+.single-focused-talk-years {
+    font-size: 90%;
+    font-style: italic;
+}
+
+.links-container-wide {
+    display: flex;
+    margin: 1em;
+}
+
+.talk-date {
+    margin-right: 0.5em;
+    font-size: 120%;
+    white-space: nowrap;
+}
+
+.talk-talk-block {
+    background: white;
+    width: 80%;
+    padding: 0.3em;
+    border-radius: 6px;
+}
+
+.talk-title {
+    font-size: 120%;
+    color: var(--main-blue);
+    font-weight: 900;
+}
+
+.talk-location {
+    margin-top: 2px;
+    color: var(--main-blue-light);
+    font-style: italic;
+}
+
+.online {
+    background: var(--main-orange);
+    color: white;
+    padding: 0px 4px;
+    border-radius: 3px;
+}
+
+.year {
+    /* text-align: center; */
+    font-size: 200%;
+    margin: 1em;
+}
+
+.year-amount {
+    font-size: 80%;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.icon {
+    /* width: 50px; */
+    width: 3em;
+    margin: 0.8em;
+    transition: 0.3s;
+}
+
+.icon:hover {
+    scale: 1.2;
+
+}
+
+p {
+    margin: 0px !important;
+}
+
+.myface {
+    width: 10em;
+}
+
+.myface-talks {
+    width: 5em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0.5em;
+}
+
+@font-face {
+    font-family: roboto;
+    src: url("../media/font/Roboto-Regular.ttf");
+}
+
+.larger-image {
+    width: 80%;
+    pointer-events: none;
+    border-radius: 5px;
+    border: 0.5em solid white;
+    box-shadow: 0px 0px 3em black;
+    /* transform: translate(50%, 50%); */
+}
+
+.selfie-image {
+    width: 10em;
+    margin: 0.5em;
+    border-radius: 10px;
+}
+
+.selfie-image:hover {}
+
+/* #generic-dialog::backdrop {
+    background: black;
+} */
+
+#generic-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+    width: 75%;
+    transform: translate(-50%, -50%);
+}
+
+.talk-flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#games-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.game-box {
+    background: white;
+    padding: 1em;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.game-title {}

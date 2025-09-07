@@ -16,6 +16,12 @@
         "retailtechweek(london)": "02.10.19-03.10.19",
         "droidcon": "24.10.19-25.10.19"
     },
+    "focusedTalks": [
+        "Escape from Planet Regex - Kotlin to the Rescue",
+        "Crime Scene InvestiGITor",
+        "Practical ADB usage to enhance your life!",
+        "Inside the .git folder - Explore the mysterious depths..."
+    ],
     "talksInYears": [
         {
             "year": "2025",
@@ -80,7 +86,7 @@
                     "reuse": false
                 },
                 {
-                    "title": "Crime Scene InvestiGITor (SHORTER)",
+                    "title": "Crime Scene InvestiGITor",
                     "description": "Together, we will learn how to become a professional and revered investiGITor, who will be able to sniff out and solve any version control offence with the ease and panache of a seasoned detective!",
                     "company": "Myself",
                     "with": null,
