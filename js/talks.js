@@ -61,12 +61,12 @@ function showLargeImage(imageName) {
 
 function hideLargeImage() {
 
-    // let elem = document.getElementById('generic-dialog')
-    // if (elem != undefined && elem != null) {
-    //     document.body.removeChild(elem)
-    //     // dialogShowTS = null;
-    //     // currentDialogType = null;
-    // }
+    let elem = document.getElementById('generic-dialog')
+    if (elem != undefined && elem != null) {
+        document.body.removeChild(elem)
+        // dialogShowTS = null;
+        // currentDialogType = null;
+    }
 }
 
 function highlightOnline(str) {
