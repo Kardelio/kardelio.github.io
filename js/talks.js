@@ -22,9 +22,8 @@ $.getJSON('data/talks.json', function (data) {
                 }
                 let selfieImageBlock = "";
                 if (talk.selfieImage != undefined && talk.selfieImage != null) {
-                    selfieImageBlock = `<div class="inner-talk-block-iamge">
+                    selfieImageBlock = `
                             <img class="selfie-image" onmouseover="showLargeImage('${talk.selfieImage}')" onmouseout="hideLargeImage()" src="media/photos/selfies/${talk.selfieImage}"/>
-                        </div>
                         `;
                 }
                 document.getElementById("talks-container").appendChild(createElementsFromHTMLWithClass(`
@@ -50,12 +49,9 @@ $.getJSON('data/talks.json', function (data) {
 //
 
 function showLargeImage(imageName) {
-    console.log(imageName);
     var dialogBox = document.createElement('div')
     dialogBox.id = 'generic-dialog'
     dialogBox.innerHTML = `<img class="larger-image" src="media/photos/selfies/${imageName}" />`
-    // dialogBox.style.top = `${posY}px`
-    // dialogBox.style.left = `${posX}px`
     document.body.appendChild(dialogBox)
 }
 
@@ -64,8 +60,6 @@ function hideLargeImage() {
     let elem = document.getElementById('generic-dialog')
     if (elem != undefined && elem != null) {
         document.body.removeChild(elem)
-        // dialogShowTS = null;
-        // currentDialogType = null;
     }
 }
 

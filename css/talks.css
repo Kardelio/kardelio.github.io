@@ -70,6 +70,8 @@ img {
     flex-direction: column;
     height: 100%;
     gap: 0.5vh;
+    flex: 1;
+    max-width: 50%;
 }
 
 .talk-date {
@@ -79,7 +81,8 @@ img {
 
 
 .selfie-image {
-    width: 20vw;
+    /* width: 12em; */
+    width: 14vw;
     min-width: 100px;
     /* margin: 0.5em; */
     border-radius: 10px;
@@ -91,23 +94,24 @@ img {
 
 .talk-title {
     /* font-size: 120%; */
-    font-size: 3vw;
+    /* font-size: 3vw; */
+    font-size: clamp(1.3rem, 1.95vw, 3rem);
     color: var(--main-blue);
     font-weight: 900;
 }
 
 .talk-location {
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
     /* font-size: 120%; */
-    font-size: 1.5vw;
     color: var(--main-blue);
 }
 
 .talk-link {
-    max-width: 50%;
+    font-size: clamp(0.65rem, 1.4vw, 1rem);
+    /* max-width: 50%;
     overflow: hidden;
-    font-size: 1vw;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; */
 }
 
 /* #generic-dialog::backdrop {
@@ -134,7 +138,7 @@ img {
 }
 
 .larger-image {
-    width: 80%;
+    width: 60%;
     pointer-events: none;
     border-radius: 5px;
     border: 0.5em solid white;
@@ -143,22 +147,31 @@ img {
 }
 
 /* IMPORTANT TO HAVE THESE LAST */
+/* Any size greater than this gets these... */
+/* @media only screen and (min-width: 900px) {
 
-@media only screen and (min-width: 700px) {
-    .talk-title {
-        font-size: 2em;
-    }
 
     .selfie-image {
-        width: 12em;
+        width: 1em;
     }
 
     .larger-image {
         width: 60%;
     }
-}
+} */
 
-@media only screen and (max-width: 600px) {
+
+/* Anything Less than this gets these... */
+@media only screen and (max-width: 1000px) {
+
+
+    .selfie-image {
+        width: 12em;
+    }
+
+
+}
+@media only screen and (max-width: 700px) {
     #talks-container {
         display: flex;
         flex-direction: column;
@@ -181,4 +194,25 @@ img {
     .inner-talk-block {
         margin: 0 auto;
     }
+
+    .year-header-container {
+        margin: 1em 1em;
+    }
+
+    .selfie-image {
+        width: 10em;
+    }
+
+    .larger-image{
+        width: 80%;
+    }
+
+    /* 
+    .talk-title {
+        font-size: 2em;
+    }
+
+    .talk-location {
+        font-size: 1.5em;
+    } */
 }
