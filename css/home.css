@@ -1,0 +1,120 @@
+.myface {
+    width: 10em;
+}
+
+.icon {
+    width: 4em;
+    margin: 0.8em;
+    transition: 0.3s;
+}
+
+.icon:hover {
+    scale: 1.2;
+}
+
+
+
+.name-title {
+    color: var(--main-white);
+    text-shadow: 2px 2px 2px black;
+    display: inline-block;
+    margin: 0;
+}
+.flags-title {
+    display: inline-block;
+    font-size: 200%;
+    margin-left: 0.4em;
+}
+
+.myface {
+    width: 10em;
+}
+
+
+#talks-button {
+    border-radius: 0.5em;
+    padding: 0.5em;
+    background: var(--main-white);
+    font-size: 150%;
+    /* margin-bottom: 0.5em; */
+    color: var(--main-blue-light);
+    border: 4px solid var(--main-blue-light);
+    font-family: roboto;
+    animation: wobble;
+    animation-iteration-count: infinite;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#talks-button:hover {
+    scale: 1.1;
+    background: var(--main-blue-light);
+    color: var(--main-white);
+}
+
+#talks-button:active {
+    background: var(--main-blue-darker);
+    color: var(--main-white);
+}
+
+@keyframes wobble {
+    0% {
+        transform: rotateZ(-2deg);
+    }
+
+    50% {
+        transform: rotateZ(2deg);
+    }
+
+    100% {
+        transform: rotateZ(-2deg);
+    }
+}
+
+
+
+.single-focused-talk-container {
+    margin: 0.5em;
+    background-color: var(--main-white);
+    border-radius: 5px;
+    color: var(--main-blue);
+    text-align: left;
+    padding: 0.5em;
+    position: relative;
+}
+
+.single-focused-talk-count {
+    /* position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 0.5em;
+    margin-top: 0.4em;
+    background: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 5px; */
+        /* position: absolute; */
+    /* top: 0; */
+    /* right: 0; */
+    /* margin-right: 0.5em; */
+    /* margin-top: 0.4em; */
+    background: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 5px;
+    float: right;
+    /* display: inline-block; */
+}
+
+.single-focused-talk-title {
+    font-weight: bold;
+    /* color: black; */
+    font-size: 110%;
+}
+
+.single-focused-talk-years {
+    font-size: 90%;
+    font-style: italic;
+}

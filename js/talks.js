@@ -4,8 +4,10 @@ $.getJSON('data/talks.json', function (data) {
     console.log(data);
     data.talksInYears.forEach(element => {
         document.getElementById("talks-container").innerHTML += `
-            <div class="year">    
-                ${element.year} <span class="year-amount">(${element.talks.length})</span>
+            <div class="year-header-container">    
+                <div class="year-header-year">${element.year}</div>
+                <div class="year-header-amount">(${element.talks.length})</div>
+                <div class="year-header-line"></div>
             </div>
         `;
         element.talks.forEach(talk => {
@@ -20,25 +22,26 @@ $.getJSON('data/talks.json', function (data) {
                 }
                 let selfieImageBlock = "";
                 if (talk.selfieImage != undefined && talk.selfieImage != null) {
-                    selfieImageBlock = `<img class="selfie-image" onmouseover="showLargeImage('${talk.selfieImage}')" onmouseout="hideLargeImage()" src="media/photos/selfies/${talk.selfieImage}"/>`;
+                    selfieImageBlock = `<div class="inner-talk-block-iamge">
+                            <img class="selfie-image" onmouseover="showLargeImage('${talk.selfieImage}')" onmouseout="hideLargeImage()" src="media/photos/selfies/${talk.selfieImage}"/>
+                        </div>
+                        `;
                 }
-                document.getElementById("talks-container").appendChild(createElementsFromHTML(`
-                    <div class="links-container-wide">
+                document.getElementById("talks-container").appendChild(createElementsFromHTMLWithClass(`
                         <div class="talk-date">
                             ${getShortDate(talk.date)}
                         </div>
-                        <div class="talk-talk-block">
-                            <div class="talk-flex-container">
-                                <div>
-                                    <div class="talk-title">${talk.title}</div>
-                                    ${locationBlock}
-                                    ${linkBlock}
+                        <div class="inner-talk-block">
+                            <div class="inner-talk-block-text">
+                                <div class="talk-title">
+                                    ${talk.title}
                                 </div>
-                                ${selfieImageBlock}
+                                ${locationBlock}
+                                ${linkBlock}
                             </div>
+                            ${selfieImageBlock}
                         </div>
-                    </div>
-                `));
+                `, "talks-row"));
             }
         });
     });
@@ -58,12 +61,12 @@ function showLargeImage(imageName) {
 
 function hideLargeImage() {
 
-    let elem = document.getElementById('generic-dialog')
-    if (elem != undefined && elem != null) {
-        document.body.removeChild(elem)
-        // dialogShowTS = null;
-        // currentDialogType = null;
-    }
+    // let elem = document.getElementById('generic-dialog')
+    // if (elem != undefined && elem != null) {
+    //     document.body.removeChild(elem)
+    //     // dialogShowTS = null;
+    //     // currentDialogType = null;
+    // }
 }
 
 function highlightOnline(str) {
@@ -88,6 +91,12 @@ function titleCase(str) {
 
 function createElementsFromHTML(html) {
     let elm = document.createElement("div");
+    elm.innerHTML = html;
+    return elm
+}
+function createElementsFromHTMLWithClass(html, className) {
+    let elm = document.createElement("div");
+    elm.classList.add(className);
     elm.innerHTML = html;
     return elm
 }
