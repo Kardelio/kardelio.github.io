@@ -95,6 +95,12 @@ function createElementsFromHTMLWithClass(html, className) {
     return elm
 }
 
+function returnHome(){
+    console.log("Going home")
+    location.href="/"
+
+}
+
 
 
 // import date from '../utils/date.js';

@@ -159,7 +159,11 @@ img {
         width: 60%;
     }
 } */
-
+.myface {
+    width: 6em;
+    position: absolute;
+    margin: 1em;
+}
 
 /* Anything Less than this gets these... */
 @media only screen and (max-width: 1000px) {
@@ -171,7 +175,16 @@ img {
 
 
 }
+
 @media only screen and (max-width: 700px) {
+    .myface {
+        width: 5em;
+        /* margin-bottom: 9em; */
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
     #talks-container {
         display: flex;
         flex-direction: column;
@@ -203,7 +216,7 @@ img {
         width: 10em;
     }
 
-    .larger-image{
+    .larger-image {
         width: 80%;
     }
 
