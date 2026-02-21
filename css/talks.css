@@ -7,9 +7,9 @@
 
 
 
-img {
+/* img {
     width: 10px;
-}
+} */
 
 .year-header-container {
     display: flex;
@@ -163,6 +163,14 @@ img {
     width: 6em;
     position: absolute;
     margin: 1em;
+}
+
+.linktree-img {
+    width: 5em;
+}
+
+.talk-linktree {
+    margin: 0.5em 0;
 }
 
 /* Anything Less than this gets these... */

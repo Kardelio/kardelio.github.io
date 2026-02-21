@@ -1,5 +1,17 @@
 $.getJSON('data/talks.json', function (data) {
     const flattenedTalks = [];
+    let ltview = "";
+    data.linktrees.forEach(lt => {
+        console.log(lt)
+        if (lt.link != null) {
+            ltview += `
+            <div class="linktree-box" onclick="goToLinktree('${lt.link}')" >
+                <img class="linktree-img linktree-green"src="media/icon-lt.webp"/> 
+                ${lt.title}
+            </div>
+        `
+        }
+    });
     data.talksInYears.forEach(yearData => {
         const year = yearData.year;
         yearData.talks.forEach(talk => {
@@ -23,11 +35,17 @@ $.getJSON('data/talks.json', function (data) {
                 <div class="single-focused-talk-years">${uniqueYearsOneLiner}</div>
             </div>
         `;
-        collectionOfFocusedTalks+=single
+        collectionOfFocusedTalks += single
     })
-    setUI(collectionOfFocusedTalks);
+    setUI(collectionOfFocusedTalks, ltview);
 });
 
-function setUI(ui){
+function setUI(ui, lts) {
     document.getElementById("focused-talks-box").innerHTML = ui;
+    document.getElementById("linktrees").innerHTML = lts;
+}
+
+function goToLinktree(link) {
+    console.log("Going to: " + link)
+    location.href = link
 }

@@ -118,3 +118,23 @@
     font-size: 90%;
     font-style: italic;
 }
+
+.linktree-box{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    margin: 0.2em;
+    border: 2px solid;
+    align-items: center;
+    border-radius: 5px;
+    padding-right: 1em;
+}
+
+.linktree-img{
+    height: 2em;
+    padding: 5px;
+}
+
+.linktree-green{
+    background-color: #42e760
+}

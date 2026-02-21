@@ -16,6 +16,12 @@ $.getJSON('data/talks.json', function (data) {
                 if (talk.where != null) {
                     locationBlock = `<div class="talk-location">${highlightOnline(talk.where)}</div>`;
                 }
+                let linktreeBlock = "";
+                if (talk.linktree != undefined && talk.linktree != null && talk.linktree != "") {
+                    linktreeBlock = `<div class="talk-linktree">
+                    <img class="linktree-img" onclick="goToLinktree('${talk.linktree}')" src="media/Linktree_logo.png"/> 
+                    </div>`;
+                }
                 let linkBlock = "";
                 if (talk.link != null) {
                     linkBlock = `<div class="talk-link"><a href="${talk.link}">${talk.link}</a></div>`;
@@ -36,6 +42,7 @@ $.getJSON('data/talks.json', function (data) {
                                     ${talk.title}
                                 </div>
                                 ${locationBlock}
+                                ${linktreeBlock}
                                 ${linkBlock}
                             </div>
                             ${selfieImageBlock}
@@ -83,6 +90,11 @@ function titleCase(str) {
     return splitStr.join(' ');
 }
 
+function goToLinktree(link) {
+    console.log("Going to: " + link)
+    location.href = link
+}
+
 function createElementsFromHTML(html) {
     let elm = document.createElement("div");
     elm.innerHTML = html;
@@ -95,9 +107,9 @@ function createElementsFromHTMLWithClass(html, className) {
     return elm
 }
 
-function returnHome(){
+function returnHome() {
     console.log("Going home")
-    location.href="/"
+    location.href = "/"
 
 }
 
