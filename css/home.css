@@ -122,6 +122,7 @@
 .linktree-box{
     display: flex;
     flex-direction: row;
+    text-align: left;
     gap: 1em;
     margin: 0.2em;
     border: 2px solid;
