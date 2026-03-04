@@ -20,6 +20,7 @@
     display: inline-block;
     margin: 0;
 }
+
 .flags-title {
     display: inline-block;
     font-size: 200%;
@@ -95,7 +96,7 @@
     color: white;
     padding: 2px 6px;
     border-radius: 5px; */
-        /* position: absolute; */
+    /* position: absolute; */
     /* top: 0; */
     /* right: 0; */
     /* margin-right: 0.5em; */
@@ -119,7 +120,16 @@
     font-style: italic;
 }
 
-.linktree-box{
+.linktree-box:hover {
+    background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.linktree-box:active {
+    scale: 0.98;
+}
+
+.linktree-box {
     display: flex;
     flex-direction: row;
     text-align: left;
@@ -131,11 +141,11 @@
     padding-right: 1em;
 }
 
-.linktree-img{
+.linktree-img {
     height: 2em;
     padding: 5px;
 }
 
-.linktree-green{
+.linktree-green {
     background-color: #42e760
 }

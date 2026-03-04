@@ -47,6 +47,30 @@
     ],
     "talksInYears": [
         {
+            "year": "2026",
+            "talks": [
+                {
+                    "title": "Become a workflow whisperer - CI/CD - Github Actions",
+                    "description": "A beginner level overview of CI/CD with a focus on Github Actions with many interactive moments for audience to test out their newly learned skills",
+                    "company": "Myself",
+                    "linktree": "https://linktr.ee/gha_workshop",
+                    "with": null,
+                    "selfieImage": "2026-stoke.webp",
+                    "more_than_once": true,
+                    "where": "Staffordshire University - Stoke-on-Trent",
+                    "audience": "Staffordshire University Students",
+                    "folder": "",
+                    "file": "staffs-uni-github-actions-workshop",
+                    "date": "25.02.26",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration": "40 minutes",
+                    "reuse": true
+                }
+            ]
+        },
+        {
             "year": "2025",
             "talks": [
                 {
@@ -63,7 +87,7 @@
                     "file": "Escape From Planet Regex",
                     "date": "19.11.25",
                     "extra": "",
-                    "link":"https://www.youtube.com/watch?v=lR2TSFyMc_4",
+                    "link": "https://www.youtube.com/watch?v=lR2TSFyMc_4",
                     "display": true,
                     "duration": "40 minutes",
                     "reuse": true
@@ -82,7 +106,7 @@
                     "file": "Escape From Planet Regex",
                     "date": "31.10.25",
                     "extra": "",
-                    "link":null,
+                    "link": null,
                     "display": true,
                     "duration": "40 minutes",
                     "reuse": true
