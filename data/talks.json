@@ -15,7 +15,7 @@
             "topic": "Kotlin Collection Functions",
             "title": "Lord of Collection Functions - The Fellowship of Kotlin",
             "theme": "Lord of the Rings / Fantasy",
-            "link": null,
+            "link": "https://linktr.ee/lord_of_collection_functions",
             "year": "2026"
         },
         {
@@ -40,6 +40,7 @@
         "droidcon": "24.10.19-25.10.19"
     },
     "focusedTalks": [
+        "The Lord of Collection Functions - The fellowship of Kotlin",
         "Escape from Planet Regex - Kotlin to the Rescue",
         "Crime Scene InvestiGITor",
         "Practical ADB usage to enhance your life!",
@@ -49,6 +50,24 @@
         {
             "year": "2026",
             "talks": [
+                {
+                    "title": "The Lord of Collection Functions - The fellowship of Kotlin",
+                    "description": "Join the followship as we embark on a perilous jourey across center-earth to destroy lord for-ron's evil 1 collection function to rule them all. During this adventure you will learn about a vast range of amazing, different & performant collections functions that the Kotlin standard library provide you, to replace imperative programming with good declarative functional programming",
+                    "company": "Myself",
+                    "linktree": "https://linktr.ee/lord_of_collection_functions",
+                    "with": null,
+                    "selfieImage": "2026-paris.webp",
+                    "where": "Android Makers by Droidcon Paris - The Belfry of Montrouge",
+                    "audience": "Conference attendees",
+                    "folder": "",
+                    "file": "The Lord of Collection Functions",
+                    "date": "10.04.26",
+                    "extra": "",
+                    "link": null,
+                    "display": true,
+                    "duration": "40 minutes",
+                    "reuse": true
+                },
                 {
                     "title": "Become a workflow whisperer - CI/CD - Github Actions",
                     "description": "A beginner level overview of CI/CD with a focus on Github Actions with many interactive moments for audience to test out their newly learned skills",
