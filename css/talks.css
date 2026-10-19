@@ -1,130 +1,212 @@
 #talks-container {
     display: flex;
     flex-direction: column;
-    max-width: 80%;
+    max-width: 52rem;
     margin: 0 auto;
+    padding: 1.5em 1em 4em;
 }
 
-
-
-/* img {
-    width: 10px;
-} */
+/* ---------- Year headers ---------- */
 
 .year-header-container {
     display: flex;
     flex-direction: row;
-    margin: 2em 1em;
-    align-items: center;
-    gap: 0.5em;
+    margin: 2.5em 0 1em;
+    align-items: baseline;
+    gap: 0.6em;
 }
 
 .year-header-year {
-    font-size: 200%;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
 }
 
 .year-header-amount {
-    font-size: 120%;
-    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--main-orange);
+    background: rgba(232, 114, 68, 0.15);
+    padding: 0.15em 0.6em;
+    border-radius: 999px;
+    align-self: center;
 }
 
 .year-header-line {
     flex: 1;
-    background: white;
     height: 2px;
-    /* width: 10px; */
-    margin: 0 2em;
-    opacity: 0.5;
+    background: linear-gradient(90deg, var(--main-blue-light), transparent);
+    align-self: center;
 }
+
+/* ---------- Talk cards ---------- */
 
 .talks-row {
     display: flex;
     gap: 1em;
-    justify-content: center;
-    margin: 1em 2em;
+    align-items: stretch;
+    margin: 0 0 1em;
 }
 
-
-.inner-talk-flex-container {
+.talk-date {
+    flex: 0 0 3.6rem;
+    align-self: flex-start;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5em 0;
+    border-radius: 12px;
+    background: var(--main-blue-darker);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    line-height: 1;
+}
+
+.talk-date-day {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.talk-date-month {
+    margin-top: 0.3em;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--main-orange);
 }
 
 .inner-talk-block {
-    background: var(--main-white);
-    color: var(--main-blue);
     flex: 1;
-    margin: 0 1em;
+    min-width: 0;
     display: flex;
-    gap: 0.5em;
+    gap: 1.2em;
     justify-content: space-between;
     align-items: center;
-    border-radius: 5px;
-    padding: 0.5em;
-    max-width: 80%;
-    min-width: 40%;
+    padding: 1em 1.2em;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: 4px solid var(--main-orange);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.inner-talk-block:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.11);
 }
 
 .inner-talk-block-text {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    gap: 0.5vh;
+    gap: 0.45em;
     flex: 1;
-    /* max-width: 50%; */
+    min-width: 0;
 }
-
-.talk-date {
-    font-size: 150%;
-}
-
-
-
-.selfie-image {
-    /* width: 12em; */
-    width: 14vw;
-    min-width: 100px;
-    /* margin: 0.5em; */
-    border-radius: 10px;
-}
-
-.selfie-image:hover {}
-
-
 
 .talk-title {
-    /* font-size: 120%; */
-    /* font-size: 3vw; */
-    font-size: clamp(1.3rem, 1.95vw, 3rem);
-    color: var(--main-blue);
-    font-weight: 900;
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--main-white);
 }
 
 .talk-location {
-    font-size: clamp(0.75rem, 1.5vw, 1rem);
-    /* font-size: 120%; */
-    color: var(--main-blue);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.talk-link {
-    font-size: clamp(0.65rem, 1.4vw, 1rem);
-    /* max-width: 50%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis; */
+.talk-location::before {
+    content: "\1F4CD\FE0E ";
+    opacity: 0.8;
 }
 
-/* #generic-dialog::backdrop {
-    background: black;
-} */
+.online {
+    color: var(--main-orange);
+}
+
+.talk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.3em;
+}
+
+.talk-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.25em 0.8em;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.talk-pill-link {
+    background: var(--main-orange);
+    color: var(--main-white);
+}
+
+.talk-pill-link:hover {
+    background: var(--main-orange-dark);
+}
+
+.talk-pill-linktree {
+    background: transparent;
+    color: var(--main-white);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.talk-pill-linktree img {
+    width: 1em;
+    height: 1em;
+    border-radius: 3px;
+    background: #42e760;
+}
+
+.talk-pill-linktree:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.selfie-wrap {
+    position: relative;
+    flex: 0 0 auto;
+    width: 11rem;
+    cursor: zoom-in;
+}
+
+.selfie-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.selfie-expand {
+    position: absolute;
+    right: 0.4em;
+    bottom: 0.4em;
+    width: 1.6em;
+    height: 1.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(14, 42, 63, 0.75);
+    color: var(--main-white);
+    font-size: 0.85rem;
+    line-height: 1;
+    transition: 0.2s;
+}
+
+.selfie-wrap:hover .selfie-expand {
+    background: var(--main-orange);
+    scale: 1.15;
+}
+
+/* ---------- Enlarged image on hover ---------- */
 
 #generic-dialog {
-    /* position: fixed;
-    top: 50%;
-    left: 50%;
-    pointer-events: none;
-    width: 75%;
-    transform: translate(-50%, -50%); */
     position: fixed;
     top: 0;
     left: 0;
@@ -133,107 +215,72 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    pointer-events: none;
-    background: rgba(0, 0, 0, 0.4);
+    cursor: zoom-out;
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .larger-image {
     width: 60%;
-    pointer-events: none;
-    border-radius: 5px;
-    border: 0.5em solid white;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 0.4em solid white;
     box-shadow: 0px 0px 3em black;
-    /* transform: translate(50%, 50%); */
 }
 
-/* IMPORTANT TO HAVE THESE LAST */
-/* Any size greater than this gets these... */
-/* @media only screen and (min-width: 900px) {
+/* ---------- Header face ---------- */
 
-
-    .selfie-image {
-        width: 1em;
-    }
-
-    .larger-image {
-        width: 60%;
-    }
-} */
 .myface {
-    width: 6em;
+    width: 5em;
     position: absolute;
     margin: 1em;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.linktree-img {
-    width: 5em;
+.myface:hover {
+    scale: 1.08;
 }
 
-.talk-linktree {
-    margin: 0.5em 0;
-}
-
-/* Anything Less than this gets these... */
-@media only screen and (max-width: 1000px) {
-
-
-    .selfie-image {
-        width: 12em;
-    }
-
-
-}
+/* ---------- Small screens ---------- */
 
 @media only screen and (max-width: 700px) {
     .myface {
-        width: 5em;
-        /* margin-bottom: 9em; */
+        width: 4.5em;
         position: relative;
         left: 50%;
         transform: translateX(-50%);
     }
 
-    #talks-container {
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-        margin: 0 auto;
-    }
-
     .talks-row {
-        display: block !important;
-        gap: 1em;
-        justify-content: center;
-        margin: 0.5em 1em;
+        flex-direction: column;
+        gap: 0.4em;
     }
 
     .talk-date {
-        font-size: 120%;
-        margin-bottom: 0.2em;
+        flex: 0 0 auto;
+        align-self: flex-start;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 0.4em;
+        padding: 0.3em 0.8em;
+        line-height: 1.2;
+    }
+
+    .talk-date-month {
+        margin-top: 0;
     }
 
     .inner-talk-block {
-        margin: 0 auto;
+        flex-direction: column-reverse;
+        align-items: stretch;
     }
 
-    .year-header-container {
-        margin: 1em 1em;
-    }
-
-    .selfie-image {
-        width: 10em;
+    .selfie-wrap {
+        width: 100%;
     }
 
     .larger-image {
-        width: 80%;
+        width: 90%;
     }
-
-    /* 
-    .talk-title {
-        font-size: 2em;
-    }
-
-    .talk-location {
-        font-size: 1.5em;
-    } */
 }
