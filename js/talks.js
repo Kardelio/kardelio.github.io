@@ -16,34 +16,30 @@ $.getJSON('data/talks.json', function (data) {
                 if (talk.where != null) {
                     locationBlock = `<div class="talk-location">${highlightOnline(talk.where)}</div>`;
                 }
-                let linktreeBlock = "";
-                if (talk.linktree != undefined && talk.linktree != null && talk.linktree != "") {
-                    linktreeBlock = `<div class="talk-linktree">
-                    <img class="linktree-img" onclick="goToLinktree('${talk.linktree}')" src="media/Linktree_logo.png"/> 
-                    </div>`;
-                }
-                let linkBlock = "";
+                let actions = "";
                 if (talk.link != null) {
-                    linkBlock = `<div class="talk-link"><a href="${talk.link}">${talk.link}</a></div>`;
+                    actions += `<a class="talk-pill talk-pill-link" href="${talk.link}">${linkLabel(talk.link)}</a>`;
                 }
+                if (talk.linktree != undefined && talk.linktree != null && talk.linktree != "") {
+                    actions += `<a class="talk-pill talk-pill-linktree" href="${talk.linktree}"><img src="media/icon-lt.webp" alt="" />Linktree</a>`;
+                }
+                let actionsBlock = actions != "" ? `<div class="talk-actions">${actions}</div>` : "";
                 let selfieImageBlock = "";
                 if (talk.selfieImage != undefined && talk.selfieImage != null) {
                     selfieImageBlock = `
-                            <img class="selfie-image" onmouseover="showLargeImage('${talk.selfieImage}')" onmouseout="hideLargeImage()" src="media/photos/selfies/${talk.selfieImage}"/>
-                        `;
+                        <div class="selfie-wrap" onclick="showLargeImage('${talk.selfieImage}')">
+                            <img class="selfie-image" src="media/photos/selfies/${talk.selfieImage}"/>
+                            <span class="selfie-expand" aria-hidden="true">&#x2922;</span>
+                        </div>
+                    `;
                 }
                 document.getElementById("talks-container").appendChild(createElementsFromHTMLWithClass(`
-                        <div class="talk-date">
-                            ${getShortDate(talk.date)}
-                        </div>
+                        ${getDateBadge(talk.date)}
                         <div class="inner-talk-block">
                             <div class="inner-talk-block-text">
-                                <div class="talk-title">
-                                    ${talk.title}
-                                </div>
+                                <div class="talk-title">${talk.title}</div>
                                 ${locationBlock}
-                                ${linktreeBlock}
-                                ${linkBlock}
+                                ${actionsBlock}
                             </div>
                             ${selfieImageBlock}
                         </div>
@@ -56,22 +52,47 @@ $.getJSON('data/talks.json', function (data) {
 //
 
 function showLargeImage(imageName) {
+    hideLargeImage()
     var dialogBox = document.createElement('div')
     dialogBox.id = 'generic-dialog'
+    dialogBox.onclick = hideLargeImage
     dialogBox.innerHTML = `<img class="larger-image" src="media/photos/selfies/${imageName}" />`
     document.body.appendChild(dialogBox)
 }
 
 function hideLargeImage() {
-
     let elem = document.getElementById('generic-dialog')
     if (elem != undefined && elem != null) {
         document.body.removeChild(elem)
     }
 }
 
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        hideLargeImage()
+    }
+})
+
 function highlightOnline(str) {
     return str.replace("online", "<b class='online'>online</b>");
+}
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function getDateBadge(dateIn) {
+    const parts = dateIn.split(".");
+    const day = parseInt(parts[0].replace(/\D/g, ""), 10);
+    const month = MONTHS[parseInt(parts[1], 10) - 1];
+    if (isNaN(day) || month === undefined) {
+        return `<div class="talk-date"><span class="talk-date-month">${getShortDate(dateIn)}</span></div>`;
+    }
+    return `<div class="talk-date"><span class="talk-date-day">${day}</span><span class="talk-date-month">${month}</span></div>`;
+}
+
+function linkLabel(link) {
+    if (link.includes("youtu")) return "&#9654; Watch";
+    if (link.includes("soundcloud")) return "&#9654; Listen";
+    return "Link";
 }
 
 function getShortDate(dateIn) {
