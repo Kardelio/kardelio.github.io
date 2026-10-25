@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ben Kadel - MTG Cards</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../media/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="../media/ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../media/ico/favicon-16x16.png">
+  <style>
+    @font-face { font-family: roboto; src: url("../media/font/Roboto-Regular.ttf"); }
+    :root {
+      --bg: #0a1118; --panel: #121c27; --panel-hi: #182636; --line: #1f3042; --line-hi: #2a4560;
+      --text: #e6edf3; --muted: #8497a9; --blue: #2a5d85; --accent: #e87244; --ok: #5fd68a; --warn: #ff7b72;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body { margin: 0; min-height: 100vh; font: 15px/1.4 roboto, system-ui, sans-serif; color: var(--text);
+           background: radial-gradient(ellipse at top, #12263a 0%, var(--bg) 55%) fixed; }
+
+    header { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px;
+             padding: 10px 20px; background: rgba(10, 17, 24, 0.85); backdrop-filter: blur(10px);
+             -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .home { display: flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; }
+    .home img { width: 2.4em; height: 2.4em; border-radius: 50%; object-fit: cover; border: 2px solid var(--line-hi); transition: 0.3s; }
+    .home:hover img { border-color: var(--accent); }
+    h1 { margin: 0; font-size: 18px; font-weight: normal; letter-spacing: 0.02em; }
+    #status { color: var(--muted); }
+    #status.ok { color: var(--ok); }
+    #status.bad { color: var(--warn); }
+    #count { color: var(--text); }
+    header > span { color: var(--muted); }
+    label { color: var(--muted); display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+    select { font: inherit; color: var(--text); background: var(--panel); border: 1px solid var(--line-hi);
+             border-radius: 8px; padding: 4px 8px; }
+    select:focus { outline: 1px solid var(--accent); }
+    input[type="checkbox"] { accent-color: var(--accent); }
+
+    main { padding: 18px 20px 48px; }
+    #message { margin: 24px 0; padding: 14px 16px; border: 1px solid var(--warn); border-radius: 10px; color: var(--warn);
+               background: var(--panel); display: none; }
+
+    .run { margin-bottom: 32px; }
+    .run h2 { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; font-size: 13px; color: var(--muted);
+              font-weight: normal; text-transform: uppercase; letter-spacing: 0.08em; }
+    .run h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; }
+
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-3px); border-color: var(--line-hi); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); }
+    .card img, .card .noimg { display: block; width: 100%; aspect-ratio: 488 / 680; object-fit: cover; background: var(--panel-hi); }
+    .card .noimg { display: flex; align-items: center; justify-content: center; color: var(--muted); }
+    .card .info { padding: 9px 11px 11px; border-top: 1px solid var(--line); }
+    .card .name { font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .card .meta { color: var(--muted); font-size: 12.5px; margin-top: 1px; }
+    .card .space { display: inline-block; max-width: 100%; margin-top: 6px; padding: 1px 8px; border-radius: 999px;
+                   color: var(--accent); background: rgba(232, 114, 68, 0.12); font-size: 12px;
+                   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top; }
+    .card.fresh { animation: flash 1.8s ease-out; }
+    @keyframes flash { 0% { box-shadow: 0 0 0 4px var(--accent), 0 0 24px var(--accent); } 100% { box-shadow: 0 0 0 0 transparent; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="home" href="../" title="Back to benkadel.com">
+      <img src="../media/bk.webp" alt="Ben Kadel">
+      <h1>MTG Cards</h1>
+    </a>
+    <span id="status">Connecting...</span>
+    <span>Cards: <span id="count">0</span></span>
+    <label>Space: <select id="spaceFilter"><option value="">All spaces</option></select></label>
+    <label><input type="checkbox" id="latestOnly"> Only the latest run</label>
+  </header>
+  <main>
+    <div id="message"></div>
+    <div id="runs"></div>
+  </main>
+  <script type="module" src="viewer.js"></script>
+</body>
+</html>
