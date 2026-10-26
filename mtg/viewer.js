@@ -16,7 +16,10 @@ const countEl = document.getElementById("count");
 const uniqueEl = document.getElementById("unique");
 const runsEl = document.getElementById("runs");
 const messageEl = document.getElementById("message");
+const loadingEl = document.getElementById("loading");
+const hideLoading = () => { loadingEl.hidden = true; loadingEl.style.display = "none"; };
 const spaceFilterEl = document.getElementById("spaceFilter");
+const foilFilterEl = document.getElementById("foilFilter");
 const searchEl = document.getElementById("search");
 const zoomToggleEl = document.getElementById("zoomToggle");
 const stackToggleEl = document.getElementById("stackToggle");
@@ -44,6 +47,7 @@ const prefs = {
 zoomToggleEl.checked = prefs.get("zoom", false) === true;
 stackToggleEl.checked = prefs.get("stack", false) === true;
 let wantedSpace = String(prefs.get("space", ""));
+foilFilterEl.value = ["foil", "normal"].includes(prefs.get("foil", "")) ? prefs.get("foil", "") : "";   // "" = all cards
 const selectedSets = new Set(prefs.get("sets", []));   // set codes; empty = all sets
 const cmcRangeEl = document.getElementById("cmcRange");
 const cmcFillEl = document.getElementById("cmcFill");
@@ -70,6 +74,10 @@ function showMessage(text) {
   messageEl.textContent = text;
   messageEl.style.display = text ? "block" : "none";
 }
+
+// Foil (shiny) cards: the app saves isFoil = true / false. Older cards saved before the field existed have none,
+// and count as not foil.
+const isFoil = (c) => c.isFoil === true;
 
 // The app stores the big PNG link; the "normal" JPG is much smaller and plenty for a grid.
 function smallImage(url) {
@@ -199,6 +207,7 @@ function render() {
   const wanted = spaceFilterEl.value;
   const tokens = searchEl.value.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
   let shown = wanted ? cards.filter((c) => c.collectionSpace === wanted) : cards;
+  if (foilFilterEl.value) shown = shown.filter((c) => isFoil(c) === (foilFilterEl.value === "foil"));
   const [lo, hi] = cmcBounds();
   if (lo > 0 || cmcHi !== null) {
     shown = shown.filter((c) => {
@@ -227,7 +236,8 @@ function render() {
 function stackCards(list) {
   const groups = new Map();
   for (const c of list) {   // list is in scan order, so the last copy of a group is its newest
-    const key = c.scryfallId || `${c.setCode}-${c.collectorNumber}`;
+    // a foil copy and a normal copy of the same printing are different tiles
+    const key = (c.scryfallId || `${c.setCode}-${c.collectorNumber}`) + (isFoil(c) ? "|foil" : "");
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(c);
   }
@@ -237,7 +247,7 @@ function stackCards(list) {
 // One card tile. `copies` holds every copy that this tile stands for (just [c] when not stacking).
 function buildCard(c, copies, stacked) {
   const card = document.createElement("div");
-  card.className = "card" + (freshIds.has(c.id) ? " fresh" : "");
+  card.className = "card" + (freshIds.has(c.id) ? " fresh" : "") + (isFoil(c) ? " foil" : "");
 
   const src = smallImage(c.imageUri);
   if (src) {
@@ -252,6 +262,13 @@ function buildCard(c, copies, stacked) {
     none.className = "noimg";
     none.textContent = "no image";
     card.append(none);
+  }
+  if (isFoil(c)) {
+    const star = document.createElement("div");
+    star.className = "foilmark";
+    star.textContent = "\u2605";
+    star.title = "Foil";
+    card.append(star);
   }
   if (copies.length > 1) {
     const badge = document.createElement("div");
@@ -269,7 +286,7 @@ function buildCard(c, copies, stacked) {
   name.textContent = stacked ? (c.name ?? "") : `#${c.scanNumber ?? "?"}  ${c.name ?? ""}`;
   const meta = document.createElement("div");
   meta.className = "meta";
-  meta.textContent = `${c.setCode ?? ""} ${c.collectorNumber ?? ""}${c.setName ? " - " + c.setName : ""}`;
+  meta.textContent = `${isFoil(c) ? "\u2605 Foil \u00B7 " : ""}${c.setCode ?? ""} ${c.collectorNumber ?? ""}${c.setName ? " - " + c.setName : ""}`;
   info.append(name, meta);
   const spaces = [...new Set(copies.map((x) => x.collectionSpace).filter(Boolean))];
   if (spaces.length) {
@@ -284,6 +301,7 @@ function buildCard(c, copies, stacked) {
 }
 
 stackToggleEl.addEventListener("change", () => { prefs.set("stack", stackToggleEl.checked); render(); });
+foilFilterEl.addEventListener("change", () => { prefs.set("foil", foilFilterEl.value); render(); });
 spaceFilterEl.addEventListener("change", () => { wantedSpace = spaceFilterEl.value; prefs.set("space", wantedSpace); render(); });
 
 setButtonEl.addEventListener("click", () => {
@@ -441,6 +459,8 @@ document.getElementById("resetFilters").addEventListener("click", () => {
   cmcLo = 0;
   cmcHi = null;
   wantedSpace = "";
+  foilFilterEl.value = "";
+  prefs.set("foil", "");
   prefs.set("sets", []);
   prefs.set("colorsOff", []);
   prefs.set("cmcLo", 0);
@@ -505,6 +525,7 @@ window.addEventListener("scroll", hideZoom, { passive: true });
 async function start() {
   if (!firebaseConfig.apiKey || firebaseConfig.apiKey.startsWith("PASTE") ||
       !firebaseConfig.appId || firebaseConfig.appId.startsWith("PASTE")) {
+    hideLoading();
     setStatus("Not configured", "bad");
     showMessage("firebase-config.js still has placeholder values. Register a Web app in the Firebase " +
                 "console and put its apiKey and appId in firebase-config.js (see README.md).");
@@ -526,6 +547,7 @@ async function start() {
       });
     }
     firstSnapshot = false;
+    hideLoading();   // the whole collection has arrived
     cards = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
     refreshSpaceOptions();
     renderSetPicker();
@@ -534,6 +556,7 @@ async function start() {
     showMessage("");
     render();
   }, (err) => {
+    hideLoading();
     setStatus("Read failed", "bad");
     showMessage(`Could not read the cards: ${err.message}`);
   });
