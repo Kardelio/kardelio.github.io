@@ -56,6 +56,13 @@ const cmcHiThumb = document.getElementById("cmcHiThumb");
 const cmcLabelEl = document.getElementById("cmcLabel");
 const pipEls = [...document.querySelectorAll("#colorPips .pip")];
 const colorsOff = new Set(prefs.get("colorsOff", []));  // colours switched off: "W" "U" "B" "R" "G" "C" (colourless)
+const rarityPipEls = [...document.querySelectorAll("#rarityPips .pip")];
+const raritiesOff = new Set(prefs.get("raritiesOff", []));  // rarities switched off: "common" "uncommon" "rare" "mythic"
+const sortButtonEl = document.getElementById("sortButton");
+const sortPanelEl = document.getElementById("sortPanel");
+const SORT_LABELS = { added: "Date added", name: "Name", cmc: "Mana value", rarity: "Rarity", color: "Colour", set: "Set", copies: "Copies" };
+let sortKey = SORT_LABELS[prefs.get("sortKey", "")] ? prefs.get("sortKey", "") : "added";
+let sortDir = prefs.get("sortDir", "desc") === "asc" ? "asc" : "desc";   // "added" + "desc" = newest first, the default
 let cmcLo = Number(prefs.get("cmcLo", 0)) || 0;                 // lowest mana value shown
 let cmcHi = prefs.get("cmcHi", null);                           // highest mana value shown; null = no upper limit
 if (cmcHi !== null) cmcHi = Number(cmcHi);
@@ -202,6 +209,10 @@ function colorAllowed(c) {
   return identity.every((color) => !colorsOff.has(color));
 }
 
+function rarityAllowed(c) {
+  return !raritiesOff.has(String(c.rarity || "").toLowerCase());
+}
+
 function render() {
   hideZoom();   // the cards are redrawn, so a popup for an old card element must go
   const wanted = spaceFilterEl.value;
@@ -216,6 +227,7 @@ function render() {
     });
   }
   if (colorsOff.size) shown = shown.filter(colorAllowed);
+  if (raritiesOff.size) shown = shown.filter(rarityAllowed);
   if (selectedSets.size) shown = shown.filter((c) => selectedSets.has(c.setCode));
   if (tokens.length) shown = shown.filter((c) => cardMatches(c, tokens));
   const stacks = stackCards(shown);   // one entry per different card (same printing = same card)
@@ -225,11 +237,45 @@ function render() {
 
   // one flat list, newest card first; with "Stack dupes" copies of the same card share one tile
   const stacked = stackToggleEl.checked;
-  const tiles = stacked ? stacks : shown.slice().reverse().map((c) => [c]);
+  const tiles = sortTiles(stacked ? stacks : shown.slice().reverse().map((c) => [c]));
   const grid = document.createElement("div");
   grid.className = "grid";
   for (const copies of tiles) grid.append(buildCard(copies[copies.length - 1], copies, stacked));
   runsEl.append(grid);
+}
+
+const RARITY_RANK = { common: 0, uncommon: 1, rare: 2, mythic: 3 };
+const COLOR_ORDER = ["W", "U", "B", "R", "G"];
+
+// Mono colours in WUBRG order, then multicolour, then colourless.
+function colorRank(c) {
+  const identity = c.colorIdentity || [];
+  if (!identity.length) return 6;
+  return identity.length > 1 ? 5 : COLOR_ORDER.indexOf(identity[0]);
+}
+
+function compareBy(key, a, b) {   // a, b: the newest card of a tile
+  switch (key) {
+    case "name": return (a.name ?? "").localeCompare(b.name ?? "");
+    case "cmc": return (a.cmc ?? 0) - (b.cmc ?? 0);
+    case "rarity": return (RARITY_RANK[String(a.rarity).toLowerCase()] ?? -1) - (RARITY_RANK[String(b.rarity).toLowerCase()] ?? -1);
+    case "color": return colorRank(a) - colorRank(b);
+    case "set": return (a.setName ?? a.setCode ?? "").localeCompare(b.setName ?? b.setCode ?? "")
+      || (parseInt(a.collectorNumber, 10) || 0) - (parseInt(b.collectorNumber, 10) || 0);
+    default: return 0;
+  }
+}
+
+// `tiles` arrives newest first. "Date added" just keeps or flips that order; other keys sort with name as the tie-break.
+function sortTiles(tiles) {
+  if (sortKey === "added") return sortDir === "desc" ? tiles : tiles.slice().reverse();
+  const sign = sortDir === "asc" ? 1 : -1;
+  const order = new Map(tiles.map((t, i) => [t, i]));
+  return tiles.slice().sort((x, y) => {
+    const a = x[x.length - 1], b = y[y.length - 1];
+    const d = sortKey === "copies" ? x.length - y.length : compareBy(sortKey, a, b);
+    return sign * d || (a.name ?? "").localeCompare(b.name ?? "") || order.get(x) - order.get(y);
+  });
 }
 
 // Same printing (same Scryfall card) = same stack. Newest copy first, so a freshly scanned card moves to the top.
@@ -306,6 +352,7 @@ spaceFilterEl.addEventListener("change", () => { wantedSpace = spaceFilterEl.val
 
 setButtonEl.addEventListener("click", () => {
   setPanelEl.hidden = !setPanelEl.hidden;
+  if (!setPanelEl.hidden) sortPanelEl.hidden = true;
   if (!setPanelEl.hidden) setSearchEl.focus();
 });
 setSearchEl.addEventListener("input", renderSetPicker);
@@ -450,12 +497,80 @@ document.getElementById("colorsAll").addEventListener("click", () => {
 });
 updatePips();
 
+function updateRarityPips() {
+  for (const pip of rarityPipEls) {
+    const off = raritiesOff.has(pip.dataset.rarity);
+    pip.classList.toggle("off", off);
+    pip.setAttribute("aria-pressed", String(!off));
+  }
+}
+for (const pip of rarityPipEls) {
+  pip.addEventListener("click", () => {
+    const rarity = pip.dataset.rarity;
+    if (raritiesOff.has(rarity)) raritiesOff.delete(rarity); else raritiesOff.add(rarity);
+    prefs.set("raritiesOff", [...raritiesOff]);
+    updateRarityPips();
+    render();
+  });
+}
+document.getElementById("raritiesNone").addEventListener("click", () => {
+  rarityPipEls.forEach((pip) => raritiesOff.add(pip.dataset.rarity));
+  prefs.set("raritiesOff", [...raritiesOff]);
+  updateRarityPips();
+  render();
+});
+document.getElementById("raritiesAll").addEventListener("click", () => {
+  raritiesOff.clear();
+  prefs.set("raritiesOff", []);
+  updateRarityPips();
+  render();
+});
+updateRarityPips();
+
+// ---- sort dropdown ----
+function updateSortUi() {
+  const custom = !(sortKey === "added" && sortDir === "desc");
+  sortButtonEl.textContent = (custom ? `Sort: ${SORT_LABELS[sortKey]} ${sortDir === "asc" ? "\u2191" : "\u2193"}` : "Sort") + " \u25BE";
+  sortButtonEl.classList.toggle("active", custom);
+  for (const r of sortPanelEl.querySelectorAll("input[name=sortKey]")) r.checked = r.value === sortKey;
+  for (const b of sortPanelEl.querySelectorAll("[data-dir]")) b.classList.toggle("on", b.dataset.dir === sortDir);
+}
+function applySort() {
+  prefs.set("sortKey", sortKey);
+  prefs.set("sortDir", sortDir);
+  updateSortUi();
+  render();
+}
+sortButtonEl.addEventListener("click", () => {
+  sortPanelEl.hidden = !sortPanelEl.hidden;
+  if (!sortPanelEl.hidden) setPanelEl.hidden = true;
+});
+for (const r of sortPanelEl.querySelectorAll("input[name=sortKey]")) {
+  r.addEventListener("change", () => {
+    if (sortKey === "added" && sortDir === "desc" && r.value !== "added") sortDir = "asc";   // leaving the default view: start ascending
+    sortKey = r.value;
+    applySort();
+  });
+}
+for (const b of sortPanelEl.querySelectorAll("[data-dir]")) {
+  b.addEventListener("click", () => { sortDir = b.dataset.dir; applySort(); });
+}
+document.addEventListener("click", (e) => { if (!e.target.closest("#sortPicker")) sortPanelEl.hidden = true; });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") sortPanelEl.hidden = true; });
+updateSortUi();
+
 // ---- reset: clear the search and every filter, so all the cards show again ----
 document.getElementById("resetFilters").addEventListener("click", () => {
   searchEl.value = "";
   setSearchEl.value = "";
   selectedSets.clear();
   colorsOff.clear();
+  raritiesOff.clear();
+  sortKey = "added";
+  sortDir = "desc";
+  prefs.set("sortKey", sortKey);
+  prefs.set("sortDir", sortDir);
+  updateSortUi();
   cmcLo = 0;
   cmcHi = null;
   wantedSpace = "";
@@ -463,12 +578,14 @@ document.getElementById("resetFilters").addEventListener("click", () => {
   prefs.set("foil", "");
   prefs.set("sets", []);
   prefs.set("colorsOff", []);
+  prefs.set("raritiesOff", []);
   prefs.set("cmcLo", 0);
   prefs.set("cmcHi", null);
   prefs.set("space", "");
   refreshSpaceOptions();
   renderSetPicker();
   updatePips();
+  updateRarityPips();
   drawCmcRange();
   render();
 });
