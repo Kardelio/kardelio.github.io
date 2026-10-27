@@ -23,6 +23,7 @@ const foilFilterEl = document.getElementById("foilFilter");
 const searchEl = document.getElementById("search");
 const zoomToggleEl = document.getElementById("zoomToggle");
 const stackToggleEl = document.getElementById("stackToggle");
+const runToggleEl = document.getElementById("runToggle");
 const zoomEl = document.getElementById("zoom");
 const zoomImgEl = zoomEl.querySelector("img");
 
@@ -46,6 +47,7 @@ const prefs = {
 };
 zoomToggleEl.checked = prefs.get("zoom", false) === true;
 stackToggleEl.checked = prefs.get("stack", false) === true;
+runToggleEl.checked = prefs.get("runs", false) === true;
 let wantedSpace = String(prefs.get("space", ""));
 foilFilterEl.value = ["foil", "normal"].includes(prefs.get("foil", "")) ? prefs.get("foil", "") : "";   // "" = all cards
 const selectedSets = new Set(prefs.get("sets", []));   // set codes; empty = all sets
@@ -235,13 +237,56 @@ function render() {
   uniqueEl.textContent = stacks.length;
   runsEl.replaceChildren();
 
-  // one flat list, newest card first; with "Stack dupes" copies of the same card share one tile
+  // newest card first; with "Stack dupes" copies of the same card share one tile
   const stacked = stackToggleEl.checked;
-  const tiles = sortTiles(stacked ? stacks : shown.slice().reverse().map((c) => [c]));
-  const grid = document.createElement("div");
-  grid.className = "grid";
-  for (const copies of tiles) grid.append(buildCard(copies[copies.length - 1], copies, stacked));
-  runsEl.append(grid);
+  const tilesOf = (list) => sortTiles(stacked ? stackCards(list) : list.slice().reverse().map((c) => [c]));
+  const fillGrid = (list) => {
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    for (const copies of tilesOf(list)) grid.append(buildCard(copies[copies.length - 1], copies, stacked));
+    return grid;
+  };
+
+  if (!runToggleEl.checked) {
+    runsEl.append(fillGrid(shown));
+    return;
+  }
+  // "Group by run": a heading per scanning run, newest run first
+  const byRun = new Map();
+  for (const c of shown) {
+    const key = runKey(c);
+    if (!byRun.has(key)) byRun.set(key, []);
+    byRun.get(key).push(c);
+  }
+  for (const key of [...byRun.keys()].sort().reverse()) {
+    const list = byRun.get(key);
+    const head = document.createElement("div");
+    head.className = "run-head";
+    const title = document.createElement("span");
+    title.className = "run-title";
+    title.textContent = runLabel(key);
+    const meta = document.createElement("span");
+    meta.className = "run-meta";
+    meta.textContent = `${list.length} ${list.length === 1 ? "card" : "cards"}`;
+    head.append(title, meta);
+    runsEl.append(head, fillGrid(list));
+  }
+}
+
+// A card's run is the start time at the front of its document ID: 2026-10-25_10-41-11_0007_SOS-22 -> 2026-10-25_10-41-11
+function runKey(c) {
+  const m = /^(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})_/.exec(c.id);
+  return m ? m[1] : "";
+}
+
+function runLabel(key) {
+  if (!key) return "Unknown run";
+  const [d, t] = key.split("_");
+  const [y, mo, day] = d.split("-").map(Number);
+  const [h, mi] = t.split("-").map(Number);
+  return new Date(y, mo - 1, day, h, mi).toLocaleString(undefined, {
+    weekday: "short", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit",
+  });
 }
 
 const RARITY_RANK = { common: 0, uncommon: 1, rare: 2, mythic: 3 };
@@ -346,6 +391,7 @@ function buildCard(c, copies, stacked) {
   return card;
 }
 
+runToggleEl.addEventListener("change", () => { prefs.set("runs", runToggleEl.checked); render(); });
 stackToggleEl.addEventListener("change", () => { prefs.set("stack", stackToggleEl.checked); render(); });
 foilFilterEl.addEventListener("change", () => { prefs.set("foil", foilFilterEl.value); render(); });
 spaceFilterEl.addEventListener("change", () => { wantedSpace = spaceFilterEl.value; prefs.set("space", wantedSpace); render(); });

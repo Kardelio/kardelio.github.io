@@ -24,7 +24,10 @@
     .home { display: flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; }
     .home img { width: 2.2em; height: 2.2em; border-radius: 50%; object-fit: cover; border: 2px solid var(--line-hi); transition: 0.3s; }
     .home:hover img { border-color: var(--accent); }
-    #status { color: var(--muted); font-size: 12px; }
+    .status-box { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; }
+    #status { color: var(--muted); font-size: 11px; }
+    #runLabel { font-size: 10px; opacity: 0.6; gap: 4px; }
+    #runLabel input { width: 10px; height: 10px; margin: 0; }
     #status.ok { color: var(--ok); }
     #status.bad { color: var(--warn); }
     .counts b { color: var(--text); font-weight: normal; }
@@ -90,6 +93,11 @@
     #message { margin: 24px 0; padding: 14px 16px; border: 1px solid var(--warn); border-radius: 10px; color: var(--warn);
                background: var(--panel); display: none; }
 
+    .run-head { display: flex; align-items: baseline; gap: 10px; margin: 22px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+    .run-head:first-child { margin-top: 0; }
+    .run-head .run-title { font-weight: bold; }
+    .run-head .run-meta { color: var(--muted); font-size: 13px; }
+
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 12px; }
 
     .card { background: var(--panel); border: 1px solid var(--line); border-radius: 9px; overflow: hidden;
@@ -139,7 +147,10 @@
     <a class="home" href="../" title="Back to benkadel.com">
       <img src="../media/bk.webp" alt="Ben Kadel">
           </a>
-    <span id="status">Connecting...</span>
+    <div class="status-box">
+      <span id="status">Connecting...</span>
+      <label id="runLabel" title="Group the cards under a heading for each scanning run"><input type="checkbox" id="runToggle"> Group by run</label>
+    </div>
     <input id="search" type="search" placeholder="Search cards..." autocomplete="off" spellcheck="false">
     <span class="counts" title="Cards you have in total, and how many different cards that is (copies of the same card count once)"><b id="count">0</b> total &middot; <b id="unique">0</b> different</span>
     <button type="button" id="resetFilters" title="Reset all filters and show every card" aria-label="Reset all filters">&#8635;</button>
