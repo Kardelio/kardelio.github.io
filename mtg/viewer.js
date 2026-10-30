@@ -216,6 +216,11 @@ function rarityAllowed(c) {
 }
 
 function render() {
+  renderCards();
+  applyLocate();
+}
+
+function renderCards() {
   hideZoom();   // the cards are redrawn, so a popup for an old card element must go
   const wanted = spaceFilterEl.value;
   const tokens = searchEl.value.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
@@ -338,6 +343,7 @@ function stackCards(list) {
 // One card tile. `copies` holds every copy that this tile stands for (just [c] when not stacking).
 function buildCard(c, copies, stacked) {
   const card = document.createElement("div");
+  card.dataset.id = c.id;
   card.className = "card" + (freshIds.has(c.id) ? " fresh" : "") + (isFoil(c) ? " foil" : "");
 
   const src = smallImage(c.imageUri);
@@ -606,7 +612,7 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") sortPanelE
 updateSortUi();
 
 // ---- reset: clear the search and every filter, so all the cards show again ----
-document.getElementById("resetFilters").addEventListener("click", () => {
+function resetFilters() {
   searchEl.value = "";
   setSearchEl.value = "";
   selectedSets.clear();
@@ -634,7 +640,82 @@ document.getElementById("resetFilters").addEventListener("click", () => {
   updateRarityPips();
   drawCmcRange();
   render();
+}
+document.getElementById("resetFilters").addEventListener("click", () => { endLocate(); resetFilters(); });
+
+// ---- right-click menu + "Locate card" ----
+// Locate card clears every filter except the card's own collection space (box/folder), shows it in scan order, scrolls to the card, highlights it and
+// fades the cards around it the further they are from it, so you can see where it sits in the physical stack.
+const LOCATE_RADIUS = 15;   // cards on each side that are still visible (they fade out linearly)
+const locateBarEl = document.getElementById("locateBar");
+const ctxMenuEl = document.getElementById("ctxMenu");
+let locateId = null;        // document ID of the located card; null = not locating
+let ctxCardId = null;
+
+function hideMenu() { ctxMenuEl.hidden = true; ctxCardId = null; }
+
+runsEl.addEventListener("contextmenu", (e) => {
+  const cardEl = e.target.closest(".card");
+  if (!cardEl) return;
+  e.preventDefault();
+  hideZoom();
+  ctxCardId = cardEl.dataset.id;
+  ctxMenuEl.hidden = false;
+  ctxMenuEl.style.left = `${Math.min(e.clientX, window.innerWidth - ctxMenuEl.offsetWidth - 8)}px`;
+  ctxMenuEl.style.top = `${Math.min(e.clientY, window.innerHeight - ctxMenuEl.offsetHeight - 8)}px`;
 });
+ctxMenuEl.addEventListener("click", (e) => {
+  if (e.target.closest("[data-act=locate]") && ctxCardId) locateCard(ctxCardId);
+  hideMenu();
+});
+document.addEventListener("click", (e) => { if (!e.target.closest("#ctxMenu")) hideMenu(); });
+document.addEventListener("contextmenu", (e) => { if (!e.target.closest(".card")) hideMenu(); });
+window.addEventListener("scroll", hideMenu, { passive: true });
+window.addEventListener("blur", hideMenu);
+
+function locateCard(id) {
+  if (!cards.some((c) => c.id === id)) return;
+  resetFilters();
+  // only this card's container (collection space) matters: cards in other boxes/folders are filtered out
+  wantedSpace = cards.find((c) => c.id === id).collectionSpace || "";
+  prefs.set("space", wantedSpace);
+  refreshSpaceOptions();
+  stackToggleEl.checked = false;   // every physical card gets its own tile
+  prefs.set("stack", false);
+  locateId = id;
+  render();
+  const target = runsEl.querySelector(`.card[data-id="${CSS.escape(id)}"]`);
+  if (target) target.scrollIntoView({ block: "center" });
+}
+
+function endLocate() {
+  locateId = null;
+  locateBarEl.hidden = true;
+  for (const el of runsEl.querySelectorAll(".card")) { el.style.opacity = ""; el.classList.remove("located"); }
+}
+
+// called after every render: highlight the located card and fade the ones around it
+function applyLocate() {
+  if (!locateId) return;
+  const els = [...runsEl.querySelectorAll(".card")];
+  const at = els.findIndex((el) => el.dataset.id === locateId);
+  if (at < 0) { endLocate(); return; }   // filtered out again, so locating is over
+  els.forEach((el, i) => {
+    const d = Math.abs(i - at);
+    el.classList.toggle("located", d === 0);
+    el.style.opacity = d === 0 ? "" : String(Math.max(0, 1 - d / (LOCATE_RADIUS + 1)));
+  });
+
+  const c = cards.find((x) => x.id === locateId);
+  const key = runKey(c);
+  const run = cards.filter((x) => runKey(x) === key && (x.collectionSpace || "") === (c.collectionSpace || ""));
+  const n = run.findIndex((x) => x.id === locateId) + 1;
+  locateBarEl.querySelector(".text").textContent =
+    `${c.name ?? "Card"} \u00B7 ${runLabel(key)} \u00B7 card ${n} of ${run.length} in this run`;
+  locateBarEl.hidden = false;
+}
+document.getElementById("locateClose").addEventListener("click", endLocate);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { hideMenu(); endLocate(); } });
 
 // ---- hover zoom (only while the "Zoom on hover" switch is on) ----
 function hideZoom() { zoomEl.style.display = "none"; zoomCard = null; }
