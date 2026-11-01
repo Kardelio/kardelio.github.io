@@ -65,6 +65,26 @@
     #setList .set-meta { color: var(--muted); font-size: 12px; }
     #setList .none { color: var(--muted); padding: 6px; }
 
+    #typePanel, #optPanel { position: absolute; top: calc(100% + 8px); left: 0; z-index: 5; padding: 10px;
+                background: var(--panel); border: 1px solid var(--line-hi); border-radius: 10px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6); }
+    #typePanel { width: 260px; max-width: 90vw; }
+    #optPanel { left: auto; right: 0; width: 220px; }
+    #typePanel[hidden], #optPanel[hidden] { display: none; }
+    #typePanel .top { display: flex; gap: 8px; margin-bottom: 6px; }
+    #typePanel .top .clear { flex: 1; }
+    #typeList label, #optPanel label { display: flex; gap: 8px; align-items: center; padding: 4px 6px; border-radius: 6px; color: var(--text); }
+    #typeList label:hover, #optPanel label:hover { background: var(--panel-hi); }
+    #typePanel .sub-head { margin: 8px 0 4px; padding-top: 8px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    #typePanel .sub-hint { opacity: 0.7; }
+    #subSearch { width: 100%; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line-hi); border-radius: 8px; padding: 4px 8px; margin-bottom: 4px; }
+    #subList { max-height: 32vh; overflow-y: auto; }
+    #subList label { display: flex; gap: 8px; align-items: center; padding: 3px 6px; border-radius: 6px; color: var(--text); }
+    #subList label:hover { background: var(--panel-hi); }
+    #subList .none { color: var(--muted); padding: 6px; }
+    #typeList .type-name, #subList .type-name { flex: 1; }
+    #typeList .type-meta, #subList .type-meta { color: var(--muted); font-size: 12px; }
+    #optPanel { display: flex; flex-direction: column; gap: 2px; }
+    #optPanel[hidden] { display: none; }
     .pips { display: inline-flex; gap: 4px; align-items: center; }
     .pip { width: 28px; height: 28px; padding: 2px; border: 2px solid var(--accent); border-radius: 50%; background: rgba(232, 114, 68, 0.12);
            box-shadow: 0 0 8px rgba(232, 114, 68, 0.45); cursor: pointer; transition: 0.2s; }
@@ -80,6 +100,11 @@
     .pip-action { font: inherit; font-size: 12px; color: var(--muted); background: transparent; border: 1px solid var(--line-hi);
                   border-radius: 999px; padding: 2px 9px; cursor: pointer; transition: 0.2s; }
     .pip-action:hover { color: var(--accent); border-color: var(--accent); }
+    .pip-mini { width: 22px; height: 22px; padding: 0; font: inherit; font-size: 12px; line-height: 1; color: var(--muted); background: transparent;
+                border: 1px solid var(--line-hi); border-radius: 50%; cursor: pointer; transition: 0.2s; }
+    .pip-mini { display: inline-flex; align-items: center; justify-content: center; }
+    .pip-mini svg { display: block; }
+    .pip-mini:hover { color: var(--accent); border-color: var(--accent); }
     .cmc { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); }
     #cmcLabel { min-width: 2.4em; font-size: 13px; color: var(--text); }
     .range { position: relative; width: 80px; height: 26px; cursor: pointer; touch-action: none; user-select: none; }
@@ -187,8 +212,18 @@
         <div id="setList"></div>
       </div>
     </div>
-    <div class="pips" id="colorPips" title="Color identity: click a colour to hide or show those cards"><button type="button" class="pip-action" id="colorsNone" title="Hide every colour">None</button><button type="button" class="pip" data-color="W" title="White" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/W.svg" alt="W"></button><button type="button" class="pip" data-color="U" title="Blue" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/U.svg" alt="U"></button><button type="button" class="pip" data-color="B" title="Black" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/B.svg" alt="B"></button><button type="button" class="pip" data-color="R" title="Red" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/R.svg" alt="R"></button><button type="button" class="pip" data-color="G" title="Green" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/G.svg" alt="G"></button><button type="button" class="pip" data-color="C" title="Colorless" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/C.svg" alt="C"></button><button type="button" class="pip-action" id="colorsAll" title="Show every colour">All</button></div>
-    <div class="pips" id="rarityPips" title="Rarity: click a rarity to hide or show those cards"><button type="button" class="pip-action" id="raritiesNone" title="Hide every rarity">None</button><button type="button" class="pip rarity" data-rarity="common" title="Common" aria-pressed="true" style="--rc: #b8b8b8">C</button><button type="button" class="pip rarity" data-rarity="uncommon" title="Uncommon" aria-pressed="true" style="--rc: #9fc5d6">U</button><button type="button" class="pip rarity" data-rarity="rare" title="Rare" aria-pressed="true" style="--rc: #e6b422">R</button><button type="button" class="pip rarity" data-rarity="mythic" title="Mythic" aria-pressed="true" style="--rc: #e8502c">M</button><button type="button" class="pip-action" id="raritiesAll" title="Show every rarity">All</button></div>
+    <div class="picker" id="typePicker">
+      <button type="button" id="typeButton">All types &#9662;</button>
+      <div id="typePanel" hidden>
+        <div class="top"><button type="button" class="clear" id="typeClear">Clear</button></div>
+        <div id="typeList"></div>
+        <div class="sub-head">Subtypes <span class="sub-hint">(Mouse, Elf, Equipment...)</span></div>
+        <input id="subSearch" type="search" placeholder="Filter subtypes..." autocomplete="off" spellcheck="false">
+        <div id="subList"></div>
+      </div>
+    </div>
+    <div class="pips" id="colorPips" title="Color identity: click a colour to hide or show those cards"><button type="button" class="pip-mini" id="colorsNone" title="Hide every colour" aria-label="Hide every colour">&#10005;</button><button type="button" class="pip" data-color="W" title="White" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/W.svg" alt="W"></button><button type="button" class="pip" data-color="U" title="Blue" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/U.svg" alt="U"></button><button type="button" class="pip" data-color="B" title="Black" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/B.svg" alt="B"></button><button type="button" class="pip" data-color="R" title="Red" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/R.svg" alt="R"></button><button type="button" class="pip" data-color="G" title="Green" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/G.svg" alt="G"></button><button type="button" class="pip" data-color="C" title="Colorless" aria-pressed="true"><img src="https://svgs.scryfall.io/card-symbols/C.svg" alt="C"></button><button type="button" class="pip-mini" id="colorsAll" title="Show every colour" aria-label="Show every colour"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><circle cx="8" cy="2.6" r="1.9"/><circle cx="13.1" cy="6.3" r="1.9"/><circle cx="11.2" cy="12.3" r="1.9"/><circle cx="4.8" cy="12.3" r="1.9"/><circle cx="2.9" cy="6.3" r="1.9"/></svg></button></div>
+    <div class="pips" id="rarityPips" title="Rarity: click a rarity to hide or show those cards"><button type="button" class="pip-mini" id="raritiesNone" title="Hide every rarity" aria-label="Hide every rarity">&#10005;</button><button type="button" class="pip rarity" data-rarity="common" title="Common" aria-pressed="true" style="--rc: #b8b8b8">C</button><button type="button" class="pip rarity" data-rarity="uncommon" title="Uncommon" aria-pressed="true" style="--rc: #9fc5d6">U</button><button type="button" class="pip rarity" data-rarity="rare" title="Rare" aria-pressed="true" style="--rc: #e6b422">R</button><button type="button" class="pip rarity" data-rarity="mythic" title="Mythic" aria-pressed="true" style="--rc: #e8502c">M</button><button type="button" class="pip-mini" id="raritiesAll" title="Show every rarity" aria-label="Show every rarity"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><circle cx="8" cy="2.6" r="1.9"/><circle cx="13.1" cy="6.3" r="1.9"/><circle cx="11.2" cy="12.3" r="1.9"/><circle cx="4.8" cy="12.3" r="1.9"/><circle cx="2.9" cy="6.3" r="1.9"/></svg></button></div>
     <div class="cmc" title="Mana value (combined mana cost)">CMC
       <div class="range" id="cmcRange">
         <div class="range-track"></div>
@@ -204,8 +239,13 @@
       <option value="foil">&#9733; Foil only</option>
       <option value="normal">Non-foil only</option>
     </select></label>
-    <label title="Show a large card when hovering over it"><input type="checkbox" id="zoomToggle"> Zoom</label>
-    <label title="Show copies of the same card once, with a number for how many you have"><input type="checkbox" id="stackToggle"> Stack dupes</label>
+    <div class="picker" id="optPicker">
+      <button type="button" id="optButton" title="Display options">&#9881; Options &#9662;</button>
+      <div id="optPanel" hidden>
+        <label title="Show a large card when hovering over it"><input type="checkbox" id="zoomToggle"> Zoom on hover</label>
+        <label title="Show copies of the same card once, with a number for how many you have"><input type="checkbox" id="stackToggle"> Stack dupes</label>
+      </div>
+    </div>
   </header>
   <main>
     <div id="message"></div>

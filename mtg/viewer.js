@@ -65,6 +65,16 @@ const sortPanelEl = document.getElementById("sortPanel");
 const SORT_LABELS = { added: "Date added", name: "Name", cmc: "Mana value", rarity: "Rarity", color: "Colour", set: "Set", copies: "Copies" };
 let sortKey = SORT_LABELS[prefs.get("sortKey", "")] ? prefs.get("sortKey", "") : "added";
 let sortDir = prefs.get("sortDir", "desc") === "asc" ? "asc" : "desc";   // "added" + "desc" = newest first, the default
+const TYPE_NAMES = ["Creature", "Instant", "Sorcery", "Artifact", "Enchantment", "Land", "Planeswalker", "Battle", "Other"];
+const selectedTypes = new Set(prefs.get("types", []).filter((t) => TYPE_NAMES.includes(t)));   // empty = all types
+const selectedSubs = new Set(prefs.get("subs", []));   // subtypes ("Mouse", "Elf"...); empty = any
+const subListEl = document.getElementById("subList");
+const subSearchEl = document.getElementById("subSearch");
+const typeButtonEl = document.getElementById("typeButton");
+const typePanelEl = document.getElementById("typePanel");
+const typeListEl = document.getElementById("typeList");
+const optButtonEl = document.getElementById("optButton");
+const optPanelEl = document.getElementById("optPanel");
 let cmcLo = Number(prefs.get("cmcLo", 0)) || 0;                 // lowest mana value shown
 let cmcHi = prefs.get("cmcHi", null);                           // highest mana value shown; null = no upper limit
 if (cmcHi !== null) cmcHi = Number(cmcHi);
@@ -211,6 +221,108 @@ function colorAllowed(c) {
   return identity.every((color) => !colorsOff.has(color));
 }
 
+// Card types come from the type line ("Legendary Artifact Creature - Golem"): only the part before the dash counts,
+// and for double-faced cards ("A // B") every face. A card can have several types and matches any of them.
+// Cards with no type line (scanned before it was saved) or only unusual types (Token, Emblem...) count as "Other".
+const typeCache = new Map();
+function typesOf(c) {
+  const line = c.typeLine || "";
+  let found = typeCache.get(line);
+  if (!found) {
+    const faces = line.split("//").map((f) => f.split(/\s[\u2014-]\s/)[0].toLowerCase());
+    found = TYPE_NAMES.slice(0, -1).filter((t) => faces.some((f) => f.split(/\s+/).includes(t.toLowerCase())));
+    if (!found.length) found = ["Other"];
+    typeCache.set(line, found);
+  }
+  return found;
+}
+
+// Subtypes are the words after the dash ("Legendary Creature - Elf Druid" -> Elf, Druid), on every face of a double-faced card.
+// (Rare two-word subtypes like "Time Lord" count as two words.)
+const subCache = new Map();
+function subtypesOf(c) {
+  const line = c.typeLine || "";
+  let subs = subCache.get(line);
+  if (!subs) {
+    subs = [...new Set(line.split("//").flatMap((f) => {
+      const at = f.search(/\s[\u2014-]\s/);
+      return at < 0 ? [] : f.slice(at).replace(/^\s[\u2014-]\s/, "").split(/\s+/).filter(Boolean);
+    }))];
+    subCache.set(line, subs);
+  }
+  return subs;
+}
+
+function renderSubPicker() {
+  const counts = new Map();
+  for (const c of cards) for (const t of subtypesOf(c)) counts.set(t, (counts.get(t) || 0) + 1);
+  for (const t of selectedSubs) if (!counts.has(t)) counts.set(t, 0);
+  const filter = subSearchEl.value.trim().toLowerCase();
+  const rows = [...counts.entries()].filter(([t]) => !filter || t.toLowerCase().includes(filter))
+    .sort((a, b) => (selectedSubs.has(b[0]) - selectedSubs.has(a[0])) || b[1] - a[1] || a[0].localeCompare(b[0]));   // ticked first, then most common
+  subListEl.replaceChildren();
+  for (const [t, n] of rows) {
+    const label = document.createElement("label");
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.checked = selectedSubs.has(t);
+    box.addEventListener("change", () => {
+      if (box.checked) selectedSubs.add(t); else selectedSubs.delete(t);
+      prefs.set("subs", [...selectedSubs]);
+      updateTypeButton();
+      render();
+    });
+    const name = document.createElement("span");
+    name.className = "type-name";
+    name.textContent = t;
+    const meta = document.createElement("span");
+    meta.className = "type-meta";
+    meta.textContent = n;
+    label.append(box, name, meta);
+    subListEl.append(label);
+  }
+  if (!rows.length) {
+    const none = document.createElement("div");
+    none.className = "none";
+    none.textContent = counts.size ? "No subtypes found" : "No subtypes yet";
+    subListEl.append(none);
+  }
+}
+
+function renderTypePicker() {
+  const counts = new Map();
+  for (const c of cards) for (const t of typesOf(c)) counts.set(t, (counts.get(t) || 0) + 1);
+  typeListEl.replaceChildren();
+  for (const t of TYPE_NAMES) {
+    if (!counts.has(t) && !selectedTypes.has(t)) continue;
+    const label = document.createElement("label");
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.checked = selectedTypes.has(t);
+    box.addEventListener("change", () => {
+      if (box.checked) selectedTypes.add(t); else selectedTypes.delete(t);
+      prefs.set("types", [...selectedTypes]);
+      updateTypeButton();
+      render();
+    });
+    const name = document.createElement("span");
+    name.className = "type-name";
+    name.textContent = t;
+    const meta = document.createElement("span");
+    meta.className = "type-meta";
+    meta.textContent = counts.get(t) || 0;
+    label.append(box, name, meta);
+    typeListEl.append(label);
+  }
+  updateTypeButton();
+}
+
+function updateTypeButton() {
+  const parts = [...selectedTypes, ...selectedSubs];
+  typeButtonEl.textContent = (parts.length === 0 ? "All types" : parts.length <= 2 ? parts.join(" \u00B7 ") : `${parts.length} types`) + " \u25BE";
+  typeButtonEl.classList.toggle("active", parts.length > 0);
+}
+
 function rarityAllowed(c) {
   return !raritiesOff.has(String(c.rarity || "").toLowerCase());
 }
@@ -236,6 +348,8 @@ function renderCards() {
   if (colorsOff.size) shown = shown.filter(colorAllowed);
   if (raritiesOff.size) shown = shown.filter(rarityAllowed);
   if (selectedSets.size) shown = shown.filter((c) => selectedSets.has(c.setCode));
+  if (selectedTypes.size) shown = shown.filter((c) => typesOf(c).some((t) => selectedTypes.has(t)));
+  if (selectedSubs.size) shown = shown.filter((c) => subtypesOf(c).some((t) => selectedSubs.has(t)));
   if (tokens.length) shown = shown.filter((c) => cardMatches(c, tokens));
   const stacks = stackCards(shown);   // one entry per different card (same printing = same card)
   countEl.textContent = shown.length === cards.length ? cards.length : `${shown.length} of ${cards.length}`;
@@ -402,9 +516,34 @@ stackToggleEl.addEventListener("change", () => { prefs.set("stack", stackToggleE
 foilFilterEl.addEventListener("change", () => { prefs.set("foil", foilFilterEl.value); render(); });
 spaceFilterEl.addEventListener("change", () => { wantedSpace = spaceFilterEl.value; prefs.set("space", wantedSpace); render(); });
 
+// only one dropdown panel is open at a time
+const panels = [setPanelEl, sortPanelEl, typePanelEl, optPanelEl];
+function togglePanel(panel) {
+  const open = panel.hidden;
+  panels.forEach((p) => { p.hidden = true; });
+  panel.hidden = !open;
+}
+typeButtonEl.addEventListener("click", () => togglePanel(typePanelEl));
+optButtonEl.addEventListener("click", () => togglePanel(optPanelEl));
+document.getElementById("typeClear").addEventListener("click", () => {
+  selectedTypes.clear();
+  selectedSubs.clear();
+  prefs.set("types", []);
+  prefs.set("subs", []);
+  renderTypePicker();
+  renderSubPicker();
+  render();
+});
+subSearchEl.addEventListener("input", renderSubPicker);
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#typePicker")) typePanelEl.hidden = true;
+  if (!e.target.closest("#optPicker")) optPanelEl.hidden = true;
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { typePanelEl.hidden = true; optPanelEl.hidden = true; } });
+
 setButtonEl.addEventListener("click", () => {
   setPanelEl.hidden = !setPanelEl.hidden;
-  if (!setPanelEl.hidden) sortPanelEl.hidden = true;
+  if (!setPanelEl.hidden) { sortPanelEl.hidden = true; typePanelEl.hidden = true; optPanelEl.hidden = true; }
   if (!setPanelEl.hidden) setSearchEl.focus();
 });
 setSearchEl.addEventListener("input", renderSetPicker);
@@ -595,7 +734,7 @@ function applySort() {
 }
 sortButtonEl.addEventListener("click", () => {
   sortPanelEl.hidden = !sortPanelEl.hidden;
-  if (!sortPanelEl.hidden) setPanelEl.hidden = true;
+  if (!sortPanelEl.hidden) { setPanelEl.hidden = true; typePanelEl.hidden = true; optPanelEl.hidden = true; }
 });
 for (const r of sortPanelEl.querySelectorAll("input[name=sortKey]")) {
   r.addEventListener("change", () => {
@@ -616,6 +755,13 @@ function resetFilters() {
   searchEl.value = "";
   setSearchEl.value = "";
   selectedSets.clear();
+  selectedTypes.clear();
+  selectedSubs.clear();
+  subSearchEl.value = "";
+  prefs.set("types", []);
+  prefs.set("subs", []);
+  renderTypePicker();
+  renderSubPicker();
   colorsOff.clear();
   raritiesOff.clear();
   sortKey = "added";
@@ -673,8 +819,48 @@ document.addEventListener("contextmenu", (e) => { if (!e.target.closest(".card")
 window.addEventListener("scroll", hideMenu, { passive: true });
 window.addEventListener("blur", hideMenu);
 
+// The view as it was just before locating, so closing the locate bar can bring it back.
+let beforeLocate = null;
+
+function saveView() {
+  return {
+    search: searchEl.value, sets: [...selectedSets], types: [...selectedTypes], subs: [...selectedSubs],
+    colorsOff: [...colorsOff], raritiesOff: [...raritiesOff], sortKey, sortDir, cmcLo, cmcHi,
+    space: wantedSpace, foil: foilFilterEl.value, stack: stackToggleEl.checked,
+  };
+}
+
+function restoreView(v) {
+  searchEl.value = v.search;
+  selectedSets.clear(); v.sets.forEach((x) => selectedSets.add(x));
+  selectedTypes.clear(); v.types.forEach((x) => selectedTypes.add(x));
+  selectedSubs.clear(); v.subs.forEach((x) => selectedSubs.add(x));
+  colorsOff.clear(); v.colorsOff.forEach((x) => colorsOff.add(x));
+  raritiesOff.clear(); v.raritiesOff.forEach((x) => raritiesOff.add(x));
+  sortKey = v.sortKey; sortDir = v.sortDir;
+  cmcLo = v.cmcLo; cmcHi = v.cmcHi;
+  wantedSpace = v.space;
+  foilFilterEl.value = v.foil;
+  stackToggleEl.checked = v.stack;
+  prefs.set("sets", v.sets); prefs.set("types", v.types); prefs.set("subs", v.subs);
+  prefs.set("colorsOff", v.colorsOff); prefs.set("raritiesOff", v.raritiesOff);
+  prefs.set("sortKey", sortKey); prefs.set("sortDir", sortDir);
+  prefs.set("cmcLo", cmcLo); prefs.set("cmcHi", cmcHi);
+  prefs.set("space", wantedSpace); prefs.set("foil", v.foil); prefs.set("stack", v.stack);
+  refreshSpaceOptions();
+  renderSetPicker();
+  renderTypePicker();
+  renderSubPicker();
+  updatePips();
+  updateRarityPips();
+  updateSortUi();
+  drawCmcRange();
+  render();
+}
+
 function locateCard(id) {
   if (!cards.some((c) => c.id === id)) return;
+  if (!locateId) beforeLocate = saveView();   // locating again from a located view keeps the original view
   resetFilters();
   // only this card's container (collection space) matters: cards in other boxes/folders are filtered out
   wantedSpace = cards.find((c) => c.id === id).collectionSpace || "";
@@ -688,10 +874,15 @@ function locateCard(id) {
   if (target) target.scrollIntoView({ block: "center" });
 }
 
-function endLocate() {
+// restore = true (Close button, Escape): go back to the view from before locating. Otherwise (reset button, or the card
+// was filtered out by the user) the current filters stay as they are.
+function endLocate(restore = false) {
+  const wasLocating = locateId !== null;
   locateId = null;
   locateBarEl.hidden = true;
   for (const el of runsEl.querySelectorAll(".card")) { el.style.opacity = ""; el.classList.remove("located"); }
+  if (restore && wasLocating && beforeLocate) restoreView(beforeLocate);
+  beforeLocate = null;
 }
 
 // called after every render: highlight the located card and fade the ones around it
@@ -714,8 +905,8 @@ function applyLocate() {
     `${c.name ?? "Card"} \u00B7 ${runLabel(key)} \u00B7 card ${n} of ${run.length} in this run`;
   locateBarEl.hidden = false;
 }
-document.getElementById("locateClose").addEventListener("click", endLocate);
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") { hideMenu(); endLocate(); } });
+document.getElementById("locateClose").addEventListener("click", () => endLocate(true));
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { hideMenu(); endLocate(true); } });
 
 // ---- hover zoom (only while the "Zoom on hover" switch is on) ----
 function hideZoom() { zoomEl.style.display = "none"; zoomCard = null; }
@@ -795,6 +986,8 @@ async function start() {
     cards = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
     refreshSpaceOptions();
     renderSetPicker();
+    renderTypePicker();
+    renderSubPicker();
     updateCmcExtent();
     setStatus(`Live ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`, "ok");
     showMessage("");
