@@ -80,6 +80,14 @@ let cmcHi = prefs.get("cmcHi", null);                           // highest mana 
 if (cmcHi !== null) cmcHi = Number(cmcHi);
 let cmcExtent = 1;                                              // right end of the slider (grows with the collection, max 10)
 
+// "New since your last visit": the ID of the newest card seen last time is kept in this browser. Card IDs sort in scan order,
+// so every card with a bigger ID is new. The stored value moves up on each visit, so the banner shows once per visit.
+const newBannerEl = document.getElementById("newBanner");
+const newShowEl = document.getElementById("newShow");
+const lastSeenId = prefs.get("lastSeenId", null);   // null = first visit: nothing is "new"
+let newSince = null;        // set while the banner is up: cards with an ID above this are the new ones
+let onlyNew = false;        // "Show only these" is on
+
 let cards = [];                 // all cards, in scan order
 const freshIds = new Set();     // cards that just arrived (they flash once)
 let firstSnapshot = true;
@@ -327,6 +335,16 @@ function rarityAllowed(c) {
   return !raritiesOff.has(String(c.rarity || "").toLowerCase());
 }
 
+function updateNewBanner() {
+  const n = newSince === null ? 0 : cards.filter((c) => c.id > newSince).length;
+  newBannerEl.hidden = n === 0;
+  if (n === 0) { onlyNew = false; return; }
+  newBannerEl.querySelector(".text").textContent = `${n} new ${n === 1 ? "card" : "cards"} added since your last visit`;
+  newShowEl.textContent = onlyNew ? "Show all" : "Show only these";
+}
+newShowEl.addEventListener("click", () => { onlyNew = !onlyNew; updateNewBanner(); render(); });
+document.getElementById("newDismiss").addEventListener("click", () => { newSince = null; onlyNew = false; updateNewBanner(); render(); });
+
 function render() {
   renderCards();
   applyLocate();
@@ -347,6 +365,7 @@ function renderCards() {
   }
   if (colorsOff.size) shown = shown.filter(colorAllowed);
   if (raritiesOff.size) shown = shown.filter(rarityAllowed);
+  if (onlyNew && newSince !== null) shown = shown.filter((c) => c.id > newSince);
   if (selectedSets.size) shown = shown.filter((c) => selectedSets.has(c.setCode));
   if (selectedTypes.size) shown = shown.filter((c) => typesOf(c).some((t) => selectedTypes.has(t)));
   if (selectedSubs.size) shown = shown.filter((c) => subtypesOf(c).some((t) => selectedSubs.has(t)));
@@ -408,6 +427,7 @@ function runLabel(key) {
   });
 }
 
+const RARITY_COLORS = { common: "#b8b8b8", uncommon: "#9fc5d6", rare: "#e6b422", mythic: "#e8502c" };
 const RARITY_RANK = { common: 0, uncommon: 1, rare: 2, mythic: 3 };
 const COLOR_ORDER = ["W", "U", "B", "R", "G"];
 
@@ -499,14 +519,26 @@ function buildCard(c, copies, stacked) {
   meta.className = "meta";
   meta.textContent = `${isFoil(c) ? "\u2605 Foil \u00B7 " : ""}${c.setCode ?? ""} ${c.collectorNumber ?? ""}${c.setName ? " - " + c.setName : ""}`;
   info.append(name, meta);
+  const tags = document.createElement("div");
+  tags.className = "tags";
+  const rarityKey = String(c.rarity || "").toLowerCase();
+  if (RARITY_COLORS[rarityKey]) {   // same colours as the rarity buttons in the top bar
+    const rarity = document.createElement("span");
+    rarity.className = "rarity";
+    rarity.style.setProperty("--rc", RARITY_COLORS[rarityKey]);
+    rarity.textContent = rarityKey[0].toUpperCase();
+    rarity.title = rarityKey[0].toUpperCase() + rarityKey.slice(1);
+    tags.append(rarity);
+  }
   const spaces = [...new Set(copies.map((x) => x.collectionSpace).filter(Boolean))];
   if (spaces.length) {
     const space = document.createElement("div");
     space.className = "space";
     space.textContent = spaces.join(", ");
     space.title = spaces.length > 1 ? "Collection spaces" : "Collection space";
-    info.append(space);
+    tags.append(space);
   }
+  if (tags.children.length) info.append(tags);
   card.append(info);
   return card;
 }
@@ -752,6 +784,8 @@ updateSortUi();
 
 // ---- reset: clear the search and every filter, so all the cards show again ----
 function resetFilters() {
+  onlyNew = false;
+  updateNewBanner();
   searchEl.value = "";
   setSearchEl.value = "";
   selectedSets.clear();
@@ -983,7 +1017,12 @@ async function start() {
     }
     firstSnapshot = false;
     hideLoading();   // the whole collection has arrived
+    const wasFirst = cards.length === 0;
     cards = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+    const newest = cards.length ? cards[cards.length - 1].id : null;   // cards arrive in ID (= scan) order
+    if (wasFirst && lastSeenId !== null) newSince = lastSeenId;       // only the first load compares with the last visit
+    if (newest) prefs.set("lastSeenId", newest);
+    updateNewBanner();
     refreshSpaceOptions();
     renderSetPicker();
     renderTypePicker();

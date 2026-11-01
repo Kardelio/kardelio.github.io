@@ -115,6 +115,13 @@
     .range .thumb:hover, .range .thumb:focus-visible, .range.dragging .thumb.active { transform: scale(1.2); outline: none; }
 
     main { padding: 18px 20px 48px; }
+    #newBanner { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; padding: 6px 8px 6px 14px; border: 1px solid var(--accent);
+                 border-radius: 999px; background: rgba(232, 114, 68, 0.1); font-size: 13px; }
+    #newBanner[hidden] { display: none; }
+    #newBanner .text { flex: 1; min-width: 0; }
+    #newBanner button { font: inherit; font-size: 12px; color: var(--text); background: transparent; border: 1px solid var(--line-hi);
+                        border-radius: 999px; padding: 2px 10px; cursor: pointer; }
+    #newBanner button:hover { color: var(--accent); border-color: var(--accent); }
     #message { margin: 24px 0; padding: 14px 16px; border: 1px solid var(--warn); border-radius: 10px; color: var(--warn);
                background: var(--panel); display: none; }
 
@@ -136,6 +143,11 @@
     .card .space { display: inline-block; max-width: 100%; margin-top: 4px; padding: 0 7px; border-radius: 999px;
                    color: var(--accent); background: rgba(232, 114, 68, 0.12); font-size: 11px;
                    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top; }
+    .card .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+    .card .tags .space { margin-top: 0; min-width: 0; }
+    .card .rarity { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 20px; height: 20px; padding: 0;
+                    border-radius: 50%; font-size: 11px; line-height: 1;
+                    color: var(--rc); border: 1px solid var(--rc); font-weight: bold; }
     .card { position: relative; }
     .card .badge { position: absolute; top: 6px; right: 6px; z-index: 1; min-width: 30px; padding: 2px 8px; border-radius: 999px;
                    background: var(--accent); color: #fff; font-size: 16px; font-weight: bold; text-align: center; line-height: 1.3;
@@ -248,6 +260,7 @@
     </div>
   </header>
   <main>
+    <div id="newBanner" hidden><span class="text"></span><button type="button" id="newShow">Show only these</button><button type="button" id="newDismiss">Dismiss</button></div>
     <div id="message"></div>
     <div id="loading" role="status" aria-live="polite"><div class="spinner"></div><div>Loading cards&hellip;</div></div>
     <div id="runs"></div>
