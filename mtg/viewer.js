@@ -345,6 +345,29 @@ function updateNewBanner() {
 newShowEl.addEventListener("click", () => { onlyNew = !onlyNew; updateNewBanner(); render(); });
 document.getElementById("newDismiss").addEventListener("click", () => { newSince = null; onlyNew = false; updateNewBanner(); render(); });
 
+let shownCards = [];   // the cards that pass every filter right now (what the CSV download exports)
+
+function csvCell(value) {
+  const text = value === undefined || value === null ? "" : String(value);
+  return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+}
+
+function downloadCsv() {
+  const header = ["Name", "Set code", "Collector number", "Set name", "Foil", "Rarity", "Collection space", "Mana value", "Type", "Scan number", "Document ID"];
+  const rows = shownCards
+    .map((c) => [c.name, c.setCode, c.collectorNumber, c.setName, isFoil(c) ? "Foil" : "Non-foil", c.rarity, c.collectionSpace, c.cmc, c.typeLine, c.scanNumber, c.id]);
+  const csv = "\uFEFF" + [header, ...rows].map((r) => r.map(csvCell).join(",")).join("\r\n");
+  const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `mtg-cards-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+document.getElementById("downloadCsv").addEventListener("click", downloadCsv);
+
 function render() {
   renderCards();
   applyLocate();
@@ -370,6 +393,7 @@ function renderCards() {
   if (selectedTypes.size) shown = shown.filter((c) => typesOf(c).some((t) => selectedTypes.has(t)));
   if (selectedSubs.size) shown = shown.filter((c) => subtypesOf(c).some((t) => selectedSubs.has(t)));
   if (tokens.length) shown = shown.filter((c) => cardMatches(c, tokens));
+  shownCards = [];   // filled in screen order by fillGrid below
   const stacks = stackCards(shown);   // one entry per different card (same printing = same card)
   countEl.textContent = shown.length === cards.length ? cards.length : `${shown.length} of ${cards.length}`;
   uniqueEl.textContent = stacks.length;
@@ -381,7 +405,10 @@ function renderCards() {
   const fillGrid = (list) => {
     const grid = document.createElement("div");
     grid.className = "grid";
-    for (const copies of tilesOf(list)) grid.append(buildCard(copies[copies.length - 1], copies, stacked));
+    for (const copies of tilesOf(list)) {
+      shownCards.push(...copies);   // CSV export follows the on-screen order (a stack contributes each of its copies)
+      grid.append(buildCard(copies[copies.length - 1], copies, stacked));
+    }
     return grid;
   };
 
@@ -966,6 +993,7 @@ runsEl.addEventListener("mouseover", (e) => {
   const cardEl = e.target.closest(".card");
   if (!cardEl || !cardEl.dataset.large || cardEl === zoomCard) return;
   zoomCard = cardEl;
+  zoomEl.classList.toggle("foil", cardEl.classList.contains("foil"));
 
   // Show the card's small grid image straight away (already loaded), so it never lags behind the mouse,
   // then swap in the sharp large version as soon as it has arrived.
@@ -987,6 +1015,20 @@ runsEl.addEventListener("mouseover", (e) => {
 });
 runsEl.addEventListener("mouseout", (e) => {
   if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest(".card")) hideZoom();
+});
+// Foil shimmer: feed the mouse position inside the card to the CSS (the card and, if shown, the zoom popup).
+runsEl.addEventListener("mousemove", (e) => {
+  const cardEl = e.target.closest(".card.foil");
+  if (!cardEl) return;
+  const r = cardEl.getBoundingClientRect();
+  const px = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+  const py = Math.min(1, Math.max(0, (e.clientY - r.top) / (r.width * 680 / 488)));
+  for (const el of cardEl === zoomCard ? [cardEl, zoomEl] : [cardEl]) {
+    el.style.setProperty("--mx", `${px * 100}%`);
+    el.style.setProperty("--my", `${py * 100}%`);
+    el.style.setProperty("--bx", `${px * 100}%`);
+    el.style.setProperty("--by", `${py * 100}%`);
+  }
 });
 zoomToggleEl.addEventListener("change", () => { prefs.set("zoom", zoomToggleEl.checked); hideZoom(); });
 window.addEventListener("scroll", hideZoom, { passive: true });
