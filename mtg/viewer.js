@@ -7,7 +7,8 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
-  getFirestore, collection, query, orderBy, documentId, onSnapshot,
+  initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager,
+  collection, query, orderBy, documentId, onSnapshot,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
@@ -1081,7 +1082,16 @@ async function start() {
   }
 
   const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  // Keep the downloaded cards in the browser (IndexedDB). A reload then shows them straight away and the server only
+  // sends what changed, so reloads within ~30 minutes cost almost no reads. After a longer gap Firebase counts one
+  // full read of the collection again. If the browser refuses storage (private window...), fall back to no cache.
+  let db;
+  try {
+    db = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+  } catch (e) {
+    console.warn("Firestore local cache unavailable, reading without it:", e);
+    db = getFirestore(app);
+  }
 
   const q = query(collection(db, "cards"), orderBy(documentId()));
   onSnapshot(q, (snapshot) => {
