@@ -501,20 +501,57 @@ function stackCards(list) {
   return [...groups.values()].sort((a, b) => (a[a.length - 1].id < b[b.length - 1].id ? 1 : -1));
 }
 
+// The two sides of a card, front first, or null for a one-sided card (older cards have no "faces").
+function twoSidedFaces(c) {
+  return Array.isArray(c.faces) && c.faces.length >= 2 && c.faces[0].imageUri && c.faces[1].imageUri ? c.faces : null;
+}
+const flippedIds = new Set();   // two-sided cards currently showing their other side (kept across redraws)
+
 // One card tile. `copies` holds every copy that this tile stands for (just [c] when not stacking).
 function buildCard(c, copies, stacked) {
   const card = document.createElement("div");
   card.dataset.id = c.id;
   card.className = "card" + (freshIds.has(c.id) ? " fresh" : "") + (isFoil(c) ? " foil" : "");
 
-  const src = smallImage(c.imageUri);
+  // Two-sided cards (transform, modal double-faced, reversible...): the app saves both sides in c.faces.
+  // The scanned (front) side shows first; the flip button shows the other one.
+  const faces = twoSidedFaces(c);
+  const faceImage = () => (faces ? faces[flippedIds.has(c.id) ? 1 : 0].imageUri : null) || c.imageUri;
+
+  const src = smallImage(faceImage());
   if (src) {
+    const pic = document.createElement("div");
+    pic.className = "pic";
     const img = document.createElement("img");
     img.loading = "lazy";
     img.alt = c.name || "";
     img.src = src;
-    card.dataset.large = largeImage(c.imageUri);
-    card.append(img);
+    card.dataset.large = largeImage(faceImage());
+    pic.append(img);
+    if (faces) {
+      const flip = document.createElement("button");
+      flip.type = "button";
+      flip.className = "flipbtn";
+      flip.textContent = "\u21BB";
+      const label = () => `Show the other side: ${faces[flippedIds.has(c.id) ? 0 : 1].name ?? ""}`;
+      flip.title = label();
+      flip.setAttribute("aria-label", label());
+      flip.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (flippedIds.has(c.id)) flippedIds.delete(c.id); else flippedIds.add(c.id);
+        img.src = smallImage(faceImage());
+        card.dataset.large = largeImage(faceImage());
+        flip.title = label();
+        flip.setAttribute("aria-label", label());
+        card.classList.toggle("flipped", flippedIds.has(c.id));
+        if (zoomCard === card) {   // the hover zoom is open on this card: show the new side there too
+          zoomImgEl.src = card.dataset.large;
+        }
+      });
+      card.classList.toggle("flipped", flippedIds.has(c.id));
+      pic.append(flip);
+    }
+    card.append(pic);
   } else {
     const none = document.createElement("div");
     none.className = "noimg";
