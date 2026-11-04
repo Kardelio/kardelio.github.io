@@ -1094,7 +1094,13 @@ async function start() {
   }
 
   const q = query(collection(db, "cards"), orderBy(documentId()));
-  onSnapshot(q, (snapshot) => {
+  let readMode = null;   // "cache" = the collection came from the local cache, "server" = a full read from Firebase
+  onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
+    if (readMode === null) readMode = (snapshot.metadata.fromCache && snapshot.size > 0) ? "cache" : "server";
+    const stamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    const setLive = () => setStatus(`Live ${stamp}`, readMode === "cache" ? "ok" : "bad");
+    // server confirmation with no card changes: just refresh the status
+    if (!firstSnapshot && snapshot.docChanges().length === 0) { setLive(); return; }
     // after the first load, cards that are newly added flash once
     if (!firstSnapshot) {
       snapshot.docChanges().forEach((ch) => {
@@ -1117,7 +1123,7 @@ async function start() {
     renderTypePicker();
     renderSubPicker();
     updateCmcExtent();
-    setStatus(`Live ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`, "ok");
+    setLive();
     showMessage("");
     render();
   }, (err) => {
