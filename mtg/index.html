@@ -142,6 +142,9 @@
     .run-head { display: flex; align-items: baseline; gap: 10px; margin: 22px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
     .run-head:first-child { margin-top: 0; }
     .run-head .run-title { font-weight: bold; }
+    .run-head .run-title { padding: 0 6px; margin: 0 -6px; border-radius: 5px; }
+    .run-head .run-title.flash-run { animation: flashRun 2.4s ease-out; }
+    @keyframes flashRun { 0%, 60% { background: var(--accent); color: #000; } 100% { background: transparent; } }
     .run-head .run-meta { color: var(--muted); font-size: 13px; }
 
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 12px; }
@@ -305,7 +308,7 @@
     <div id="runs"></div>
   </main>
   <div id="ctxMenu" hidden><button type="button" data-act="locate">Locate card</button></div>
-  <div id="locateBar" hidden><span class="text"></span><button type="button" id="locateClose">Close</button></div>
+  <div id="locateBar" hidden><span class="text"></span><button type="button" id="locateRun">Jump to run</button><button type="button" id="locateClose">Close</button></div>
   <div id="zoom"><img alt=""></div>
   <script type="module" src="viewer.js"></script>
 </body>

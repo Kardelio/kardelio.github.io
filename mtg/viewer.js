@@ -470,6 +470,7 @@ function renderCards() {
     const list = byRun.get(key);
     const head = document.createElement("div");
     head.className = "run-head";
+    head.dataset.run = key;
     const title = document.createElement("span");
     title.className = "run-title";
     title.textContent = runLabel(key);
@@ -1079,6 +1080,26 @@ function applyLocate() {
   locateBarEl.hidden = false;
 }
 document.getElementById("locateClose").addEventListener("click", () => endLocate(true));
+
+// Jump to run: leave locate mode, reset every filter, turn on "Group by run", scroll to the card's run and flash its heading.
+document.getElementById("locateRun").addEventListener("click", () => {
+  const c = cards.find((x) => x.id === locateId);
+  if (!c) return;
+  const key = runKey(c);
+  endLocate();
+  runToggleEl.checked = true;
+  prefs.set("runs", true);
+  resetFilters();   // renders
+  const head = [...runsEl.querySelectorAll(".run-head")].find((h) => h.dataset.run === key);
+  if (!head) return;
+  // the header is sticky, so stop short by its height (plus a little air) or it would cover the run heading
+  const headerH = document.querySelector("header").offsetHeight;
+  window.scrollTo({ top: head.getBoundingClientRect().top + window.scrollY - headerH - 12 });
+  const title = head.querySelector(".run-title");
+  title.classList.remove("flash-run");
+  void title.offsetWidth;   // restart the animation
+  title.classList.add("flash-run");
+});
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") { hideMenu(); endLocate(true); } });
 
 // ---- hover zoom (only while the "Zoom on hover" switch is on) ----
