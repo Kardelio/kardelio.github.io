@@ -8,7 +8,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
   initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager,
-  collection, query, orderBy, documentId, onSnapshot,
+  collection, query, orderBy, documentId, onSnapshot, terminate, clearIndexedDbPersistence,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
@@ -19,7 +19,10 @@ const runsEl = document.getElementById("runs");
 const messageEl = document.getElementById("message");
 const loadingEl = document.getElementById("loading");
 const hideLoading = () => { loadingEl.hidden = true; loadingEl.style.display = "none"; };
-const spaceFilterEl = document.getElementById("spaceFilter");
+const spaceButtonEl = document.getElementById("spaceButton");
+const spacePanelEl = document.getElementById("spacePanel");
+const spaceListEl = document.getElementById("spaceList");
+const hideBasicsEl = document.getElementById("hideBasics");
 const foilFilterEl = document.getElementById("foilFilter");
 const searchEl = document.getElementById("search");
 const zoomToggleEl = document.getElementById("zoomToggle");
@@ -49,7 +52,9 @@ const prefs = {
 zoomToggleEl.checked = prefs.get("zoom", false) === true;
 stackToggleEl.checked = prefs.get("stack", false) === true;
 runToggleEl.checked = prefs.get("runs", false) === true;
-let wantedSpace = String(prefs.get("space", ""));
+const spacesOff = new Set(prefs.get("spacesOff", []));   // collection spaces switched off (new spaces start on)
+let hideBasics = prefs.get("hideBasics", false) === true;   // hide basic lands completely
+hideBasicsEl.checked = hideBasics;
 foilFilterEl.value = ["foil", "normal"].includes(prefs.get("foil", "")) ? prefs.get("foil", "") : "";   // "" = all cards
 const selectedSets = new Set(prefs.get("sets", []));   // set codes; empty = all sets
 const cmcRangeEl = document.getElementById("cmcRange");
@@ -164,12 +169,47 @@ function cardMatches(c, tokens) {
   return tokens.every((t) => nameWords.some((w) => w.includes(t) || fuzzyNameMatch(t, w)));
 }
 
-// the dropdown lists every collection space that appears on the saved cards
+// the space picker lists every collection space that appears on the saved cards, each with a checkbox
 function refreshSpaceOptions() {
-  const spaces = [...new Set(cards.map((c) => c.collectionSpace).filter(Boolean))].sort((a, b) => a.localeCompare(b));
-  spaceFilterEl.replaceChildren(new Option("All spaces", ""));
-  for (const s of spaces) spaceFilterEl.append(new Option(s, s));
-  spaceFilterEl.value = spaces.includes(wantedSpace) ? wantedSpace : "";
+  const counts = new Map();
+  for (const c of cards) if (c.collectionSpace) counts.set(c.collectionSpace, (counts.get(c.collectionSpace) || 0) + 1);
+  const spaces = [...counts.keys()].sort((a, b) => a.localeCompare(b));
+  spaceListEl.replaceChildren();
+  for (const s of spaces) {
+    const label = document.createElement("label");
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.checked = !spacesOff.has(s);
+    box.addEventListener("change", () => {
+      if (box.checked) spacesOff.delete(s); else spacesOff.add(s);
+      prefs.set("spacesOff", [...spacesOff]);
+      updateSpaceButton();
+      render();
+    });
+    const name = document.createElement("span");
+    name.className = "type-name";
+    name.textContent = s;
+    const meta = document.createElement("span");
+    meta.className = "type-meta";
+    meta.textContent = counts.get(s);
+    label.append(box, name, meta);
+    spaceListEl.append(label);
+  }
+  updateSpaceButton();
+}
+
+function updateSpaceButton() {
+  const all = [...new Set(cards.map((c) => c.collectionSpace).filter(Boolean))];
+  const off = all.filter((s) => spacesOff.has(s));
+  const on = all.filter((s) => !spacesOff.has(s));
+  spaceButtonEl.textContent = "Spaces \u25BE";
+  spaceButtonEl.title = off.length ? `Showing ${on.length} of ${all.length} spaces` : "Collection spaces: tick the ones to show";
+  spaceButtonEl.classList.toggle("active", off.length > 0);
+}
+
+// Basic lands: "Basic Land - Forest" etc. (the word "Basic" before the dash)
+function isBasicLand(c) {
+  return /\bbasic\b/i.test(String(c.typeLine || "").split(/\s[\u2014-]\s/)[0]);
 }
 
 // ---- set picker: a small dropdown panel with a filter box and checkboxes ----
@@ -219,7 +259,8 @@ function renderSetPicker() {
 
 function updateSetButton() {
   const n = selectedSets.size;
-  setButtonEl.textContent = (n ? `${n} set${n === 1 ? "" : "s"}` : "All sets") + " \u25BE";
+  setButtonEl.textContent = "Sets \u25BE";
+  setButtonEl.title = n ? `${n} set${n === 1 ? "" : "s"} selected` : "Sets";
   setButtonEl.classList.toggle("active", n > 0);
 }
 
@@ -328,7 +369,8 @@ function renderTypePicker() {
 
 function updateTypeButton() {
   const parts = [...selectedTypes, ...selectedSubs];
-  typeButtonEl.textContent = (parts.length === 0 ? "All types" : parts.length <= 2 ? parts.join(" \u00B7 ") : `${parts.length} types`) + " \u25BE";
+  typeButtonEl.textContent = "Types \u25BE";
+  typeButtonEl.title = parts.length ? `Filtering: ${parts.join(", ")}` : "Types";
   typeButtonEl.classList.toggle("active", parts.length > 0);
 }
 
@@ -376,9 +418,9 @@ function render() {
 
 function renderCards() {
   hideZoom();   // the cards are redrawn, so a popup for an old card element must go
-  const wanted = spaceFilterEl.value;
   const tokens = searchEl.value.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
-  let shown = wanted ? cards.filter((c) => c.collectionSpace === wanted) : cards;
+  let shown = spacesOff.size ? cards.filter((c) => !spacesOff.has(c.collectionSpace)) : cards;
+  if (hideBasics) shown = shown.filter((c) => !isBasicLand(c));
   if (foilFilterEl.value) shown = shown.filter((c) => isFoil(c) === (foilFilterEl.value === "foil"));
   const [lo, hi] = cmcBounds();
   if (lo > 0 || cmcHi !== null) {
@@ -610,11 +652,35 @@ function buildCard(c, copies, stacked) {
 
 runToggleEl.addEventListener("change", () => { prefs.set("runs", runToggleEl.checked); render(); });
 stackToggleEl.addEventListener("change", () => { prefs.set("stack", stackToggleEl.checked); render(); });
-foilFilterEl.addEventListener("change", () => { prefs.set("foil", foilFilterEl.value); render(); });
-spaceFilterEl.addEventListener("change", () => { wantedSpace = spaceFilterEl.value; prefs.set("space", wantedSpace); render(); });
+function updateFoilSeg() {
+  for (const b of document.querySelectorAll("#foilSeg button")) b.classList.toggle("on", b.dataset.foil === foilFilterEl.value);
+}
+for (const b of document.querySelectorAll("#foilSeg button")) {
+  b.addEventListener("click", () => { foilFilterEl.value = b.dataset.foil; prefs.set("foil", foilFilterEl.value); updateFoilSeg(); render(); });
+}
+updateFoilSeg();
+const allSpaces = () => [...new Set(cards.map((c) => c.collectionSpace).filter(Boolean))];
+document.getElementById("spaceAll").addEventListener("click", () => { spacesOff.clear(); prefs.set("spacesOff", []); refreshSpaceOptions(); render(); });
+document.getElementById("spaceNone").addEventListener("click", () => { allSpaces().forEach((s) => spacesOff.add(s)); prefs.set("spacesOff", [...spacesOff]); refreshSpaceOptions(); render(); });
+hideBasicsEl.addEventListener("change", () => { hideBasics = hideBasicsEl.checked; prefs.set("hideBasics", hideBasics); render(); });
+spaceButtonEl.addEventListener("click", () => { spacePanelEl.hidden = !spacePanelEl.hidden; });
 
 // only one dropdown panel is open at a time
 const panels = [setPanelEl, sortPanelEl, typePanelEl, optPanelEl];
+// keep every dropdown panel on screen: when one opens, slide it so it sits fully inside the window (8px margin)
+for (const p of panels) {
+  new MutationObserver(() => {
+    if (p.hidden) return;
+    p.style.left = ""; p.style.right = "";
+    const r = p.getBoundingClientRect();
+    const maxLeft = Math.max(8, window.innerWidth - 8 - r.width);
+    const want = Math.min(Math.max(r.left, 8), maxLeft);
+    if (Math.abs(want - r.left) < 0.5) return;
+    const parentLeft = p.offsetParent ? p.offsetParent.getBoundingClientRect().left : 0;
+    p.style.left = `${want - parentLeft}px`;
+    p.style.right = "auto";
+  }).observe(p, { attributes: true, attributeFilter: ["hidden"] });
+}
 function togglePanel(panel) {
   const open = panel.hidden;
   panels.forEach((p) => { p.hidden = true; });
@@ -636,11 +702,11 @@ document.addEventListener("click", (e) => {
   if (!e.target.closest("#typePicker")) typePanelEl.hidden = true;
   if (!e.target.closest("#optPicker")) optPanelEl.hidden = true;
 });
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") { typePanelEl.hidden = true; optPanelEl.hidden = true; } });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { typePanelEl.hidden = true; optPanelEl.hidden = true; spacePanelEl.hidden = true; } });
 
 setButtonEl.addEventListener("click", () => {
   setPanelEl.hidden = !setPanelEl.hidden;
-  if (!setPanelEl.hidden) { sortPanelEl.hidden = true; typePanelEl.hidden = true; optPanelEl.hidden = true; }
+  if (!setPanelEl.hidden) { sortPanelEl.hidden = true; typePanelEl.hidden = true; optPanelEl.hidden = true; spacePanelEl.hidden = true; }
   if (!setPanelEl.hidden) setSearchEl.focus();
 });
 setSearchEl.addEventListener("input", renderSetPicker);
@@ -818,7 +884,8 @@ updateRarityPips();
 // ---- sort dropdown ----
 function updateSortUi() {
   const custom = !(sortKey === "added" && sortDir === "desc");
-  sortButtonEl.textContent = (custom ? `Sort: ${SORT_LABELS[sortKey]} ${sortDir === "asc" ? "\u2191" : "\u2193"}` : "Sort") + " \u25BE";
+  sortButtonEl.textContent = "Sort \u25BE";   // fixed width so the panel does not jump while you change the sort
+  sortButtonEl.title = custom ? `Sorted by ${SORT_LABELS[sortKey]}, ${sortDir === "asc" ? "ascending" : "descending"}` : "Sort";
   sortButtonEl.classList.toggle("active", custom);
   for (const r of sortPanelEl.querySelectorAll("input[name=sortKey]")) r.checked = r.value === sortKey;
   for (const b of sortPanelEl.querySelectorAll("[data-dir]")) b.classList.toggle("on", b.dataset.dir === sortDir);
@@ -831,7 +898,7 @@ function applySort() {
 }
 sortButtonEl.addEventListener("click", () => {
   sortPanelEl.hidden = !sortPanelEl.hidden;
-  if (!sortPanelEl.hidden) { setPanelEl.hidden = true; typePanelEl.hidden = true; optPanelEl.hidden = true; }
+  if (!sortPanelEl.hidden) { setPanelEl.hidden = true; typePanelEl.hidden = true; optPanelEl.hidden = true; spacePanelEl.hidden = true; }
 });
 for (const r of sortPanelEl.querySelectorAll("input[name=sortKey]")) {
   r.addEventListener("change", () => {
@@ -870,15 +937,19 @@ function resetFilters() {
   updateSortUi();
   cmcLo = 0;
   cmcHi = null;
-  wantedSpace = "";
+  spacesOff.clear();
+  hideBasics = false;
+  hideBasicsEl.checked = false;
+  prefs.set("hideBasics", false);
   foilFilterEl.value = "";
+  updateFoilSeg();
   prefs.set("foil", "");
   prefs.set("sets", []);
   prefs.set("colorsOff", []);
   prefs.set("raritiesOff", []);
   prefs.set("cmcLo", 0);
   prefs.set("cmcHi", null);
-  prefs.set("space", "");
+  prefs.set("spacesOff", []);
   refreshSpaceOptions();
   renderSetPicker();
   updatePips();
@@ -925,7 +996,7 @@ function saveView() {
   return {
     search: searchEl.value, sets: [...selectedSets], types: [...selectedTypes], subs: [...selectedSubs],
     colorsOff: [...colorsOff], raritiesOff: [...raritiesOff], sortKey, sortDir, cmcLo, cmcHi,
-    space: wantedSpace, foil: foilFilterEl.value, stack: stackToggleEl.checked,
+    spacesOff: [...spacesOff], hideBasics, foil: foilFilterEl.value, stack: stackToggleEl.checked,
   };
 }
 
@@ -938,14 +1009,16 @@ function restoreView(v) {
   raritiesOff.clear(); v.raritiesOff.forEach((x) => raritiesOff.add(x));
   sortKey = v.sortKey; sortDir = v.sortDir;
   cmcLo = v.cmcLo; cmcHi = v.cmcHi;
-  wantedSpace = v.space;
+  spacesOff.clear(); v.spacesOff.forEach((x) => spacesOff.add(x));
+  hideBasics = v.hideBasics; hideBasicsEl.checked = hideBasics;
   foilFilterEl.value = v.foil;
+  updateFoilSeg();
   stackToggleEl.checked = v.stack;
   prefs.set("sets", v.sets); prefs.set("types", v.types); prefs.set("subs", v.subs);
   prefs.set("colorsOff", v.colorsOff); prefs.set("raritiesOff", v.raritiesOff);
   prefs.set("sortKey", sortKey); prefs.set("sortDir", sortDir);
   prefs.set("cmcLo", cmcLo); prefs.set("cmcHi", cmcHi);
-  prefs.set("space", wantedSpace); prefs.set("foil", v.foil); prefs.set("stack", v.stack);
+  prefs.set("spacesOff", v.spacesOff); prefs.set("hideBasics", hideBasics); prefs.set("foil", v.foil); prefs.set("stack", v.stack);
   refreshSpaceOptions();
   renderSetPicker();
   renderTypePicker();
@@ -962,8 +1035,9 @@ function locateCard(id) {
   if (!locateId) beforeLocate = saveView();   // locating again from a located view keeps the original view
   resetFilters();
   // only this card's container (collection space) matters: cards in other boxes/folders are filtered out
-  wantedSpace = cards.find((c) => c.id === id).collectionSpace || "";
-  prefs.set("space", wantedSpace);
+  const space = cards.find((c) => c.id === id).collectionSpace || "";
+  allSpaces().forEach((s) => { if (s !== space) spacesOff.add(s); });
+  prefs.set("spacesOff", [...spacesOff]);
   refreshSpaceOptions();
   stackToggleEl.checked = false;   // every physical card gets its own tile
   prefs.set("stack", false);
@@ -1093,12 +1167,19 @@ async function start() {
     db = getFirestore(app);
   }
 
+  // Chrome's hard reload (Shift+Cmd+R) only bypasses the HTTP cache. This cache lives in IndexedDB, which it never clears,
+  // so use this button to really start from nothing.
+  document.getElementById("redownload").addEventListener("click", async () => {
+    try { await terminate(db); await clearIndexedDbPersistence(db); } catch (e) { console.warn("Could not clear the cache:", e); }
+    location.reload();
+  });
+
   const q = query(collection(db, "cards"), orderBy(documentId()));
   let readMode = null;   // "cache" = the collection came from the local cache, "server" = a full read from Firebase
   onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
     if (readMode === null) readMode = (snapshot.metadata.fromCache && snapshot.size > 0) ? "cache" : "server";
     const stamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-    const setLive = () => setStatus(`Live ${stamp}`, readMode === "cache" ? "ok" : "bad");
+    const setLive = () => setStatus(`Live ${stamp}\n${readMode === "cache" ? "from browser cache" : "full read from server"}`, readMode === "cache" ? "ok" : "bad");
     // server confirmation with no card changes: just refresh the status
     if (!firstSnapshot && snapshot.docChanges().length === 0) { setLive(); return; }
     // after the first load, cards that are newly added flash once

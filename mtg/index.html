@@ -18,20 +18,17 @@
     body { margin: 0; min-height: 100vh; font: 15px/1.4 roboto, system-ui, sans-serif; color: var(--text);
            background: radial-gradient(ellipse at top, #12263a 0%, var(--bg) 55%) fixed; }
 
-    header { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
-             padding: 8px 14px; font-size: 14px; background: rgba(10, 17, 24, 0.85); backdrop-filter: blur(10px);
+    header { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+             padding: 8px 12px; font-size: 14px; background: rgba(10, 17, 24, 0.85); backdrop-filter: blur(10px);
              -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
     .home { display: flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; }
     .home img { width: 2.2em; height: 2.2em; border-radius: 50%; object-fit: cover; border: 2px solid var(--line-hi); transition: 0.3s; }
     .home:hover img { border-color: var(--accent); }
-    #downloadCsv { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: 12px; color: var(--muted); background: transparent; border: 1px solid var(--line-hi); border-radius: 999px; padding: 1px 10px; cursor: pointer; }
-    #downloadCsv:hover { color: var(--accent); border-color: var(--accent); }
     .status-box { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; }
-    #status { color: var(--muted); font-size: 11px; }
-    #runLabel { font-size: 10px; opacity: 0.6; gap: 4px; }
-    #runLabel input { width: 10px; height: 10px; margin: 0; }
+    #status { color: var(--muted); font-size: 11px; white-space: pre-line; }
     #status.ok { color: var(--ok); }
     #status.bad { color: var(--warn); }
+    .counts { font-size: 12px; line-height: 1.25; display: inline-block; width: 19ch; flex: none; white-space: nowrap; font-variant-numeric: tabular-nums; }
     .counts b { color: var(--text); font-weight: normal; }
     header > span { color: var(--muted); }
     label { color: var(--muted); display: inline-flex; gap: 5px; align-items: center; cursor: pointer; }
@@ -71,11 +68,17 @@
                 background: var(--panel); border: 1px solid var(--line-hi); border-radius: 10px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6); }
     #typePanel { width: 260px; max-width: 90vw; }
     #optPanel { left: auto; right: 0; width: 220px; }
-    #typePanel[hidden], #optPanel[hidden] { display: none; }
-    #typePanel .top { display: flex; gap: 8px; margin-bottom: 6px; }
-    #typePanel .top .clear { flex: 1; }
-    #typeList label, #optPanel label { display: flex; gap: 8px; align-items: center; padding: 4px 6px; border-radius: 6px; color: var(--text); }
-    #typeList label:hover, #optPanel label:hover { background: var(--panel-hi); }
+    #typePanel[hidden], #optPanel[hidden], #spacePanel[hidden] { display: none; }
+    #spacePanel { margin: 2px 0 6px 8px; padding-left: 6px; border-left: 1px solid var(--line-hi); }
+    #spaceList { max-height: 40vh; overflow-y: auto; }
+    #spaceButton { text-align: left; font: inherit; color: var(--text); background: transparent; border: 0; padding: 4px 6px; border-radius: 6px; cursor: pointer; }
+    #spaceButton:hover { background: var(--panel-hi); }
+    #spaceButton.active { color: var(--accent); }
+    #typePanel .top, #spacePanel .top { display: flex; gap: 8px; margin-bottom: 6px; }
+    #typePanel .top .clear, #spacePanel .top .clear { flex: 1; }
+    #typeList label, #spaceList label, #optPanel label { display: flex; gap: 8px; align-items: center; padding: 4px 6px; border-radius: 6px; color: var(--text); }
+    #typeList label:hover, #spaceList label:hover, #optPanel label:hover { background: var(--panel-hi); }
+    #typePanel .hide-basics { display: flex; gap: 8px; align-items: center; padding: 4px 6px; margin-bottom: 4px; border-bottom: 1px solid var(--line); color: var(--text); }
     #typePanel .sub-head { margin: 8px 0 4px; padding-top: 8px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
     #typePanel .sub-hint { opacity: 0.7; }
     #subSearch { width: 100%; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line-hi); border-radius: 8px; padding: 4px 8px; margin-bottom: 4px; }
@@ -83,8 +86,11 @@
     #subList label { display: flex; gap: 8px; align-items: center; padding: 3px 6px; border-radius: 6px; color: var(--text); }
     #subList label:hover { background: var(--panel-hi); }
     #subList .none { color: var(--muted); padding: 6px; }
-    #typeList .type-name, #subList .type-name { flex: 1; }
-    #typeList .type-meta, #subList .type-meta { color: var(--muted); font-size: 12px; }
+    #typeList .type-name, #subList .type-name, #spaceList .type-name { flex: 1; }
+    #typeList .type-meta, #subList .type-meta, #spaceList .type-meta { color: var(--muted); font-size: 12px; }
+    #downloadCsv { display: inline-flex; align-items: center; gap: 6px; }
+    #downloadCsv, #redownload { font: inherit; font-size: 12px; color: var(--muted); background: transparent; border: 1px solid var(--line-hi); border-radius: 6px; padding: 4px 8px; margin: 4px 6px; cursor: pointer; }
+    #downloadCsv:hover, #redownload:hover { color: var(--accent); border-color: var(--accent); }
     #optPanel { display: flex; flex-direction: column; gap: 2px; }
     #optPanel[hidden] { display: none; }
     .pips { display: inline-flex; gap: 4px; align-items: center; }
@@ -102,6 +108,12 @@
     .pip-action { font: inherit; font-size: 12px; color: var(--muted); background: transparent; border: 1px solid var(--line-hi);
                   border-radius: 999px; padding: 2px 9px; cursor: pointer; transition: 0.2s; }
     .pip-action:hover { color: var(--accent); border-color: var(--accent); }
+    .seg { display: inline-flex; border: 1px solid var(--line-hi); border-radius: 8px; overflow: hidden; }
+    .seg button { font: inherit; font-size: 12px; padding: 3px 9px; color: var(--muted); background: transparent; border: 0; border-left: 1px solid var(--line-hi); cursor: pointer; }
+    .seg button:first-of-type { border-left: 0; }
+    .seg button svg { display: block; }
+    .seg button:hover { color: var(--text); }
+    .seg button.on { color: var(--text); background: var(--panel-hi); box-shadow: inset 0 -2px 0 var(--accent); }
     .pip-mini { width: 22px; height: 22px; padding: 0; font: inherit; font-size: 12px; line-height: 1; color: var(--muted); background: transparent;
                 border: 1px solid var(--line-hi); border-radius: 50%; cursor: pointer; transition: 0.2s; }
     .pip-mini { display: inline-flex; align-items: center; justify-content: center; }
@@ -109,7 +121,7 @@
     .pip-mini:hover { color: var(--accent); border-color: var(--accent); }
     .cmc { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); }
     #cmcLabel { min-width: 2.4em; font-size: 13px; color: var(--text); }
-    .range { position: relative; width: 80px; height: 26px; cursor: pointer; touch-action: none; user-select: none; }
+    .range { position: relative; width: 64px; height: 26px; cursor: pointer; touch-action: none; user-select: none; }
     .range-track { position: absolute; left: 8px; right: 8px; top: 11px; height: 4px; border-radius: 2px; background: var(--line-hi); }
     .range-fill { position: absolute; top: 11px; height: 4px; border-radius: 2px; background: var(--accent); }
     .range .thumb { position: absolute; top: 5px; width: 16px; height: 16px; border-radius: 50%; background: var(--text);
@@ -194,9 +206,8 @@
     #sortPanel[hidden] { display: none; }
     #sortList label { display: flex; gap: 8px; align-items: center; padding: 4px 6px; border-radius: 6px; color: var(--text); }
     #sortList label:hover { background: var(--panel-hi); }
-    #sortDir { display: flex; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
-    #sortDir .pip-action { flex: 1; padding: 4px 8px; }
-    #sortDir .pip-action.on { color: var(--accent); border-color: var(--accent); }
+    #sortDir { display: flex; justify-content: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+    #sortDir .seg button { font-size: 16px; line-height: 1; padding: 4px 22px; }
 
     .card { transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.3s; }
     .card.located { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent), 0 0 28px var(--accent); z-index: 1; }
@@ -224,21 +235,19 @@
           </a>
     <div class="status-box">
       <span id="status">Connecting...</span>
-      <label id="runLabel" title="Group the cards under a heading for each scanning run"><input type="checkbox" id="runToggle"> Group by run</label>
     </div>
-    <button type="button" id="downloadCsv" title="Download the cards currently shown as a CSV file (opens in Google Sheets, Excel)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 10a4 4 0 0 1 0 8"/><path d="M12 11v9"/><path d="M8.5 16.5 12 20l3.5-3.5"/></svg>CSV</button>
     <input id="search" type="search" placeholder="Search cards..." autocomplete="off" spellcheck="false">
-    <span class="counts" title="Cards you have in total, and how many different cards that is (copies of the same card count once)"><b id="count">0</b> total &middot; <b id="unique">0</b> different</span>
+    <span class="counts" title="Cards you have in total, and how many different cards that is (copies of the same card count once)"><b id="count">0</b> total<br><b id="unique">0</b> different</span>
     <button type="button" id="resetFilters" title="Reset all filters and show every card" aria-label="Reset all filters">&#8635;</button>
     <div class="picker" id="sortPicker">
       <button type="button" id="sortButton">Sort &#9662;</button>
       <div id="sortPanel" hidden>
         <div id="sortList"><label><input type="radio" name="sortKey" value="added"> Date added</label><label><input type="radio" name="sortKey" value="name"> Name</label><label><input type="radio" name="sortKey" value="cmc"> Mana value</label><label><input type="radio" name="sortKey" value="rarity"> Rarity</label><label><input type="radio" name="sortKey" value="color"> Colour</label><label><input type="radio" name="sortKey" value="set"> Set</label><label><input type="radio" name="sortKey" value="copies"> Copies owned</label></div>
-        <div id="sortDir"><button type="button" class="pip-action" data-dir="asc">Ascending &#8593;</button><button type="button" class="pip-action" data-dir="desc">Descending &#8595;</button></div>
+        <div id="sortDir"><div class="seg"><button type="button" data-dir="asc" title="Ascending" aria-label="Ascending">&#8593;</button><button type="button" data-dir="desc" title="Descending" aria-label="Descending">&#8595;</button></div></div>
       </div>
     </div>
     <div class="picker" id="setPicker">
-      <button type="button" id="setButton">All sets &#9662;</button>
+      <button type="button" id="setButton">Sets &#9662;</button>
       <div id="setPanel" hidden>
         <div class="top">
           <input id="setSearch" type="search" placeholder="Filter sets..." autocomplete="off" spellcheck="false">
@@ -248,9 +257,10 @@
       </div>
     </div>
     <div class="picker" id="typePicker">
-      <button type="button" id="typeButton">All types &#9662;</button>
+      <button type="button" id="typeButton">Types &#9662;</button>
       <div id="typePanel" hidden>
         <div class="top"><button type="button" class="clear" id="typeClear">Clear</button></div>
+        <label class="hide-basics" title="Hide basic lands (Plains, Island, Swamp, Mountain, Forest, Wastes)"><input type="checkbox" id="hideBasics"> Hide basic lands</label>
         <div id="typeList"></div>
         <div class="sub-head">Subtypes <span class="sub-hint">(Mouse, Elf, Equipment...)</span></div>
         <input id="subSearch" type="search" placeholder="Filter subtypes..." autocomplete="off" spellcheck="false">
@@ -268,16 +278,22 @@
       </div>
       <span id="cmcLabel">Any</span>
     </div>
-    <label title="Collection space"><select id="spaceFilter"><option value="">All spaces</option></select></label>
-    <label title="Foil (shiny) cards"><select id="foilFilter">
-      <option value="">All cards</option>
-      <option value="foil">&#9733; Foil only</option>
-      <option value="normal">Non-foil only</option>
-    </select></label>
+    <div class="seg" id="foilSeg" role="group" aria-label="Foil filter" title="Foil (shiny) cards">
+      <input type="hidden" id="foilFilter" value="">
+      <button type="button" data-foil="" title="All cards">All</button><button type="button" data-foil="foil" title="Foil only"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><polygon points="8,1.5 10.1,5.9 14.9,6.5 11.4,9.8 12.3,14.6 8,12.3 3.7,14.6 4.6,9.8 1.1,6.5 5.9,5.9" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></svg></button><button type="button" data-foil="normal" title="Non-foil only"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><polygon points="8,1.5 10.1,5.9 14.9,6.5 11.4,9.8 12.3,14.6 8,12.3 3.7,14.6 4.6,9.8 1.1,6.5 5.9,5.9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="1.6 1.6" stroke-linejoin="round"/></svg></button>
+    </div>
     <div class="picker" id="optPicker">
       <button type="button" id="optButton" title="Display options">&#9881; Options &#9662;</button>
       <div id="optPanel" hidden>
+        <button type="button" id="spaceButton" title="Collection spaces: tick the ones to show">Spaces &#9662;</button>
+        <div id="spacePanel" hidden>
+          <div class="top"><button type="button" class="clear" id="spaceAll">All</button><button type="button" class="clear" id="spaceNone">None</button></div>
+          <div id="spaceList"></div>
+        </div>
         <label title="Show a large card when hovering over it"><input type="checkbox" id="zoomToggle"> Zoom on hover</label>
+        <button type="button" id="downloadCsv" title="Download the cards currently shown as a CSV file (opens in Google Sheets, Excel)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 10a4 4 0 0 1 0 8"/><path d="M12 11v9"/><path d="M8.5 16.5 12 20l3.5-3.5"/></svg>CSV</button>
+        <button type="button" id="redownload" title="Wipe this browser's saved copy of the collection and download everything again from Firebase (counts as a full read)">Re-download from server</button>
+        <label title="Group the cards under a heading for each scanning run"><input type="checkbox" id="runToggle"> Group by run</label>
         <label title="Show copies of the same card once, with a number for how many you have"><input type="checkbox" id="stackToggle"> Stack dupes</label>
       </div>
     </div>
