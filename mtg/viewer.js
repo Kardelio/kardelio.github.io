@@ -125,7 +125,8 @@ function largeImage(url) {
 }
 
 // ---- fuzzy search ----
-// The query is split into words and EVERY word has to match a word of the card NAME:
+// The query is split into words and EVERY word has to match a word of the card NAME (the real name, or the name
+// printed on the card when it is a reprint under another name: c.flavorName):
 //  - exactly (part of a word: "neg" -> "Negate"), or
 //  - fuzzily, only for words of 4+ letters: the letters appear in order inside a name word
 //    ("pstbd" -> "pestbrood"), or the word is only a typo or two away ("pestbrod", "hydro-chaneler").
@@ -165,7 +166,7 @@ function fuzzyNameMatch(token, word) {
 }
 
 function cardMatches(c, tokens) {
-  const nameWords = words(c.name);
+  const nameWords = words(`${c.name ?? ""} ${c.flavorName ?? ""}`);
   return tokens.every((t) => nameWords.some((w) => w.includes(t) || fuzzyNameMatch(t, w)));
 }
 
@@ -396,9 +397,9 @@ function csvCell(value) {
 }
 
 function downloadCsv() {
-  const header = ["Name", "Set code", "Collector number", "Set name", "Foil", "Rarity", "Collection space", "Mana value", "Type", "Scan number", "Document ID"];
+  const header = ["Name", "Printed name", "Set code", "Collector number", "Set name", "Foil", "Rarity", "Collection space", "Mana value", "Type", "Scan number", "Document ID"];
   const rows = shownCards
-    .map((c) => [c.name, c.setCode, c.collectorNumber, c.setName, isFoil(c) ? "Foil" : "Non-foil", c.rarity, c.collectionSpace, c.cmc, c.typeLine, c.scanNumber, c.id]);
+    .map((c) => [c.name, c.flavorName ?? "", c.setCode, c.collectorNumber, c.setName, isFoil(c) ? "Foil" : "Non-foil", c.rarity, c.collectionSpace, c.cmc, c.typeLine, c.scanNumber, c.id]);
   const csv = "\uFEFF" + [header, ...rows].map((r) => r.map(csvCell).join(",")).join("\r\n");
   const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
   const a = document.createElement("a");
@@ -621,12 +622,21 @@ function buildCard(c, copies, stacked) {
   info.className = "info";
   const name = document.createElement("div");
   name.className = "name";
-  name.title = c.name || "";
-  name.textContent = stacked ? (c.name ?? "") : `#${c.scanNumber ?? "?"}  ${c.name ?? ""}`;
+  // A reprint under another name shows the name printed on the card; the real card is in the tooltip
+  const shownName = c.flavorName || c.name;
+  name.title = c.flavorName ? `${c.flavorName} (card: ${c.name ?? ""})` : (c.name || "");
+  name.textContent = stacked ? (shownName ?? "") : `#${c.scanNumber ?? "?"}  ${shownName ?? ""}`;
   const meta = document.createElement("div");
   meta.className = "meta";
   meta.textContent = `${isFoil(c) ? "\u2605 Foil \u00B7 " : ""}${c.setCode ?? ""} ${c.collectorNumber ?? ""}${c.setName ? " - " + c.setName : ""}`;
-  info.append(name, meta);
+  info.append(name);
+  if (c.flavorName && c.name && c.flavorName !== c.name) {   // visible on touch screens too, unlike the tooltip
+    const aka = document.createElement("div");
+    aka.className = "aka";
+    aka.textContent = `aka ${c.name}`;
+    info.append(aka);
+  }
+  info.append(meta);
   const tags = document.createElement("div");
   tags.className = "tags";
   const rarityKey = String(c.rarity || "").toLowerCase();
