@@ -71,8 +71,9 @@ const sortPanelEl = document.getElementById("sortPanel");
 const SORT_LABELS = { added: "Date added", name: "Name", cmc: "Mana value", rarity: "Rarity", color: "Colour", set: "Set", copies: "Copies" };
 let sortKey = SORT_LABELS[prefs.get("sortKey", "")] ? prefs.get("sortKey", "") : "added";
 let sortDir = prefs.get("sortDir", "desc") === "asc" ? "asc" : "desc";   // "added" + "desc" = newest first, the default
-const TYPE_NAMES = ["Creature", "Legendary Creature", "Instant", "Sorcery", "Artifact", "Enchantment", "Land", "Planeswalker", "Battle", "Other"];
-const selectedTypes = new Set(prefs.get("types", []).filter((t) => TYPE_NAMES.includes(t)));   // empty = all types
+const TYPE_NAMES = ["Legendary", "Creature", "Instant", "Sorcery", "Artifact", "Enchantment", "Land", "Planeswalker", "Battle", "Other"];
+// Older saved prefs had a combined "Legendary Creature" entry; it is now the two checkboxes Legendary + Creature.
+const selectedTypes = new Set(prefs.get("types", []).flatMap((t) => t === "Legendary Creature" ? ["Legendary", "Creature"] : [t]).filter((t) => TYPE_NAMES.includes(t)));   // empty = all types
 const selectedSubs = new Set(prefs.get("subs", []));   // subtypes ("Mouse", "Elf"...); empty = any
 const subListEl = document.getElementById("subList");
 const subSearchEl = document.getElementById("subSearch");
@@ -274,22 +275,31 @@ function colorAllowed(c) {
 
 // Card types come from the type line ("Legendary Artifact Creature - Golem"): only the part before the dash counts,
 // and for double-faced cards ("A // B") every face. A card can have several types and matches any of them.
+// "Legendary" is a modifier: when checked together with other types, a face must be legendary AND one of those types
+// (Legendary + Creature + Artifact = legendary creatures and legendary artifacts); on its own it matches every legendary card.
 // Cards with no type line (scanned before it was saved) or only unusual types (Token, Emblem...) count as "Other".
 const typeCache = new Map();
-function typesOf(c) {
+function faceTypesOf(c) {
   const line = c.typeLine || "";
-  let found = typeCache.get(line);
-  if (!found) {
-    const faces = line.split("//").map((f) => f.split(/\s[\u2014-]\s/)[0].toLowerCase());
-    // "Legendary Creature" is a combined filter (commander candidates): one face must be both legendary and a creature.
-    found = TYPE_NAMES.slice(0, -1).filter((t) => faces.some((f) => {
-      const words = f.split(/\s+/);
-      return t.toLowerCase().split(" ").every((w) => words.includes(w));
-    }));
-    if (!found.length) found = ["Other"];
-    typeCache.set(line, found);
+  let faces = typeCache.get(line);
+  if (!faces) {
+    faces = line.split("//").map((f) => {
+      const words = f.split(/\s[\u2014-]\s/)[0].toLowerCase().split(/\s+/);
+      const found = TYPE_NAMES.slice(0, -1).filter((t) => words.includes(t.toLowerCase()));
+      return found.length ? found : ["Other"];
+    });
+    typeCache.set(line, faces);
   }
-  return found;
+  return faces;
+}
+function typesOf(c) {
+  return TYPE_NAMES.filter((t) => faceTypesOf(c).some((f) => f.includes(t)));
+}
+function typeAllowed(c) {
+  const wantLegendary = selectedTypes.has("Legendary");
+  const others = [...selectedTypes].filter((t) => t !== "Legendary");
+  return faceTypesOf(c).some((f) =>
+    (!wantLegendary || f.includes("Legendary")) && (!others.length || others.some((t) => f.includes(t))));
 }
 
 // Subtypes are the words after the dash ("Legendary Creature - Elf Druid" -> Elf, Druid), on every face of a double-faced card.
@@ -440,7 +450,7 @@ function renderCards() {
   if (raritiesOff.size) shown = shown.filter(rarityAllowed);
   if (onlyNew && newSince !== null) shown = shown.filter((c) => c.id > newSince);
   if (selectedSets.size) shown = shown.filter((c) => selectedSets.has(c.setCode));
-  if (selectedTypes.size) shown = shown.filter((c) => typesOf(c).some((t) => selectedTypes.has(t)));
+  if (selectedTypes.size) shown = shown.filter(typeAllowed);
   if (selectedSubs.size) shown = shown.filter((c) => subtypesOf(c).some((t) => selectedSubs.has(t)));
   if (tokens.length) shown = shown.filter((c) => cardMatches(c, tokens));
   // Make the reset button glow and pulse whenever anything (a filter, the search, or a non-default sort) changes the usual list.
