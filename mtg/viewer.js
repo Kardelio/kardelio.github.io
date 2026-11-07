@@ -71,7 +71,7 @@ const sortPanelEl = document.getElementById("sortPanel");
 const SORT_LABELS = { added: "Date added", name: "Name", cmc: "Mana value", rarity: "Rarity", color: "Colour", set: "Set", copies: "Copies" };
 let sortKey = SORT_LABELS[prefs.get("sortKey", "")] ? prefs.get("sortKey", "") : "added";
 let sortDir = prefs.get("sortDir", "desc") === "asc" ? "asc" : "desc";   // "added" + "desc" = newest first, the default
-const TYPE_NAMES = ["Creature", "Instant", "Sorcery", "Artifact", "Enchantment", "Land", "Planeswalker", "Battle", "Other"];
+const TYPE_NAMES = ["Creature", "Legendary Creature", "Instant", "Sorcery", "Artifact", "Enchantment", "Land", "Planeswalker", "Battle", "Other"];
 const selectedTypes = new Set(prefs.get("types", []).filter((t) => TYPE_NAMES.includes(t)));   // empty = all types
 const selectedSubs = new Set(prefs.get("subs", []));   // subtypes ("Mouse", "Elf"...); empty = any
 const subListEl = document.getElementById("subList");
@@ -281,7 +281,11 @@ function typesOf(c) {
   let found = typeCache.get(line);
   if (!found) {
     const faces = line.split("//").map((f) => f.split(/\s[\u2014-]\s/)[0].toLowerCase());
-    found = TYPE_NAMES.slice(0, -1).filter((t) => faces.some((f) => f.split(/\s+/).includes(t.toLowerCase())));
+    // "Legendary Creature" is a combined filter (commander candidates): one face must be both legendary and a creature.
+    found = TYPE_NAMES.slice(0, -1).filter((t) => faces.some((f) => {
+      const words = f.split(/\s+/);
+      return t.toLowerCase().split(" ").every((w) => words.includes(w));
+    }));
     if (!found.length) found = ["Other"];
     typeCache.set(line, found);
   }
