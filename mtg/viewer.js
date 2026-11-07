@@ -203,7 +203,7 @@ function updateSpaceButton() {
   const all = [...new Set(cards.map((c) => c.collectionSpace).filter(Boolean))];
   const off = all.filter((s) => spacesOff.has(s));
   const on = all.filter((s) => !spacesOff.has(s));
-  spaceButtonEl.textContent = "Spaces \u25BE";
+  spaceButtonEl.innerHTML = '<span>Spaces</span><span class="chev">\u25BE</span>';
   spaceButtonEl.title = off.length ? `Showing ${on.length} of ${all.length} spaces` : "Collection spaces: tick the ones to show";
   spaceButtonEl.classList.toggle("active", off.length > 0);
 }
@@ -685,7 +685,7 @@ const allSpaces = () => [...new Set(cards.map((c) => c.collectionSpace).filter(B
 document.getElementById("spaceAll").addEventListener("click", () => { spacesOff.clear(); prefs.set("spacesOff", []); refreshSpaceOptions(); render(); });
 document.getElementById("spaceNone").addEventListener("click", () => { allSpaces().forEach((s) => spacesOff.add(s)); prefs.set("spacesOff", [...spacesOff]); refreshSpaceOptions(); render(); });
 hideBasicsEl.addEventListener("change", () => { hideBasics = hideBasicsEl.checked; prefs.set("hideBasics", hideBasics); render(); });
-spaceButtonEl.addEventListener("click", () => { spacePanelEl.hidden = !spacePanelEl.hidden; });
+spaceButtonEl.addEventListener("click", () => { spacePanelEl.hidden = !spacePanelEl.hidden; spaceButtonEl.setAttribute("aria-expanded", String(!spacePanelEl.hidden)); });
 
 // only one dropdown panel is open at a time
 const panels = [setPanelEl, sortPanelEl, typePanelEl, optPanelEl];
