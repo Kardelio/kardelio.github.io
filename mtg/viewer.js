@@ -1212,12 +1212,61 @@ async function start() {
   const q = query(collection(db, "cards"), orderBy(documentId()));
   let readMode = null;   // "cache" = the collection came from the local cache, "server" = a full read from Firebase
   // Ask the local cache directly. The snapshot's own fromCache flag is unreliable when cache and server answers arrive together.
-  try { readMode = (await getDocsFromCache(q)).size > 0 ? "cache" : "server"; } catch (e) { readMode = "server"; }
+  // Keep what the cache held, so we can show how much the server then had to correct.
+  const loadedAt = Date.now();
+  const prevServerSync = prefs.get("lastServerSync", null);   // last time a previous visit heard from the server
+  let cacheDocs = new Map();
+  try {
+    const cached = await getDocsFromCache(q);
+    cacheDocs = new Map(cached.docs.map((d) => [d.id, JSON.stringify(d.data())]));
+    readMode = cacheDocs.size > 0 ? "cache" : "server";
+  } catch (e) { readMode = "server"; }
+  let serverAt = null;     // when the server last confirmed the list on this visit
+  let serverDiff = null;   // how the server's list differed from the cache at first confirmation
+  const fmtTime = (ms) => new Date(ms).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  const RESUME_MS = 30 * 60 * 1000;   // Firestore only resumes a listener cheaply if it was connected within ~30 minutes
+  function statusTooltip() {
+    const lines = [];
+    lines.push(readMode === "cache"
+      ? `Page load: ${cacheDocs.size} cards were already in this browser's cache (IndexedDB) and were shown from it.`
+      : "Page load: the browser cache was empty, so every card came from the server.");
+    lines.push(serverAt
+      ? `Server last confirmed the list at ${fmtTime(serverAt)}.`
+      : "Server has not confirmed yet: you are looking at cached cards while it connects.");
+    if (serverDiff) lines.push(`Compared with the cache, the server added ${serverDiff.added}, changed ${serverDiff.changed}, removed ${serverDiff.removed} cards.`);
+    if (prevServerSync) {
+      const gap = loadedAt - prevServerSync;
+      lines.push(`Previous server contact: ${new Date(prevServerSync).toLocaleString()} (${Math.round(gap / 60000)} min before this load).`);
+      lines.push(gap <= RESUME_MS
+        ? "That was within 30 min, so Firebase should only send changes (almost no reads)."
+        : "That was over 30 min ago, so Firebase most likely re-sent the whole collection in the background (one full billed read), even though the page showed instantly from cache.");
+    }
+    if (serverAt) lines.push(`While this page stays open, nothing is re-read: only new cards are pushed. Reloading before ${fmtTime(serverAt + RESUME_MS)} keeps reads minimal.`);
+    lines.push("The cached cards themselves never expire (size limit is off). The 30 min only affects how much the server re-sends.");
+    return lines.join("\n\n");
+  }
   onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
-    if (readMode === null) console.info("[mtg] first snapshot:", { fromCache: snapshot.metadata.fromCache, size: snapshot.size, changes: snapshot.docChanges().length });
-    if (readMode === null) readMode =(snapshot.metadata.fromCache && snapshot.size > 0) ? "cache" : "server";
+    if (!snapshot.metadata.fromCache && !snapshot.metadata.hasPendingWrites) {   // the server itself confirmed this list
+      if (!serverAt) {
+        let added = 0, changed = 0, removed = 0;
+        const seen = new Set();
+        snapshot.docs.forEach((d) => {
+          seen.add(d.id);
+          if (!cacheDocs.has(d.id)) added++;
+          else if (cacheDocs.get(d.id) !== JSON.stringify(d.data())) changed++;
+        });
+        cacheDocs.forEach((_, id) => { if (!seen.has(id)) removed++; });
+        serverDiff = { added, changed, removed };
+        console.info("[mtg] server confirmed; cache held", cacheDocs.size, "cards, server differed:", serverDiff);
+      }
+      serverAt = Date.now();
+      prefs.set("lastServerSync", serverAt);
+    }
     const stamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-    const setLive = () => setStatus(`Live ${stamp}\n${readMode === "cache" ? "from browser cache" : "full read from server"}`, readMode === "cache" ? "ok" : "bad");
+    const setLive = () => {
+      setStatus(`Live ${stamp}\n${readMode === "cache" ? "from browser cache" : "full read from server"}`, readMode === "cache" ? "ok" : "bad");
+      statusEl.title = statusTooltip();
+    };
     // server confirmation with no card changes: just refresh the status
     if (!firstSnapshot && snapshot.docChanges().length === 0) { setLive(); return; }
     // after the first load, cards that are newly added flash once
