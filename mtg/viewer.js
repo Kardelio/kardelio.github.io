@@ -7,7 +7,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
-  initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager,
+  initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager, CACHE_SIZE_UNLIMITED,
   collection, query, orderBy, documentId, onSnapshot, terminate, clearIndexedDbPersistence,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
@@ -1196,7 +1196,7 @@ async function start() {
   // full read of the collection again. If the browser refuses storage (private window...), fall back to no cache.
   let db;
   try {
-    db = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+    db = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager(), cacheSizeBytes: CACHE_SIZE_UNLIMITED }) });
   } catch (e) {
     console.warn("Firestore local cache unavailable, reading without it:", e);
     db = getFirestore(app);
