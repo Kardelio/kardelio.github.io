@@ -8,7 +8,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
   initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager, CACHE_SIZE_UNLIMITED,
-  collection, query, orderBy, documentId, onSnapshot, terminate, clearIndexedDbPersistence,
+  collection, query, orderBy, documentId, onSnapshot, getDocsFromCache, terminate, clearIndexedDbPersistence,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
@@ -1211,6 +1211,8 @@ async function start() {
 
   const q = query(collection(db, "cards"), orderBy(documentId()));
   let readMode = null;   // "cache" = the collection came from the local cache, "server" = a full read from Firebase
+  // Ask the local cache directly. The snapshot's own fromCache flag is unreliable when cache and server answers arrive together.
+  try { readMode = (await getDocsFromCache(q)).size > 0 ? "cache" : "server"; } catch (e) { readMode = "server"; }
   onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
     if (readMode === null) console.info("[mtg] first snapshot:", { fromCache: snapshot.metadata.fromCache, size: snapshot.size, changes: snapshot.docChanges().length });
     if (readMode === null) readMode =(snapshot.metadata.fromCache && snapshot.size > 0) ? "cache" : "server";
