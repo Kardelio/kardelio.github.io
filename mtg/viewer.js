@@ -416,6 +416,8 @@ function downloadCsv() {
 }
 document.getElementById("downloadCsv").addEventListener("click", downloadCsv);
 
+const resetBtnEl = document.getElementById("resetFilters");
+
 function render() {
   renderCards();
   applyLocate();
@@ -441,6 +443,11 @@ function renderCards() {
   if (selectedTypes.size) shown = shown.filter((c) => typesOf(c).some((t) => selectedTypes.has(t)));
   if (selectedSubs.size) shown = shown.filter((c) => subtypesOf(c).some((t) => selectedSubs.has(t)));
   if (tokens.length) shown = shown.filter((c) => cardMatches(c, tokens));
+  // Make the reset button glow and pulse whenever anything (a filter, the search, or a non-default sort) changes the usual list.
+  const viewChanged = tokens.length > 0 || spacesOff.size > 0 || hideBasics || foilFilterEl.value !== "" || lo > 0 || cmcHi !== null ||
+    colorsOff.size > 0 || raritiesOff.size > 0 || (onlyNew && newSince !== null) || selectedSets.size > 0 || selectedTypes.size > 0 ||
+    selectedSubs.size > 0 || sortKey !== "added" || sortDir !== "desc";
+  resetBtnEl.classList.toggle("active", viewChanged);
   shownCards = [];   // filled in screen order by fillGrid below
   const stacks = stackCards(shown);   // one entry per different card (same printing = same card)
   countEl.textContent = shown.length === cards.length ? cards.length : `${shown.length} of ${cards.length}`;
@@ -1265,7 +1272,7 @@ async function start() {
     const stamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
     const setLive = () => {
       setStatus(`Live ${stamp}\n${readMode === "cache" ? "from browser cache" : "full read from server"}`, readMode === "cache" ? "ok" : "bad");
-      statusEl.title = statusTooltip();
+      document.getElementById("statusTip").textContent = statusTooltip();
     };
     // server confirmation with no card changes: just refresh the status
     if (!firstSnapshot && snapshot.docChanges().length === 0) { setLive(); return; }
